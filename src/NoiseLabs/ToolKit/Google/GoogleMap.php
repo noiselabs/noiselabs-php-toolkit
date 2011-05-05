@@ -43,6 +43,8 @@ namespace NoiseLabs\ToolKit\Google;
  */
 class GoogleMap
 {
+	const LOCALHOST_API_KEY = 'ABQIAAAAdi_0xCw-nuskZRWE2Z6PBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxR3tBq3ZXP3CHmGs13Ec_yYzjqSfA';
+
 	/**
 	 * validPoints : array
 	 * Holds addresses and HTML Messages for points that are valid (ie: have longitude and latitutde)
@@ -71,7 +73,7 @@ class GoogleMap
 	 * apiKey
 	 * Google API Key
 	 */
-    public $apiKey = "";
+    public $apiKey = '';
 
 	/**
 	 * showControl
@@ -100,34 +102,44 @@ class GoogleMap
     public $zoomLevel = 4;
 
 	/**
-	 * @function     addGeoPoint
-	 * @description  Add's an address to be displayed on the Google Map using latitude/longitude
-	 *               early version of this function, considered experimental
+	 *
 	 */
-	public function addGeoPoint($lat,$long,$infoHTML)
+	public static function create(array $options = array())
+	{
+		$map = new static();
+		$map->setAPIKey(static::LOCALHOST_API_KEY);
+
+		return $map;
+	}
+
+	/**
+	 * Add's an address to be displayed on the Google Map using latitude/longitude
+	 * early version of this function, considered experimental.
+	 */
+	public function addGeoPoint($lat, $long, $infoHTML)
 	{
 		$pointer = count($this->validPoints);
-        $this->validPoints[$pointer]['lat'] = $lat;
-        $this->validPoints[$pointer]['long'] = $long;
-        $this->validPoints[$pointer]['htmlMessage'] = $infoHTML;
+		$this->validPoints[$pointer]['lat'] = $lat;
+		$this->validPoints[$pointer]['long'] = $long;
+		$this->validPoints[$pointer]['htmlMessage'] = $infoHTML;
     }
 
 	/**
-	 * @function     centerMap
-	 * @description  center's Google Map on a specific point
-	 *               (thus eliminating the need for two different show methods from version 1.0)
+	 * Center's Google Map on a specific point (thus eliminating the need for
+	 * two different show methods from version 1.0).
 	 */
-	public function centerMap($lat,$long)
+	public function centerMap($lat, $long)
 	{
 		$this->centerMap = "map.centerAndZoom(new GPoint(".$long.",".$lat."), ".$this->zoomLevel.");\n";
 	}
 
 	/**
-	 * @function     addAddress
-	 * @param        $address:string
-	 * @returns      Boolean True:False (True if address has long/lat, false if it doesn't)
-	 * @description  Add's an address to be displayed on the Google Map
-	 *               (thus eliminating the need for two different show methods from version 1.0)
+	 * Add's an address to be displayed on the Google Map (thus eliminating the
+	 * need for two different show methods from version 1.0).
+	 *
+	 * @param	$address:string
+	 * @return  Boolean True:False (True if address has long/lat, false if it
+	 *			doesn't)
 	 */
 	public function addAddress($address,$htmlMessage=null)
 	{
@@ -138,13 +150,14 @@ class GoogleMap
 		$addressData = file_get_contents($apiURL.urlencode($address));
 
 		$results = $this->xml2array($addressData);
-		if (empty($results['Point']['coordinates'])){
+		if (empty($results['Point']['coordinates'])) {
 			$pointer = count($this->invalidPoints);
 			$this->invalidPoints[$pointer]['lat']= $results['Point']['coordinates'][0];
 			$this->invalidPoints[$pointer]['long']= $results['Point']['coordinates'][1];
 			$this->invalidPoints[$pointer]['passedAddress'] = $address;
 			$this->invalidPoints[$pointer]['htmlMessage'] = $htmlMessage;
-		  }else{
+		  }
+		  else {
 			$pointer = count($this->validPoints);
 			$this->validPoints[$pointer]['lat']= $results['Point']['coordinates'];
 			$this->validPoints[$pointer]['long']= $results['Point']['coordinates'];
@@ -154,122 +167,122 @@ class GoogleMap
 	}
 
 	/**
-	* @function     showValidPoints
-	* @param        $displayType:string
-	* @param        $css_id:string
-	* @returns      nothing
-	* @description  Displays either a table or a list of the address points that are valid.
-	*               Mainly used for debugging but could be useful for showing a list of addresses
-	*               on the map
-	*/
+	 * Displays either a table or a list of the address points that are valid.
+	 * Mainly used for debugging but could be useful for showing a list of
+	 * addresses on the map.
+	 *
+	 * @param	$displayType:string
+	 * @param	$css_id:string
+	 * @return	nothing
+	 */
 	public function showValidPoints($displayType,$css_id)
 	{
 		$total = count($this->validPoints);
-		if ($displayType == "table"){
+		if ($displayType == "table") {
 			echo "<table id=\"".$css_id."\">\n<tr>\n\t<td>Address</td>\n</tr>\n";
-        for ($t=0; $t<$total; $t++){
-            echo"<tr>\n\t<td>".$this->validPoints[$t]['passedAddress']."</td>\n</tr>\n";
-        }
-        echo "</table>\n";
-        }
-      if ($displayType == "list"){
-        echo "<ul id=\"".$css_id."\">\n";
-      for ($lst=0; $lst<$total; $lst++){
-        echo "<li>".$this->validPoints[$lst]['passedAddress']."</li>\n";
-        }
-        echo "</ul>\n";
-       }
+		for ($t=0; $t<$total; $t++) {
+			echo"<tr>\n\t<td>".$this->validPoints[$t]['passedAddress']."</td>\n</tr>\n";
+		}
+		echo "</table>\n";
+		}
+		if ($displayType == "list") {
+			echo "<ul id=\"".$css_id."\">\n";
+		for ($lst=0; $lst<$total; $lst++) {
+			echo "<li>".$this->validPoints[$lst]['passedAddress']."</li>\n";
+		}
+		echo "</ul>\n";
+		}
 	}
 
 	/**
-	* @function     showInvalidPoints
-	* @param        $displayType:string
-	* @param        $css_id:string
-	* @returns      nothing
-	* @description  Displays either a table or a list of the address points that are invalid.
-	*               Mainly used for debugging shows only the points that are NOT on the map
-	*/
+	 * Displays either a table or a list of the address points that are invalid.
+	 * Mainly used for debugging shows only the points that are NOT on the map.
+	 *
+	 * @param	$displayType:string
+	 * @param	$css_id:string
+	 * @return	nothing
+	 */
 	public function showInvalidPoints($displayType,$css_id)
 	{
-      $total = count($this->invalidPoints);
-      if ($displayType == "table"){
-        echo "<table id=\"".$css_id."\">\n<tr>\n\t<td>Address</td>\n</tr>\n";
-        for ($t=0; $t<$total; $t++){
-            echo"<tr>\n\t<td>".$this->invalidPoints[$t]['passedAddress']."</td>\n</tr>\n";
-        }
-        echo "</table>\n";
-        }
-      if ($displayType == "list"){
-        echo "<ul id=\"".$css_id."\">\n";
-      for ($lst=0; $lst<$total; $lst++){
-        echo "<li>".$this->invalidPoints[$lst]['passedAddress']."</li>\n";
-        }
-        echo "</ul>\n";
-       }
+		$total = count($this->invalidPoints);
+		if ($displayType == "table") {
+			echo "<table id=\"".$css_id."\">\n<tr>\n\t<td>Address</td>\n</tr>\n";
+			for ($t=0; $t<$total; $t++){
+				echo"<tr>\n\t<td>".$this->invalidPoints[$t]['passedAddress']."</td>\n</tr>\n";
+			}
+		echo "</table>\n";
+		}
+		if ($displayType == "list") {
+			echo "<ul id=\"".$css_id."\">\n";
+			for ($lst=0; $lst<$total; $lst++) {
+				echo "<li>".$this->invalidPoints[$lst]['passedAddress']."</li>\n";
+			}
+			echo "</ul>\n";
+		}
 	}
 
 	/**
-	* @function     setWidth
-	* @param        $width:int
-	* @returns      nothing
-	* @description  Sets the width of the map to be displayed
-	*/
+	 * Sets the width of the map to be displayed.
+	 *
+	 * @param	$width:int
+	 * @return	nothing
+	 */
 	public function setWidth($width)
 	{
 		$this->mapWidth = $width;
 	}
 
 	/**
-	* @function     setHeight
-	* @param        $height:int
-	* @returns      nothing
-	* @description  Sets the height of the map to be displayed
-	*/
+	 * Sets the height of the map to be displayed
+	 *
+	 * @param	$height:int
+	 * @return	nothing
+	 */
 	public function setHeight($height)
 	{
 		$this->mapHeight = $height;
 	}
 
 	/**
-	* @function     setAPIkey
-	* @param        $key:string
-	* @returns      nothing
-	* @description  Stores the API Key acquired from Google
-	*/
+	 * Stores the API Key acquired from Google.
+	 *
+	 * @param	$key:string
+	 * @return	nothing
+	 */
 	public function setAPIkey($key)
 	{
 		$this->apiKey = $key;
 	}
 
 	/**
-	* @function     printGoogleJS
-	* @returns      nothing
-	* @description  Adds the necessary Javascript for the Google Map to function
-	*               should be called in between the html <head></head> tags
-	*/
+	 * Adds the necessary Javascript for the Google Map to function should be
+	 * called in between the html <head></head> tags.
+	 *
+	 * @return	othing
+	 */
 	public function printGoogleJS()
 	{
 		echo "\n<script src=\"http://maps.google.com/maps?file=api&v=2&key=".$this->apiKey."\" type=\"text/javascript\"></script>\n";
 	}
 
 	/**
-	* @function     showMap
-	* @description  Displays the Google Map on the page
-	*/
+	 * Displays the Google Map on the page.
+	 */
 	public function showMap()
 	{
 		echo "\n<div id=\"map\" style=\"width: ".$this->mapWidth."px; height: ".$this->mapHeight."px\">\n</div>\n";
 		echo "    <script type=\"text/javascript\">\n
     	function showmap(){
 				//<![CDATA[\n
-    		if (GBrowserIsCompatible()) {\n
-      		var map = new GMap(document.getElementById(\"map\"));\n";
-      		if (empty($this->centerMap)){
-             echo "map.centerAndZoom(new GPoint(".$this->validPoints[0]['long'].",".$this->validPoints[0]['lat']."), ".$this->zoomLevel.");\n";
-             }else{
-               echo $this->centerMap;
-               }
-		    echo "}\n
+			if (GBrowserIsCompatible()) {\n
+			var map = new GMap(document.getElementById(\"map\"));\n";
+			if (empty($this->centerMap)) {
+				echo "map.centerAndZoom(new GPoint(".$this->validPoints[0]['long'].",".$this->validPoints[0]['lat']."), ".$this->zoomLevel.");\n";
+			}
+			else {
+				echo $this->centerMap;
+			}
+			echo "}\n
 			var icon = new GIcon();
 			icon.image = \"http://labs.google.com/ridefinder/images/mm_20_red.png\";
 			icon.shadow = \"http://labs.google.com/ridefinder/images/mm_20_shadow.png\";
@@ -277,30 +290,29 @@ class GoogleMap
 			icon.shadowSize = new GSize(22, 20);
 			icon.iconAnchor = new GPoint(6, 20);
 			icon.infoWindowAnchor = new GPoint(5, 1);
-
 			";
-		if ($this->showControl){
-          if ($this->controlType == 'small'){echo "map.addControl(new GSmallMapControl());\n";}
-          if ($this->controlType == 'large'){echo "map.addControl(new GLargeMapControl());\n";}
-
-			}
-		if ($this->showType){
-		echo "map.addControl(new GMapTypeControl());\n";
+		if ($this->showControl) {
+			if ($this->controlType == 'small') { echo "map.addControl(new GSmallMapControl());\n"; }
+			if ($this->controlType == 'large') { echo "map.addControl(new GLargeMapControl());\n"; }
+		}
+		if ($this->showType) {
+			echo "map.addControl(new GMapTypeControl());\n";
 		}
 
-    $numPoints = count($this->validPoints);
-    for ($g = 0; $g<$numPoints; $g++){
-        echo "var point".$g." = new GPoint(".$this->validPoints[$g]['long'].",".$this->validPoints[$g]['lat'].")\n;
-              var marker".$g." = new GMarker(point".$g.");\n
-              map.addOverlay(marker".$g.")\n
-              GEvent.addListener(marker".$g.", \"click\", function() {\n";
-              if ($this->validPoints[$g]['htmlMessage']!=null){
-              echo "marker".$g.".openInfoWindowHtml(\"".$this->validPoints[$g]['htmlMessage']."\");\n";
-              }else{
-             echo "marker".$g.".openInfoWindowHtml(\"".$this->validPoints[$g]['passedAddress']."\");\n";
-                }
-              echo "});\n";
-	}
+		$numPoints = count($this->validPoints);
+		for ($g = 0; $g<$numPoints; $g++) {
+			echo "var point".$g." = new GPoint(".$this->validPoints[$g]['long'].",".$this->validPoints[$g]['lat'].")\n;
+			var marker".$g." = new GMarker(point".$g.");\n
+			map.addOverlay(marker".$g.")\n
+			GEvent.addListener(marker".$g.", \"click\", function() {\n";
+			if ($this->validPoints[$g]['htmlMessage']!=null) {
+				echo "marker".$g.".openInfoWindowHtml(\"".$this->validPoints[$g]['htmlMessage']."\");\n";
+			}
+			else {
+				echo "marker".$g.".openInfoWindowHtml(\"".$this->validPoints[$g]['passedAddress']."\");\n";
+			}
+			echo "});\n";
+		}
 		echo "    	//]]>\n
 		}
 		window.onload = showmap;
