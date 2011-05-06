@@ -71,35 +71,72 @@ class Map extends BaseMap
 
 	public function render()
 	{
+		//var_dump($this->getMarkers());die;
+
 		// Create a div element to hold the Map.
-		echo '<div id="'.$this->getId().'" style="width:'.$this->options->get('width').'; height:'.$this->options->get('height').'"></div>';
+		echo "<div id=\"".$this->getId()."\" style=\"width:".$this->options->get('width')."; height:".$this->options->get('height')."\"></div>\n";
 
 		// GoogleMaps won't work without at least one location.
 		if (!$this->hasMarkers()) {
 			return;
 		}
+		else {
+			$markers = $this->getMarkers();
+		}
 
-		echo '
-		<script type="text/javascript">
-		function showmap() {
-		//<![CDATA[
-			var locationsArray = [];
-			var markersArray = [];';
-		// insert markers
-		foreach ($this->getMarkers() as $marker) {
-			echo "\nlocationsArray.push(new google.maps.LatLng(".$marker->getLatitude().", ".$marker->getLongitude()."));";
+		echo
+		"<script type=\"text/javascript\">\n".
+		"function showmap() {\n".
+		"	var markersArray = [];\n".
+		"	var bounds = new google.maps.LatLngBounds();\n".
+		"	var infowindowsArray = [];\n".
+		"\n";
+
+		// Create the map object
+		$kc = $this->options->get('center');
+		echo
+		"	var mapOptions = {\n".
+		"		zoom: ".$this->options->get('zoom').",\n".
+		"		center: new google.maps.LatLng(".$markers[$kc]->getLatitude().", ".$markers[$kc]->getLongitude()."),\n".
+		"		mapTypeId: google.maps.MapTypeId.".strtoupper($this->options->get('type'))."\n".
+		"	};\n".
+		"	var map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
+		"\n";
+
+		// Insert markers
+		foreach (array_keys($markers) as $k) {
+			echo
+			"	// Marker $k\n".
+			"	markersArray[$k] = new google.maps.Marker({\n".
+			"		position: new google.maps.LatLng(".$markers[$k]->getLatitude().", ".$markers[$k]->getLongitude()."),\n".
+			"		map: map";
+			if ($markers[$k]->options->has('icon')) {
+				echo ",\n		icon: '".$markers[$k]->options->get('icon')."'";
+			}
+			if ($markers[$k]->options->has('title')) {
+				echo ",\n		title: '".$markers[$k]->options->get('title')."'";
+			}
+			echo
+			"\n	});\n";
+			// Info windows
+			if ($markers[$k]->options->has('infowindow')) {
+				echo
+				"	infowindowsArray[$k] = new google.maps.InfoWindow({\n".
+				"		content: '".$markers[$k]->options->get('infowindow')."'\n".
+				"	});\n".
+				"	google.maps.event.addListener(markersArray[$k], 'click', function() {\n".
+				"		infowindowsArray[$k].open(map, markersArray[$k]);\n".
+				"	});\n";
+			}
+			echo "	bounds.extend(markersArray[$k].getPosition());\n";
 		}
-		echo '
-			var mapOptions = {
-				zoom: '.$this->options->get('zoom').',
-				center: locationsArray[0],
-				mapTypeId: google.maps.MapTypeId.'.strtoupper($this->options->get('type')).'
-			};
-			var map = new google.maps.Map(document.getElementById("'.$this->getId().'"), mapOptions);
-		//]]>
-		}
-		window.onload = showmap;
-		</script>';
+		// Auto-center and auto-zoom
+		echo
+		"	map.fitBounds(bounds);\n".
+		"	map.setCenter(bounds.getCenter());\n".
+		"}\n".
+		"window.onload = showmap;\n".
+		"</script>\n";
 	}
 }
 

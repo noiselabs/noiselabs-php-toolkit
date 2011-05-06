@@ -109,6 +109,8 @@ abstract class BaseMap implements MapInterface
 
 		$options['https'] = false;	// use https?
 
+		$options['center'] = 0; // center map on desidered Marker (array index)
+
 		return $options;
 	}
 

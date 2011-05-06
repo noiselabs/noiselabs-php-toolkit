@@ -10,22 +10,35 @@
 
 namespace NoiseLabs\ToolKit\Google\Maps;
 
+use NoiseLabs\Toolkit\ParameterBag;
+
 class Marker
 {
 	protected $latitude;
     protected $longitude;
-    protected $icon = false;
+
+    /**
+	 * Marker options.
+	 *
+	 * Known keys:
+	 *  - icon: 	An icon to show in place of the default icon
+	 *  - title:
+	 *
+	 * @var \NoiseLabs\ToolKit\ParameterBag
+	 */
+	public $options;
 
 	public function __construct()
 	{
-
+		$this->options = new ParameterBag();
 	}
 
-    public static function create($latitude, $longitude)
+    public static function create($latitude, $longitude, array $options = array())
     {
 		$marker = new static();
 		$marker->setLatitude($latitude);
 		$marker->setLongitude($longitude);
+		$marker->options->add($options);
 
 		return $marker;
 	}
