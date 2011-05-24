@@ -1,0 +1,515 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Google/Maps/BaseMap.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>NoiseLabs</dd>
+<dt>copyright</dt>
+<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.</dd>
+<dt>package</dt>
+<dd>Google</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap">BaseMap</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="NoiseLabs\ToolKit\Google\Maps\BaseMap"></a><h2 class="class">NoiseLabs\ToolKit\Google\Maps\BaseMap<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Implements</dt>
+<dd><a href="_Google_Maps_MapInterface.html#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CMapInterface">NoiseLabs\ToolKit\Google\Maps\MapInterface</a></dd>
+<dt>see</dt>
+<dd>https://github.com/kriswallsmith/GoogleBundle</dd>
+<dt>Properties</dt>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::%24id">$id</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::%24markers">$markers</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::%24parameters">$parameters</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::%24options">$options</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::%24https">$https</a></dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::__construct()">__construct</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::getOptionsDefaults()">getOptionsDefaults</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::setId()">setId</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::getId()">getId</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::hasMarkers()">hasMarkers</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::hasMarker()">hasMarker</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::addMarker()">addMarker</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::removeMarker()">removeMarker</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::setMarkers()">setMarkers</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::getMarkers()">getMarkers</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap::create()">create</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">GoogleMaps base class (abstract).</p>
+<div class="long-description"><p>Inspired by a GoogleMaps implementation made by tirnanog06.</p>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::$https"></a><h4 class="property">$https<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$https</span> = 'false'</code><div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>false</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::$id"></a><h4 class="property">$id<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code>string <span class="highlight">$id</span> = ''</code><p class="short-description">An unique ID to identify this map, useful when manipulating an array of
+maps. This is also used as the ID for the &lt;div&gt; element.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>$id</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::$markers"></a><h4 class="property">$markers<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$markers</span> = 'array'</code><p class="short-description">A collection of map markers. Each element of the array should be an
+object of type Marker.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd>array</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::$options"></a><h4 class="property">$options<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\NoiseLabs\ToolKit\ParameterBag <span class="highlight">$options</span> = ''</code><p class="short-description">GoogleMaps configuration. This covers settings like zoom level to the
+usage of HTTPS.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>$options</dt>
+<dd>\NoiseLabs\ToolKit\ParameterBag<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::$parameters"></a><h4 class="property">$parameters<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\NoiseLabs\ToolKit\ParameterBag <span class="highlight">$parameters</span> = ''</code><p class="short-description">A set of parameters to append to configure how the Maps JavaScript API is
+loaded.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>$parameters</dt>
+<dd>\NoiseLabs\ToolKit\ParameterBag<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::__construct()"></a><h4 class="method">__construct<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+           $id
+              =
+              map,  $options
+              =
+              array,  $parameters
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd><em></em></dd>
+<dt>$options</dt>
+<dd><em></em></dd>
+<dt>$parameters</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::addMarker()"></a><h4 class="method">addMarker<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">addMarker</span><span class="nb-faded-text">(
+           $marker
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$marker</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::create()"></a><h4 class="method">create<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">create</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::getId()"></a><h4 class="method">getId<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getId</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::getMarkers()"></a><h4 class="method">getMarkers<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getMarkers</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::getOptionsDefaults()"></a><h4 class="method">getOptionsDefaults<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getOptionsDefaults</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::hasMarker()"></a><h4 class="method">hasMarker<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">hasMarker</span><span class="nb-faded-text">(
+           $marker
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$marker</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::hasMarkers()"></a><h4 class="method">hasMarkers<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">hasMarkers</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::removeMarker()"></a><h4 class="method">removeMarker<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">removeMarker</span><span class="nb-faded-text">(
+           $marker
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$marker</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::setId()"></a><h4 class="method">setId<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setId</span><span class="nb-faded-text">(
+           $id
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\BaseMap::setMarkers()"></a><h4 class="method">setMarkers<div class="to-top"><a href="#BaseMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setMarkers</span><span class="nb-faded-text">(
+           $markers
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$markers</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox</a>.
+    </small></body></html>

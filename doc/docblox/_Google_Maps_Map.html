@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Google/Maps/Map.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>NoiseLabs</dd>
+<dt>copyright</dt>
+<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.</dd>
+<dt>package</dt>
+<dd>Google</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CMap">Map</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="NoiseLabs\ToolKit\Google\Maps\Map"></a><h2 class="class">NoiseLabs\ToolKit\Google\Maps\Map<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_Google_Maps_BaseMap.html#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CBaseMap">NoiseLabs\ToolKit\Google\Maps\BaseMap</a></dd>
+<dt>link</dt>
+<dd>http://code.google.com/intl/pt-PT/apis/maps/documentation/javascript/basics.html</dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CMap::printGoogleJS()">printGoogleJS</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CMap::loadJavascriptApi()">loadJavascriptApi</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CMaps%5CMap::render()">render</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">A class that makes use of the Google Maps API to create customizable maps
+that can be embedded on your website.</p>
+<div class="long-description"><p>The API version in use is Google Maps Javascript API Version 3.</p>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="NoiseLabs\ToolKit\Google\Maps\Map::loadJavascriptApi()"></a><h4 class="method">loadJavascriptApi<div class="to-top"><a href="#Map">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadJavascriptApi</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Include the Maps API JavaScript using a script tag.</p>
+<div class="long-description"><p>This function should be called in between the html <head></head> tags.</p>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\Map::printGoogleJS()"></a><h4 class="method">printGoogleJS<div class="to-top"><a href="#Map">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">printGoogleJS</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">For backwards compatibility.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\Maps\Map::render()"></a><h4 class="method">render<div class="to-top"><a href="#Map">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">render</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox</a>.
+    </small></body></html>

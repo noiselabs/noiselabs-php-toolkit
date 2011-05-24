@@ -1,0 +1,899 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Google/GoogleMap.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>author</dt>
+<dd>Justin Johnson &lt;justinjohnson@system7designs.com&gt;</dd>
+<dt>category</dt>
+<dd>NoiseLabs</dd>
+<dt>copyright</dt>
+<dd>2005 system7designs</dd>
+<dt>package</dt>
+<dd>ToolKit
+Phoogle Maps 2.0 | Uses Google Maps API to create customizable maps
+that can be embedded on your website
+Copyright (C) 2005  Justin Johnson
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+Phoogle Maps 2.0
+Uses Google Maps Mapping API to create customizable Google Maps that can be
+embedded on your website</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">GoogleMap</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="NoiseLabs\ToolKit\Google\GoogleMap"></a><h2 class="class">NoiseLabs\ToolKit\Google\GoogleMap<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>author</dt>
+<dd>Justin Johnson &lt;justinjohnson@system7designs.com&gt;</dd>
+<dt>author</dt>
+<dd>Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
+<dt>Constants</dt>
+<dd><a class="constant" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::LOCALHOST_API_KEY">LOCALHOST_API_KEY</a></dd>
+<dt>Properties</dt>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24validPoints">$validPoints</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24invalidPoints">$invalidPoints</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24mapWidth">$mapWidth</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24mapHeight">$mapHeight</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24apiKey">$apiKey</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24showControl">$showControl</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24showType">$showType</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24controlType">$controlType</a></dd>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::%24zoomLevel">$zoomLevel</a></dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::create()">create</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::addGeoPoint()">addGeoPoint</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::centerMap()">centerMap</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::addAddress()">addAddress</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::showValidPoints()">showValidPoints</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::showInvalidPoints()">showInvalidPoints</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::setWidth()">setWidth</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::setHeight()">setHeight</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::setAPIkey()">setAPIkey</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::printGoogleJS()">printGoogleJS</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::showMap()">showMap</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::xml2array()">xml2array</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::startElement()">startElement</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::characterData()">characterData</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap::endElement()">endElement</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Uses Google Maps API to create customizable maps that can be embedded on your
+website.</p>
+<div class="long-description"><p>This class is a rewrite of the original PhoogleMap class created by Justin
+Johnson (system7designs).</p>
+</div>
+<h3>Constants</h3>
+<div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::LOCALHOST_API_KEY"></a><h4 class="constant">LOCALHOST_API_KEY<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="constant">
+<code> <span class="highlight">LOCALHOST_API_KEY</span> = 'ABQIAAAAdi_0xCw-nuskZRWE2Z6PBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxR3tBq3ZXP3CHmGs13Ec_yYzjqSfA'
+      </code><div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="constant-info">
+<dt>value</dt>
+<dd>ABQIAAAAdi_0xCw-nuskZRWE2Z6PBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxR3tBq3ZXP3CHmGs13Ec_yYzjqSfA</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$apiKey"></a><h4 class="property">$apiKey<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$apiKey</span> = ''</code><p class="short-description">apiKey
+Google API Key</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$controlType"></a><h4 class="property">$controlType<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$controlType</span> = 'small'</code><p class="short-description">controlType
+string: can be 'small' or 'large'
+display's either the large or the small controls on the map, small by default</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>small</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$invalidPoints"></a><h4 class="property">$invalidPoints<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$invalidPoints</span> = 'array'</code><p class="short-description">invalidPoints : array
+Holds addresses and HTML Messages for points that are invalid (ie: don't have longitude and latitutde)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>array</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$mapHeight"></a><h4 class="property">$mapHeight<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$mapHeight</span> = '300'</code><p class="short-description">mapHeight
+height of the Google Map, in pixels</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>300</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$mapWidth"></a><h4 class="property">$mapWidth<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$mapWidth</span> = '300'</code><p class="short-description">mapWidth
+width of the Google Map, in pixels</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>300</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$showControl"></a><h4 class="property">$showControl<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$showControl</span> = 'true'</code><p class="short-description">showControl
+True/False whether to show map controls or not</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>true</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$showType"></a><h4 class="property">$showType<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$showType</span> = 'true'</code><p class="short-description">showType
+True/False whether to show map type controls or not</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>true</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$validPoints"></a><h4 class="property">$validPoints<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$validPoints</span> = 'array'</code><p class="short-description">validPoints : array
+Holds addresses and HTML Messages for points that are valid (ie: have longitude and latitutde)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>array</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::$zoomLevel"></a><h4 class="property">$zoomLevel<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CGoogle%5CGoogleMap">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$zoomLevel</span> = '4'</code><p class="short-description">zoomLevel
+int: 0-17
+set's the initial zoom level of the map</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>4</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::addAddress()"></a><h4 class="method">addAddress<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">addAddress</span><span class="nb-faded-text">(
+           $address,  $htmlMessage
+              =
+              null
+          )
+        </span>
+        :
+        Boolean</code><p class="short-description">Add's an address to be displayed on the Google Map (thus eliminating the
+need for two different show methods from version 1.0).</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$address</dt>
+<dd><em></em></dd>
+<dt>$htmlMessage</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>Boolean</dt>
+<dd><em>True:False (True if address has long/lat, false if it doesn&#039;t)</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::addGeoPoint()"></a><h4 class="method">addGeoPoint<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">addGeoPoint</span><span class="nb-faded-text">(
+           $lat,  $long,  $infoHTML
+          )
+        </span>
+        :
+        </code><p class="short-description">Add's an address to be displayed on the Google Map using latitude/longitude
+early version of this function, considered experimental.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$lat</dt>
+<dd><em></em></dd>
+<dt>$long</dt>
+<dd><em></em></dd>
+<dt>$infoHTML</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::centerMap()"></a><h4 class="method">centerMap<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">centerMap</span><span class="nb-faded-text">(
+           $lat,  $long
+          )
+        </span>
+        :
+        </code><p class="short-description">Center's Google Map on a specific point (thus eliminating the need for
+two different show methods from version 1.0).</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$lat</dt>
+<dd><em></em></dd>
+<dt>$long</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::characterData()"></a><h4 class="method">characterData<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">characterData</span><span class="nb-faded-text">(
+           $parser,  $data
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$parser</dt>
+<dd><em></em></dd>
+<dt>$data</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::create()"></a><h4 class="method">create<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">create</span><span class="nb-faded-text">(
+           $options
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$options</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::endElement()"></a><h4 class="method">endElement<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">endElement</span><span class="nb-faded-text">(
+           $parser,  $name
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$parser</dt>
+<dd><em></em></dd>
+<dt>$name</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::printGoogleJS()"></a><h4 class="method">printGoogleJS<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">printGoogleJS</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        NoiseLabs\ToolKit\Google\othing</code><p class="short-description">Adds the necessary Javascript for the Google Map to function should be
+called in between the html &lt;head&gt;&lt;/head&gt; tags.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\Google\othing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::setAPIkey()"></a><h4 class="method">setAPIkey<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setAPIkey</span><span class="nb-faded-text">(
+           $key
+          )
+        </span>
+        :
+        NoiseLabs\ToolKit\Google\nothing</code><p class="short-description">Stores the API Key acquired from Google.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\Google\nothing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::setHeight()"></a><h4 class="method">setHeight<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setHeight</span><span class="nb-faded-text">(
+           $height
+          )
+        </span>
+        :
+        NoiseLabs\ToolKit\Google\nothing</code><p class="short-description">Sets the height of the map to be displayed</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$height</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\Google\nothing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::setWidth()"></a><h4 class="method">setWidth<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setWidth</span><span class="nb-faded-text">(
+           $width
+          )
+        </span>
+        :
+        NoiseLabs\ToolKit\Google\nothing</code><p class="short-description">Sets the width of the map to be displayed.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$width</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\Google\nothing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::showInvalidPoints()"></a><h4 class="method">showInvalidPoints<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">showInvalidPoints</span><span class="nb-faded-text">(
+           $displayType,  $css_id
+          )
+        </span>
+        :
+        NoiseLabs\ToolKit\Google\nothing</code><p class="short-description">Displays either a table or a list of the address points that are invalid.</p>
+<div class="long-description"><p>Mainly used for debugging shows only the points that are NOT on the map.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$displayType</dt>
+<dd><em></em></dd>
+<dt>$css_id</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\Google\nothing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::showMap()"></a><h4 class="method">showMap<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">showMap</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Displays the Google Map on the page.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::showValidPoints()"></a><h4 class="method">showValidPoints<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">showValidPoints</span><span class="nb-faded-text">(
+           $displayType,  $css_id
+          )
+        </span>
+        :
+        NoiseLabs\ToolKit\Google\nothing</code><p class="short-description">Displays either a table or a list of the address points that are valid.</p>
+<div class="long-description"><p>Mainly used for debugging but could be useful for showing a list of
+addresses on the map.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$displayType</dt>
+<dd><em></em></dd>
+<dt>$css_id</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\Google\nothing</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::startElement()"></a><h4 class="method">startElement<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">startElement</span><span class="nb-faded-text">(
+           $parser,  $name,  $attrs
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$parser</dt>
+<dd><em></em></dd>
+<dt>$name</dt>
+<dd><em></em></dd>
+<dt>$attrs</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\Google\GoogleMap::xml2array()"></a><h4 class="method">xml2array<div class="to-top"><a href="#GoogleMap">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">xml2array</span><span class="nb-faded-text">(
+           $xml
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$xml</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox</a>.
+    </small></body></html>

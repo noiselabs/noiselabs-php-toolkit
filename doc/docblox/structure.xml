@@ -1,0 +1,2188 @@
+<?xml version="1.0"?>
+<project version="0.10.0" title="">
+  <file path="ConfigParser/ConfigParser.php" hash="f41ecfcbb05c3623dea51d47b2819c66">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ConfigParser"/>
+      <tag name="version" description="0.1.0"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <namespace-alias name="File">NoiseLabs\ToolKit\ConfigParser\File</namespace-alias>
+    <namespace-alias name="DuplicateSectionException">NoiseLabs\ToolKit\ConfigParser\Exception\DuplicateSectionException</namespace-alias>
+    <namespace-alias name="NoSectionException">NoiseLabs\ToolKit\ConfigParser\Exception\NoSectionException</namespace-alias>
+    <class final="false" abstract="false" line="33" namespace="NoiseLabs\ToolKit\ConfigParser">
+      <name>ConfigParser</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\ConfigParser\ConfigParser</full_name>
+      <docblock>
+        <description>The ConfigParser class implements a basic configuration language which
+provides a structure similar to what&#x2019;s found in Microsoft Windows INI
+files. You can use this to write PHP programs which can be customized by
+end users easily.</description>
+        <long-description>&lt;p&gt;DISCLAIMER:
+Every docblock was shameless copied or at least adapted from Python's
+configparser documentation page (version 3.0). See
+http://docs.python.org/dev/library/configparser.html&lt;/p&gt;
+</long-description>
+        <tag name="note" description="This class does not interpret or write the value-type prefixes&#10;used in the Windows Registry extended version of INI syntax." line="19"/>
+      </docblock>
+      <implements>\IteratorAggregate</implements>
+      <implements>NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface</implements>
+      <constant namespace="NoiseLabs\ToolKit\ConfigParser" line="35">
+        <name>DEFAULT_SECTION</name>
+        <value>DEFAULT</value>
+      </constant>
+      <constant namespace="NoiseLabs\ToolKit\ConfigParser" line="36">
+        <name>HAS_SECTIONS</name>
+        <value>true</value>
+      </constant>
+      <property final="false" static="false" visibility="private" line="42">
+        <name>$_data</name>
+        <default>array</default>
+        <docblock>
+          <description>The configuration representation is stored here.</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="array" variable="" line="38">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="44">
+        <name>$_defaults</name>
+        <default>array</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="50">
+        <name>$_files</name>
+        <default>array</default>
+        <docblock>
+          <description>An array of FILE objects representing the loaded files.</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="array" variable="" line="46">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="52">
+        <name>__construct</name>
+        <argument line="52">
+          <name>$defaults</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="58">
+        <name>getConfig</name>
+        <argument line="58">
+          <name>$filename</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="58">
+          <name>$has_sections</name>
+          <default>true</default>
+          <type/>
+        </argument>
+        <argument line="58">
+          <name>$safemode</name>
+          <default>false</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="88">
+        <name>defaults</name>
+        <docblock>
+          <description>Return an associative array containing the instance-wide defaults.</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="97">
+        <name>sections</name>
+        <docblock>
+          <description>Return a list of the sections available; the default section is not
+included in the list.</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="109">
+        <name>addSection</name>
+        <docblock>
+          <description>Add a section named section to the instance. If a section by the given
+name already exists, DuplicateSectionException is raised. If the
+default section name is passed, InvalidArgumentException is raised.</description>
+          <long-description>&lt;p&gt;The name of the section must be a string; if not,
+InvalidArgumentException is raised too.&lt;/p&gt;
+</long-description>
+        </docblock>
+        <argument line="109">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="135">
+        <name>hasSection</name>
+        <docblock>
+          <description>Indicates whether the named section is present in the configuration.</description>
+          <long-description>&lt;p&gt;The default section is not acknowledged.&lt;/p&gt;
+</long-description>
+        </docblock>
+        <argument line="135">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="143">
+        <name>options</name>
+        <docblock>
+          <description>Return a list of options available in the specified section.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="143">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="158">
+        <name>hasOption</name>
+        <docblock>
+          <description>If the given section exists, and contains the given option, return
+TRUE; otherwise return FALSE. If the specified section is NULL or an
+empty string, DEFAULT is assumed.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="158">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="158">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="166">
+        <name>setOptions</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="throws" description="if section doesn&amp;#039;t exist" type="NoiseLabs\ToolKit\ConfigParser\Exception\NoSectionException" line="163">
+            <type by_reference="false">NoiseLabs\ToolKit\ConfigParser\Exception\NoSectionException</type>
+          </tag>
+        </docblock>
+        <argument line="166">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="166">
+          <name>$options</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="189">
+        <name>read</name>
+        <docblock>
+          <description>Attempt to read and parse a list of filenames, returning a list of
+filenames which were successfully parsed. If filenames is a string, it
+is treated as a single filename. If a file named in filenames cannot be
+opened, that file will be ignored. This is designed so that you can
+specify a list of potential configuration file locations (for example,
+the current directory, the user&#x2019;s home directory, and some system-wide
+directory), and all existing configuration files in the list will be
+read. If none of the named files exist, the ConfigParser instance will
+contain an empty dataset. An application which requires initial values
+to be loaded from a file should load the required file or files using
+read_file() before calling read() for any optional files:</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="189">
+          <name>$filenames</name>
+          <default>array</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="208">
+        <name>readFile</name>
+        <argument line="208">
+          <name>$filehandler</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="212">
+        <name>readString</name>
+        <argument line="212">
+          <name>$string</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="216">
+        <name>readArray</name>
+        <argument line="216">
+          <name>$array</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="223">
+        <name>get</name>
+        <docblock>
+          <description>Get an option value for the named section.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="223">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="223">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="237">
+        <name>getInt</name>
+        <docblock>
+          <description>A convenience method which coerces the option in the specified section
+to an integer.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="237">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="237">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="246">
+        <name>getFloat</name>
+        <docblock>
+          <description>A convenience method which coerces the option in the specified section
+to a floating point number.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="246">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="246">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="259">
+        <name>getBoolean</name>
+        <docblock>
+          <description>A convenience method which coerces the option in the specified section
+to a Boolean value. Note that the accepted values for the option are
+'1', 'yes', 'true', and 'on', which cause this method to return TRUE,
+and '0', 'no', 'false', and 'off', which cause it to return FALSE.</description>
+          <long-description>&lt;p&gt;These string values are checked in a case-insensitive manner. Any
+other value will cause it to raise ValueException.&lt;/p&gt;
+</long-description>
+        </docblock>
+        <argument line="259">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="259">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="285">
+        <name>set</name>
+        <docblock>
+          <description>If the given section exists, set the given option to the specified
+value; otherwise raise NoSectionException.</description>
+          <long-description>
+</long-description>
+          <tag name="todo" description="Option and value must be strings; if not, TypeException is raised." line="279"/>
+        </docblock>
+        <argument line="285">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="285">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="285">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="295">
+        <name>write</name>
+        <argument line="295">
+          <name>$filename</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+        <argument line="295">
+          <name>$space_around_delimiters</name>
+          <default>true</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="304">
+        <name>removeOption</name>
+        <docblock>
+          <description>Remove the specified option from the specified section. If the section
+does not exist, raise NoSectionException. If the option existed to be
+removed, return TRUE; otherwise return FALSE.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="304">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="304">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="324">
+        <name>removeSection</name>
+        <docblock>
+          <description>Remove the specified section from the configuration. If the section in
+fact existed, return TRUE. Otherwise return FALSE.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="324">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="335">
+        <name>read_</name>
+        <argument line="335">
+          <name>$filenames</name>
+          <default>array</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="349">
+        <name>get_</name>
+        <docblock>
+          <description>Get an option value for the named section.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="349">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="349">
+          <name>$option</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="396">
+        <name>sections_</name>
+        <docblock>
+          <description>Prints all available sections</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="408">
+        <name>has_section</name>
+        <docblock>
+          <description>Indicates whether the named section is present in the configuration.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="408">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="421">
+        <name>has_option</name>
+        <docblock>
+          <description>If the given section exists, and contains the given option, return True;
+otherwise return False.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="421">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="421">
+          <name>$option</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="431">
+        <name>set_</name>
+        <argument line="431">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="431">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="431">
+          <name>$value</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="456">
+        <name>write_</name>
+        <docblock>
+          <description>Write a representation of the configuration to the specified
+filename. This representation can be parsed by a future read() call.</description>
+          <long-description>&lt;p&gt;If $space_around_delimiters is true, delimiters between keys and
+values are surrounded by spaces.&lt;/p&gt;
+
+&lt;p&gt;When $filename is NULL, the last file loaded (if any) is used.&lt;/p&gt;
+</long-description>
+        </docblock>
+        <argument line="456">
+          <name>$filename</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+        <argument line="456">
+          <name>$space_around_delimiters</name>
+          <default>true</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="506">
+        <name>dump</name>
+        <docblock>
+          <description>Output the current configuration representation.</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="519">
+        <name>offsetExists</name>
+        <docblock>
+          <description>Returns true if the section exists (implements the \ArrayAccess
+interface).</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The name of the section" type="string" variable="$offset" line="511">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="true if the section exists, false otherwise" type="Boolean" line="511">
+            <type by_reference="false">Boolean</type>
+          </tag>
+        </docblock>
+        <argument line="519">
+          <name>$offset</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="532">
+        <name>offsetGet</name>
+        <docblock>
+          <description>Returns the array of options associated with the section (implements
+the \ArrayAccess interface).</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The offset of the value to get" type="string" variable="$offset" line="524">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="The array of options associated with the section" type="mixed" line="524">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="532">
+          <name>$offset</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="544">
+        <name>offsetSet</name>
+        <docblock>
+          <description>Adds an array of options to the given section (implements the
+\ArrayAccess interface).</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The name of the section to insert $options." type="string" variable="$section" line="537">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The array of options to be added" type="array" variable="$options" line="537">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="544">
+          <name>$offset</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="544">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="559">
+        <name>offsetUnset</name>
+        <docblock>
+          <description>Removes the child with the given name from the form (implements the \ArrayAccess interface).</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The name of the child to be removed" type="string" variable="$name" line="554">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="559">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="569">
+        <name>getIterator</name>
+        <docblock>
+          <description>Returns the iterator for this group.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\ArrayIterator" line="564">
+            <type by_reference="false">\ArrayIterator</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="579">
+        <name>count</name>
+        <docblock>
+          <description>Returns the number of sections (implements the \Countable interface).</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="The number of sections" type="integer" line="574">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="ConfigParser/Exception/NoSectionException.php" hash="bb4e8624bfb030342f2abafc374de99a">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ConfigParser"/>
+      <tag name="version" description="0.1.0"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <class final="false" abstract="false" line="15" namespace="NoiseLabs\ToolKit\ConfigParser\Exception">
+      <name>NoSectionException</name>
+      <extends>\RuntimeException</extends>
+      <full_name>NoiseLabs\ToolKit\ConfigParser\Exception\NoSectionException</full_name>
+      <method final="false" abstract="false" static="false" visibility="public" line="17">
+        <name>__construct</name>
+        <argument line="17">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="ConfigParser/Exception/BaseException.php" hash="d41d8cd98f00b204e9800998ecf8427e"/>
+  <file path="ConfigParser/Exception/NoOptionException.php" hash="7dd19a001f4dbebcad2fa6a9efd17f60">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ConfigParser"/>
+      <tag name="version" description="0.1.0"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <class final="false" abstract="false" line="15" namespace="NoiseLabs\ToolKit\ConfigParser\Exception">
+      <name>NoOptionException</name>
+      <extends>\RuntimeException</extends>
+      <full_name>NoiseLabs\ToolKit\ConfigParser\Exception\NoOptionException</full_name>
+      <method final="false" abstract="false" static="false" visibility="public" line="17">
+        <name>__construct</name>
+        <argument line="17">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="17">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="ConfigParser/Exception/DuplicateSectionException.php" hash="b2b178dc973914ceae4d3bd34a6316ac">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ConfigParser"/>
+      <tag name="version" description="0.1.0"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <class final="false" abstract="false" line="15" namespace="NoiseLabs\ToolKit\ConfigParser\Exception">
+      <name>DuplicateSectionException</name>
+      <extends>\RuntimeException</extends>
+      <full_name>NoiseLabs\ToolKit\ConfigParser\Exception\DuplicateSectionException</full_name>
+      <method final="false" abstract="false" static="false" visibility="public" line="17">
+        <name>__construct</name>
+        <argument line="17">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="ConfigParser/ConfigParserInterface.php" hash="ac513f81b1b437ce89a923706e91ae7f">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ConfigParser"/>
+      <tag name="version" description="0.1.0"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <interface namespace="NoiseLabs\ToolKit\ConfigParser" line="18">
+      <name>ConfigParserInterface</name>
+      <extends>\ArrayAccess</extends>
+      <full_name>NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface</full_name>
+      <docblock>
+        <description>The Interface for the ConfigParser class.</description>
+        <long-description>
+</long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="20">
+        <name>defaults</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="22">
+        <name>sections</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="24">
+        <name>addSection</name>
+        <argument line="24">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="26">
+        <name>hasSection</name>
+        <argument line="26">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="28">
+        <name>options</name>
+        <argument line="28">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="30">
+        <name>hasOption</name>
+        <argument line="30">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="30">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="32">
+        <name>read</name>
+        <argument line="32">
+          <name>$filenames</name>
+          <default>array</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="34">
+        <name>readFile</name>
+        <argument line="34">
+          <name>$filehandler</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="36">
+        <name>readString</name>
+        <argument line="36">
+          <name>$string</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="38">
+        <name>readArray</name>
+        <argument line="38">
+          <name>$array</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="40">
+        <name>get</name>
+        <argument line="40">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="40">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="42">
+        <name>getInt</name>
+        <argument line="42">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="42">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="44">
+        <name>getFloat</name>
+        <argument line="44">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="44">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="46">
+        <name>getBoolean</name>
+        <argument line="46">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="46">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="48">
+        <name>set</name>
+        <argument line="48">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="48">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="48">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="50">
+        <name>write</name>
+        <argument line="50">
+          <name>$filename</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="50">
+          <name>$space_around_delimiters</name>
+          <default>true</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="52">
+        <name>removeOption</name>
+        <argument line="52">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="52">
+          <name>$option</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="54">
+        <name>removeSection</name>
+        <argument line="54">
+          <name>$section</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="56">
+        <name>dump</name>
+      </method>
+    </interface>
+  </file>
+  <file path="ConfigParser/File.php" hash="de138484b1816a9e1a087c0b18073ab5">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ConfigParser"/>
+      <tag name="version" description="0.1.0"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <class final="false" abstract="false" line="15" namespace="NoiseLabs\ToolKit\ConfigParser">
+      <name>File</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\ConfigParser\File</full_name>
+      <property final="false" static="false" visibility="protected" line="17">
+        <name>$_path</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="22">
+        <name>$_handle</name>
+        <default/>
+        <docblock>
+          <description>File pointer to the given filename.</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="68">
+        <name>$_mode</name>
+        <default/>
+        <docblock>
+          <description>A list of possible modes for fopen():</description>
+          <long-description>&lt;p&gt;'r': Open for reading only; place the file pointer at the beginning of
+the file.&lt;/p&gt;
+
+&lt;p&gt;'r+': Open for reading and writing; place the file pointer at the
+beginning of the file.&lt;/p&gt;
+
+&lt;p&gt;'w': Open for writing only; place the file pointer at the beginning of
+the file and truncate the file to zero length. If the file does not
+exist, attempt to create it.&lt;/p&gt;
+
+&lt;p&gt;'w+': Open for reading and writing; place the file pointer at the
+beginning of the file and truncate the file to zero length. If the file
+does not exist, attempt to create it.&lt;/p&gt;
+
+&lt;p&gt;'a': Open for writing only; place the file pointer at the end of the
+file. If the file does not exist, attempt to create it.&lt;/p&gt;
+
+&lt;p&gt;'a+': Open for reading and writing; place the file pointer at the end
+of the file. If the file does not exist, attempt to create it.&lt;/p&gt;
+
+&lt;p&gt;'x': Create and open for writing only; place the file pointer at the
+beginning of the file. If the file already exists, the fopen() call will
+fail by returning FALSE and generating an error of level E_WARNING. If
+the file does not exist, attempt to create it. This is equivalent to
+specifying O_EXCL|O_CREAT flags for the underlying open(2) system call.&lt;/p&gt;
+
+&lt;p&gt;'x+': Create and open for reading and writing; otherwise it has the
+same behavior as 'x'.&lt;/p&gt;
+
+&lt;p&gt;'c': Open the file for writing only. If the file does not exist, it is
+created. If it exists, it is neither truncated (as opposed to 'w'), nor
+the call to this function fails (as is the case with 'x'). The file
+pointer is positioned on the beginning of the file. This may be useful
+if it's desired to get an advisory lock (see flock()) before attempting
+to modify the file, as using 'w' could truncate the file before the lock
+was obtained (if truncation is desired, ftruncate() can be used after
+the lock is requested).&lt;/p&gt;
+
+&lt;p&gt;'c+': Open the file for reading and writing; otherwise it has the
+same behavior as 'c'.&lt;/p&gt;
+</long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="70">
+        <name>__construct</name>
+        <argument line="70">
+          <name>$filename</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="70">
+          <name>$mode</name>
+          <default>rb</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="76">
+        <name>open</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="83">
+        <name>close</name>
+      </method>
+    </class>
+  </file>
+  <file path="ParameterBag.php" hash="73c232576fcb066ba6f67856c29eaea2">
+    <class final="false" abstract="false" line="38" namespace="NoiseLabs\ToolKit">
+      <name>ParameterBag</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\ParameterBag</full_name>
+      <docblock>
+        <description>ParameterBag is a container for key/value pairs.</description>
+        <long-description>
+</long-description>
+        <tag name="author" description="Fabien Potencier &amp;lt;fabien@symfony.com&amp;gt;" line="33"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="40">
+        <name>$parameters</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="47">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="An array of parameters" type="array" variable="$parameters" line="42">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="47">
+          <name>$parameters</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="57">
+        <name>all</name>
+        <docblock>
+          <description>Returns the parameters.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="An array of parameters" type="array" variable="" line="52">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="67">
+        <name>keys</name>
+        <docblock>
+          <description>Returns the parameter keys.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="An array of parameter keys" type="array" variable="" line="62">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="77">
+        <name>replace</name>
+        <docblock>
+          <description>Replaces the current parameters by a new set.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="An array of parameters" type="array" variable="$parameters" line="72">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="77">
+          <name>$parameters</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="87">
+        <name>add</name>
+        <docblock>
+          <description>Adds parameters.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="An array of parameters" type="array" variable="$parameters" line="82">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="87">
+          <name>$parameters</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="98">
+        <name>get</name>
+        <docblock>
+          <description>Returns a parameter by name.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The key" type="string" variable="$key" line="92">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The default value" type="mixed" variable="$default" line="92">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="98">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="98">
+          <name>$default</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="109">
+        <name>getDeep</name>
+        <docblock>
+          <description>Returns a parameter by name allowing to specify a path with arbitrary depth.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The path, e.g. foo[bar]" type="string" variable="$path" line="103">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The default value" type="mixed" variable="$default" line="103">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="109">
+          <name>$path</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="109">
+          <name>$default</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="164">
+        <name>set</name>
+        <docblock>
+          <description>Sets a parameter by name.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The key" type="string" variable="$key" line="158">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The value" type="mixed" variable="$value" line="158">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="164">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="164">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="176">
+        <name>has</name>
+        <docblock>
+          <description>Returns true if the parameter is defined.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The key" type="string" variable="$key" line="169">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="true if the parameter exists, false otherwise" type="Boolean" variable="" line="169">
+            <type by_reference="false">Boolean</type>
+          </tag>
+        </docblock>
+        <argument line="176">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="186">
+        <name>remove</name>
+        <docblock>
+          <description>Removes a parameter.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The key" type="string" variable="$key" line="181">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="186">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="199">
+        <name>getAlpha</name>
+        <docblock>
+          <description>Returns the alphabetic characters of the parameter value.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The parameter key" type="string" variable="$key" line="191">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The default value" type="mixed" variable="$default" line="191">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="return" description="The filtered value" type="string" variable="" line="191">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="199">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="199">
+          <name>$default</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="212">
+        <name>getAlnum</name>
+        <docblock>
+          <description>Returns the alphabetic characters and digits of the parameter value.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The parameter key" type="string" variable="$key" line="204">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The default value" type="mixed" variable="$default" line="204">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="return" description="The filtered value" type="string" variable="" line="204">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="212">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="212">
+          <name>$default</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="225">
+        <name>getDigits</name>
+        <docblock>
+          <description>Returns the digits of the parameter value.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The parameter key" type="string" variable="$key" line="217">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The default value" type="mixed" variable="$default" line="217">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="return" description="The filtered value" type="string" variable="" line="217">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="225">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="225">
+          <name>$default</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="238">
+        <name>getInt</name>
+        <docblock>
+          <description>Returns the parameter value converted to integer.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The parameter key" type="string" variable="$key" line="230">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The default value" type="mixed" variable="$default" line="230">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="return" description="The filtered value" type="string" variable="" line="230">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="238">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="238">
+          <name>$default</name>
+          <default>0</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Google/Maps/Map.php" hash="475878b4f5283e08ef4e08abd0e6b256">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="Google"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <namespace-alias name="BaseMap">NoiseLabs\ToolKit\Google\Maps\BaseMap</namespace-alias>
+    <class final="false" abstract="false" line="22" namespace="NoiseLabs\ToolKit\Google\Maps">
+      <name>Map</name>
+      <extends>NoiseLabs\ToolKit\Google\Maps\BaseMap</extends>
+      <full_name>NoiseLabs\ToolKit\Google\Maps\Map</full_name>
+      <docblock>
+        <description>A class that makes use of the Google Maps API to create customizable maps
+that can be embedded on your website.</description>
+        <long-description>&lt;p&gt;The API version in use is Google Maps Javascript API Version 3.&lt;/p&gt;
+</long-description>
+        <tag name="link" description="http://code.google.com/intl/pt-PT/apis/maps/documentation/javascript/basics.html" link="http://code.google.com/intl/pt-PT/apis/maps/documentation/javascript/basics.html" line="15"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="27">
+        <name>printGoogleJS</name>
+        <docblock>
+          <description>For backwards compatibility.</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="37">
+        <name>loadJavascriptApi</name>
+        <docblock>
+          <description>Include the Maps API JavaScript using a script tag.</description>
+          <long-description>&lt;p&gt;This function should be called in between the html &lt;head&gt;&lt;/head&gt; tags.&lt;/p&gt;
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="72">
+        <name>render</name>
+      </method>
+    </class>
+  </file>
+  <file path="Google/Maps/BaseMap.php" hash="35c3af7958d1bb0aa09c2975b13b913e">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="Google"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <namespace-alias name="ParameterBag">NoiseLabs\ToolKit\ParameterBag</namespace-alias>
+    <namespace-alias name="MapInterface">NoiseLabs\ToolKit\Google\Maps\MapInterface</namespace-alias>
+    <namespace-alias name="Marker">NoiseLabs\ToolKit\Google\Maps\Marker</namespace-alias>
+    <class final="false" abstract="true" line="23" namespace="NoiseLabs\ToolKit\Google\Maps">
+      <name>BaseMap</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\Google\Maps\BaseMap</full_name>
+      <docblock>
+        <description>GoogleMaps base class (abstract).</description>
+        <long-description>&lt;p&gt;Inspired by a GoogleMaps implementation made by tirnanog06.&lt;/p&gt;
+</long-description>
+        <tag name="see" description="https://github.com/kriswallsmith/GoogleBundle" line="17"/>
+      </docblock>
+      <implements>NoiseLabs\ToolKit\Google\Maps\MapInterface</implements>
+      <property final="false" static="false" visibility="protected" line="31">
+        <name>$id</name>
+        <default/>
+        <docblock>
+          <description>An unique ID to identify this map, useful when manipulating an array of
+maps. This is also used as the ID for the &lt;div&gt; element.</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" variable="" line="25">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="37">
+        <name>$markers</name>
+        <default>array</default>
+        <docblock>
+          <description>A collection of map markers. Each element of the array should be an
+object of type Marker.</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="45">
+        <name>$parameters</name>
+        <default/>
+        <docblock>
+          <description>A set of parameters to append to configure how the Maps JavaScript API is
+loaded.</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" variable="" line="39">
+            <type by_reference="false">\NoiseLabs\ToolKit\ParameterBag</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="53">
+        <name>$options</name>
+        <default/>
+        <docblock>
+          <description>GoogleMaps configuration. This covers settings like zoom level to the
+usage of HTTPS.</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" variable="" line="47">
+            <type by_reference="false">\NoiseLabs\ToolKit\ParameterBag</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="55">
+        <name>$https</name>
+        <default>false</default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="60">
+        <name>__construct</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="60">
+          <name>$id</name>
+          <default>map</default>
+          <type/>
+        </argument>
+        <argument line="60">
+          <name>$options</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+        <argument line="60">
+          <name>$parameters</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="75">
+        <name>getOptionsDefaults</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="117">
+        <name>setId</name>
+        <argument line="117">
+          <name>$id</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="122">
+        <name>getId</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="127">
+        <name>hasMarkers</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="135">
+        <name>hasMarker</name>
+        <argument line="135">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="140">
+        <name>addMarker</name>
+        <argument line="140">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="145">
+        <name>removeMarker</name>
+        <argument line="145">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="155">
+        <name>setMarkers</name>
+        <argument line="155">
+          <name>$markers</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="160">
+        <name>getMarkers</name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="165">
+        <name>create</name>
+      </method>
+    </class>
+  </file>
+  <file path="Google/Maps/Marker.php" hash="22715b40770689d252c696bfc56731f8">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="Google"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <namespace-alias name="ParameterBag">NoiseLabs\Toolkit\ParameterBag</namespace-alias>
+    <class final="false" abstract="false" line="15" namespace="NoiseLabs\ToolKit\Google\Maps">
+      <name>Marker</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\Google\Maps\Marker</full_name>
+      <property final="false" static="false" visibility="protected" line="17">
+        <name>$latitude</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="18">
+        <name>$longitude</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="public" line="29">
+        <name>$options</name>
+        <default/>
+        <docblock>
+          <description>Marker options.</description>
+          <long-description>&lt;p&gt;Known keys:
+ - icon:    An icon to show in place of the default icon
+ - title:&lt;/p&gt;
+</long-description>
+          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" variable="" line="20">
+            <type by_reference="false">\NoiseLabs\ToolKit\ParameterBag</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="31">
+        <name>__construct</name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="36">
+        <name>create</name>
+        <argument line="36">
+          <name>$latitude</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="36">
+          <name>$longitude</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="36">
+          <name>$options</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="46">
+        <name>setLatitude</name>
+        <argument line="46">
+          <name>$latitude</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="51">
+        <name>getLatitude</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="56">
+        <name>setLongitude</name>
+        <argument line="56">
+          <name>$longitude</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="61">
+        <name>getLongitude</name>
+      </method>
+    </class>
+  </file>
+  <file path="Google/Maps/StaticMap.php" hash="a5b011ce10fcabbe5d5023be9035de17">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="Google"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <namespace-alias name="BaseMap">NoiseLabs\ToolKit\Google\Maps\BaseMap</namespace-alias>
+    <class final="false" abstract="false" line="15" namespace="NoiseLabs\ToolKit\Google\Maps">
+      <name>StaticMap</name>
+      <extends>NoiseLabs\ToolKit\Google\Maps\BaseMap</extends>
+      <full_name>NoiseLabs\ToolKit\Google\Maps\StaticMap</full_name>
+    </class>
+  </file>
+  <file path="Google/Maps/MapInterface.php" hash="01301d66a5267de1c2a5151322b35a99">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="Google"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <namespace-alias name="Marker">NoiseLabs\ToolKit\Google\Maps\Marker</namespace-alias>
+    <interface namespace="NoiseLabs\ToolKit\Google\Maps" line="15">
+      <name>MapInterface</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\Google\Maps\MapInterface</full_name>
+      <method final="false" abstract="false" static="false" visibility="public" line="17">
+        <name>setId</name>
+        <argument line="17">
+          <name>$id</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="18">
+        <name>getId</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="19">
+        <name>hasMarkers</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="20">
+        <name>hasMarker</name>
+        <argument line="20">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="21">
+        <name>setMarkers</name>
+        <argument line="21">
+          <name>$markers</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="22">
+        <name>getMarkers</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="23">
+        <name>addMarker</name>
+        <argument line="23">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="24">
+        <name>removeMarker</name>
+        <argument line="24">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="25">
+        <name>render</name>
+      </method>
+    </interface>
+  </file>
+  <file path="Google/GoogleMap.php" hash="8286b3898a07bbb1d9a52d20320c2a6b">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ToolKit&#10;Phoogle Maps 2.0 | Uses Google Maps API to create customizable maps&#10;that can be embedded on your website&#10;Copyright (C) 2005  Justin Johnson&#10;This program is free software; you can redistribute it and/or modify&#10;it under the terms of the GNU General Public License as published by&#10;the Free Software Foundation; either version 2 of the License, or&#10;(at your option) any later version.&#10;This program is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;GNU General Public License for more details.&#10;You should have received a copy of the GNU General Public License&#10;along with this program; if not, write to the Free Software&#10;Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA&#10;Phoogle Maps 2.0&#10;Uses Google Maps Mapping API to create customizable Google Maps that can be&#10;embedded on your website"/>
+      <tag name="author" description="Justin Johnson &amp;lt;justinjohnson@system7designs.com&amp;gt;"/>
+      <tag name="copyright" description="2005 system7designs"/>
+    </docblock>
+    <class final="false" abstract="false" line="44" namespace="NoiseLabs\ToolKit\Google">
+      <name>GoogleMap</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\Google\GoogleMap</full_name>
+      <docblock>
+        <description>Uses Google Maps API to create customizable maps that can be embedded on your
+website.</description>
+        <long-description>&lt;p&gt;This class is a rewrite of the original PhoogleMap class created by Justin
+Johnson (system7designs).&lt;/p&gt;
+</long-description>
+        <tag name="author" description="Justin Johnson &amp;lt;justinjohnson@system7designs.com&amp;gt;" line="34"/>
+        <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;" line="34"/>
+      </docblock>
+      <constant namespace="NoiseLabs\ToolKit\Google" line="46">
+        <name>LOCALHOST_API_KEY</name>
+        <value>ABQIAAAAdi_0xCw-nuskZRWE2Z6PBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxR3tBq3ZXP3CHmGs13Ec_yYzjqSfA</value>
+      </constant>
+      <property final="false" static="false" visibility="public" line="52">
+        <name>$validPoints</name>
+        <default>array</default>
+        <docblock>
+          <description>validPoints : array
+Holds addresses and HTML Messages for points that are valid (ie: have longitude and latitutde)</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="58">
+        <name>$invalidPoints</name>
+        <default>array</default>
+        <docblock>
+          <description>invalidPoints : array
+Holds addresses and HTML Messages for points that are invalid (ie: don't have longitude and latitutde)</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="64">
+        <name>$mapWidth</name>
+        <default>300</default>
+        <docblock>
+          <description>mapWidth
+width of the Google Map, in pixels</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="70">
+        <name>$mapHeight</name>
+        <default>300</default>
+        <docblock>
+          <description>mapHeight
+height of the Google Map, in pixels</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="76">
+        <name>$apiKey</name>
+        <default/>
+        <docblock>
+          <description>apiKey
+Google API Key</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="82">
+        <name>$showControl</name>
+        <default>true</default>
+        <docblock>
+          <description>showControl
+True/False whether to show map controls or not</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="88">
+        <name>$showType</name>
+        <default>true</default>
+        <docblock>
+          <description>showType
+True/False whether to show map type controls or not</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="95">
+        <name>$controlType</name>
+        <default>small</default>
+        <docblock>
+          <description>controlType
+string: can be 'small' or 'large'
+display's either the large or the small controls on the map, small by default</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="102">
+        <name>$zoomLevel</name>
+        <default>4</default>
+        <docblock>
+          <description>zoomLevel
+int: 0-17
+set's the initial zoom level of the map</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" line="107">
+        <name>create</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="107">
+          <name>$options</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="119">
+        <name>addGeoPoint</name>
+        <docblock>
+          <description>Add's an address to be displayed on the Google Map using latitude/longitude
+early version of this function, considered experimental.</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="119">
+          <name>$lat</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="119">
+          <name>$long</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="119">
+          <name>$infoHTML</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="131">
+        <name>centerMap</name>
+        <docblock>
+          <description>Center's Google Map on a specific point (thus eliminating the need for
+two different show methods from version 1.0).</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="131">
+          <name>$lat</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="131">
+          <name>$long</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="144">
+        <name>addAddress</name>
+        <docblock>
+          <description>Add's an address to be displayed on the Google Map (thus eliminating the
+need for two different show methods from version 1.0).</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$address:string" line="136"/>
+          <tag name="return" description="True:False (True if address has long/lat, false if it doesn&amp;#039;t)" type="Boolean" variable="" line="136">
+            <type by_reference="false">Boolean</type>
+          </tag>
+        </docblock>
+        <argument line="144">
+          <name>$address</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="144">
+          <name>$htmlMessage</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="178">
+        <name>showValidPoints</name>
+        <docblock>
+          <description>Displays either a table or a list of the address points that are valid.</description>
+          <long-description>&lt;p&gt;Mainly used for debugging but could be useful for showing a list of
+addresses on the map.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="" type="" variable="$displayType:string" line="169"/>
+          <tag name="param" description="" type="" variable="$css_id:string" line="169"/>
+          <tag name="return" description="" type="NoiseLabs\ToolKit\Google\nothing" variable="" line="169">
+            <type by_reference="false">NoiseLabs\ToolKit\Google\nothing</type>
+          </tag>
+        </docblock>
+        <argument line="178">
+          <name>$displayType</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="178">
+          <name>$css_id</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="205">
+        <name>showInvalidPoints</name>
+        <docblock>
+          <description>Displays either a table or a list of the address points that are invalid.</description>
+          <long-description>&lt;p&gt;Mainly used for debugging shows only the points that are NOT on the map.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="" type="" variable="$displayType:string" line="197"/>
+          <tag name="param" description="" type="" variable="$css_id:string" line="197"/>
+          <tag name="return" description="" type="NoiseLabs\ToolKit\Google\nothing" variable="" line="197">
+            <type by_reference="false">NoiseLabs\ToolKit\Google\nothing</type>
+          </tag>
+        </docblock>
+        <argument line="205">
+          <name>$displayType</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="205">
+          <name>$css_id</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="230">
+        <name>setWidth</name>
+        <docblock>
+          <description>Sets the width of the map to be displayed.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$width:int" line="224"/>
+          <tag name="return" description="" type="NoiseLabs\ToolKit\Google\nothing" variable="" line="224">
+            <type by_reference="false">NoiseLabs\ToolKit\Google\nothing</type>
+          </tag>
+        </docblock>
+        <argument line="230">
+          <name>$width</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="241">
+        <name>setHeight</name>
+        <docblock>
+          <description>Sets the height of the map to be displayed</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$height:int" line="235"/>
+          <tag name="return" description="" type="NoiseLabs\ToolKit\Google\nothing" variable="" line="235">
+            <type by_reference="false">NoiseLabs\ToolKit\Google\nothing</type>
+          </tag>
+        </docblock>
+        <argument line="241">
+          <name>$height</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="252">
+        <name>setAPIkey</name>
+        <docblock>
+          <description>Stores the API Key acquired from Google.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$key:string" line="246"/>
+          <tag name="return" description="" type="NoiseLabs\ToolKit\Google\nothing" variable="" line="246">
+            <type by_reference="false">NoiseLabs\ToolKit\Google\nothing</type>
+          </tag>
+        </docblock>
+        <argument line="252">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="263">
+        <name>printGoogleJS</name>
+        <docblock>
+          <description>Adds the necessary Javascript for the Google Map to function should be
+called in between the html &lt;head&gt;&lt;/head&gt; tags.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="NoiseLabs\ToolKit\Google\othing" variable="" line="257">
+            <type by_reference="false">NoiseLabs\ToolKit\Google\othing</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="271">
+        <name>showMap</name>
+        <docblock>
+          <description>Displays the Google Map on the page.</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="327">
+        <name>xml2array</name>
+        <argument line="327">
+          <name>$xml</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="341">
+        <name>startElement</name>
+        <argument line="341">
+          <name>$parser</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="341">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="341">
+          <name>$attrs</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="348">
+        <name>characterData</name>
+        <argument line="348">
+          <name>$parser</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="348">
+          <name>$data</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="355">
+        <name>endElement</name>
+        <argument line="355">
+          <name>$parser</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="355">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Helper.php" hash="8fb26bf8dae913f6a2866b9b0853c022">
+    <docblock>
+      <description/>
+      <long-description>
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="ToolKit"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;&#10;For the full copyright and license information, please view the LICENSE&#10;file that was distributed with this source code."/>
+    </docblock>
+    <class final="false" abstract="false" line="18" namespace="NoiseLabs\ToolKit">
+      <name>Helper</name>
+      <extends/>
+      <full_name>NoiseLabs\ToolKit\Helper</full_name>
+      <docblock>
+        <description>Helper holds a collection of static methods, useful for generic purposes</description>
+        <long-description>
+</long-description>
+        <tag name="author" description="V&#xED;tor Brand&#xE3;o &amp;lt;noisebleed@noiselabs.org&amp;gt;" line="13"/>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" line="31">
+        <name>sanitizeFileName</name>
+        <docblock>
+          <description>Returns a safe filename, for a given platform (OS), by replacing all
+dangerous characters with an underscore.</description>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.1.0" line="20"/>
+          <tag name="param" description="The source filename to be &amp;quot;sanitized&amp;quot;" type="string" variable="$dangerous_filename" line="20">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="The target OS" type="string" variable="$platform" line="20">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="string A safe version of the input filename" type="Boolean" variable="" line="20">
+            <type by_reference="false">Boolean</type>
+          </tag>
+        </docblock>
+        <argument line="31">
+          <name>$dangerous_filename</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="31">
+          <name>$platform</name>
+          <default>unix</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="57">
+        <name>buildArrayFromObjectsProperty</name>
+        <docblock>
+          <description>Returns an array made from property values extracted from each object in
+the array of objects.</description>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.1.0" line="46"/>
+          <tag name="param" description="The collection of objects holding the target property" type="array" variable="$objects" line="46">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="param" description="Property name to collect data from" type="string" variable="$property" line="46">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="array" variable="" line="46">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="57">
+          <name>$objects</name>
+          <default/>
+          <type>array</type>
+        </argument>
+        <argument line="57">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="81">
+        <name>buildArrayFromObjectsMethod</name>
+        <docblock>
+          <description>Returns an array made from values extracted the array of obects using
+the given method.</description>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.1.0" line="70"/>
+          <tag name="param" description="The collection of objects holding the target method" type="array" variable="$objects" line="70">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="param" description="Method name to ask for data" type="string" variable="$property" line="70">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="array" variable="" line="70">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="81">
+          <name>$objects</name>
+          <default/>
+          <type>array</type>
+        </argument>
+        <argument line="81">
+          <name>$method</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="112">
+        <name>getPreferredLanguage</name>
+        <docblock>
+          <description>An implementation of PECL's http_negotiate_language as posted on
+http://www.php.net/manual/en/function.http-negotiate-language.php by
+Anonymous (03-Nov-2008 11:23).</description>
+          <long-description>&lt;p&gt;This function negotiates the clients preferred language based on its
+Accept-Language HTTP header. The qualifier is recognized and languages
+without qualifier are rated highest. The qualifier will be decreased by
+10% for partial matches (i.e. matching primary language).&lt;/p&gt;
+</long-description>
+          <tag name="since" description="0.1.0" line="94"/>
+          <tag name="param" description="Array with language-tag-strings that are available" type="array" variable="$available_languages" line="94">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="param" description="The language to pick if none available" type="string" variable="$default_language" line="94">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="Returns the negotiated language or the default language" type="string" variable="" line="94">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="112">
+          <name>$available_languages</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+        <argument line="112">
+          <name>$default_language</name>
+          <default>en</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <package name=""/>
+  <package name="ConfigParser"/>
+  <package name="Google"/>
+  <package name="ToolKit&#10;Phoogle Maps 2.0 | Uses Google Maps API to create customizable maps&#10;that can be embedded on your website&#10;Copyright (C) 2005  Justin Johnson&#10;This program is free software; you can redistribute it and/or modify&#10;it under the terms of the GNU General Public License as published by&#10;the Free Software Foundation; either version 2 of the License, or&#10;(at your option) any later version.&#10;This program is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;GNU General Public License for more details.&#10;You should have received a copy of the GNU General Public License&#10;along with this program; if not, write to the Free Software&#10;Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA&#10;Phoogle Maps 2.0&#10;Uses Google Maps Mapping API to create customizable Google Maps that can be&#10;embedded on your website"/>
+  <package name="ToolKit"/>
+  <namespace name="NoiseLabs">
+    <namespace name="ToolKit">
+      <namespace name="ConfigParser">
+        <namespace name="Exception"/>
+      </namespace>
+      <namespace name="Google">
+        <namespace name="Maps"/>
+      </namespace>
+    </namespace>
+  </namespace>
+  <marker>todo</marker>
+  <marker>fixme</marker>
+</project>

@@ -1,0 +1,662 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">ConfigParser/ConfigParserInterface.php</h1>
+<div class="file_menu"><a href="#interfaces">Interfaces</a></div>
+<dl class="file-info">
+<dt>author</dt>
+<dd>Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
+<dt>category</dt>
+<dd>NoiseLabs</dd>
+<dt>copyright</dt>
+<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.</dd>
+<dt>package</dt>
+<dd>ConfigParser</dd>
+<dt>version</dt>
+<dd>0.1.0</dd>
+<dt>Interfaces</dt>
+<dd><a class="interface" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface">ConfigParserInterface</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+<a name="interfaces"></a><a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface"></a><h2 class="interface">NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd>\ArrayAccess</dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::defaults()">defaults</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::sections()">sections</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::addSection()">addSection</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::hasSection()">hasSection</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::options()">options</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::hasOption()">hasOption</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::read()">read</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::readFile()">readFile</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::readString()">readString</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::readArray()">readArray</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::get()">get</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::getInt()">getInt</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::getFloat()">getFloat</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::getBoolean()">getBoolean</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::set()">set</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::write()">write</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::removeOption()">removeOption</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::removeSection()">removeSection</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface::dump()">dump</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">The Interface for the ConfigParser class.</p>
+<div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::addSection()"></a><h4 class="method">addSection<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">addSection</span><span class="nb-faded-text">(
+           $section
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::defaults()"></a><h4 class="method">defaults<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">defaults</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::dump()"></a><h4 class="method">dump<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">dump</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::get()"></a><h4 class="method">get<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">get</span><span class="nb-faded-text">(
+           $section,  $option
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+<dt>$option</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::getBoolean()"></a><h4 class="method">getBoolean<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getBoolean</span><span class="nb-faded-text">(
+           $section,  $option
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+<dt>$option</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::getFloat()"></a><h4 class="method">getFloat<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getFloat</span><span class="nb-faded-text">(
+           $section,  $option
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+<dt>$option</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::getInt()"></a><h4 class="method">getInt<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getInt</span><span class="nb-faded-text">(
+           $section,  $option
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+<dt>$option</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::hasOption()"></a><h4 class="method">hasOption<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">hasOption</span><span class="nb-faded-text">(
+           $section,  $option
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+<dt>$option</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::hasSection()"></a><h4 class="method">hasSection<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">hasSection</span><span class="nb-faded-text">(
+           $section
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::options()"></a><h4 class="method">options<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">options</span><span class="nb-faded-text">(
+           $section
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::read()"></a><h4 class="method">read<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">read</span><span class="nb-faded-text">(
+           $filenames
+              =
+              array
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$filenames</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::readArray()"></a><h4 class="method">readArray<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">readArray</span><span class="nb-faded-text">(
+           $array
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::readFile()"></a><h4 class="method">readFile<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">readFile</span><span class="nb-faded-text">(
+           $filehandler
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$filehandler</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::readString()"></a><h4 class="method">readString<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">readString</span><span class="nb-faded-text">(
+           $string
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::removeOption()"></a><h4 class="method">removeOption<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">removeOption</span><span class="nb-faded-text">(
+           $section,  $option
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+<dt>$option</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::removeSection()"></a><h4 class="method">removeSection<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">removeSection</span><span class="nb-faded-text">(
+           $section
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::sections()"></a><h4 class="method">sections<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">sections</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::set()"></a><h4 class="method">set<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">set</span><span class="nb-faded-text">(
+           $section,  $option,  $value
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$section</dt>
+<dd><em></em></dd>
+<dt>$option</dt>
+<dd><em></em></dd>
+<dt>$value</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface::write()"></a><h4 class="method">write<div class="to-top"><a href="#ConfigParserInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">write</span><span class="nb-faded-text">(
+           $filename
+              =
+              null,  $space_around_delimiters
+              =
+              true
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$filename</dt>
+<dd><em></em></dd>
+<dt>$space_around_delimiters</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox</a>.
+    </small></body></html>
