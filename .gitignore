@@ -1,2 +1,4 @@
 *~
+*.kate-swp
+src/NoiseLabs/ToolKit/ConfigParser/configparser.py
 src/NoiseLabs/ToolKit/ToolKitBundle.php
