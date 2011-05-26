@@ -28,7 +28,7 @@
  *  THE SOFTWARE
  */
 
-namespace NoiseLabs\ToolKit;
+namespace NoiseLabs\ToolKit\GoogleMap;
 
 /**
  * ParameterBag is a container for key/value pairs.
