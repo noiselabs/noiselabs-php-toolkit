@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="NoiseLabs ToolKit Test Suite">
+            <directory>tests/Monolog/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/NoiseLabs/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
