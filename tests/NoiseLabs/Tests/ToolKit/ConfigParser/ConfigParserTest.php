@@ -16,6 +16,30 @@ use NoiseLabs\ToolKit\ConfigParser\ConfigParser;
 
 class ConfigParserTest extends \PHPUnit_Framework_TestCase
 {
+	protected $filenames;
+	protected $out_filename;
+	
+	protected function getFilename()
+	{
+		return $this->filenames[0];
+	}
+	
+	protected function setUp()
+	{
+		$this->cfg = new ConfigParser();
+		
+		$this->filenames = array(
+					__DIR__.'/Fixtures/source.cfg'
+					);
+		
+		$this->out_filename = tempnam(sys_get_temp_dir(), str_replace('\\', '_',__CLASS__).'_');
+	}
+	
+	protected function tearDown()
+	{
+		file_exists($this->out_filename) && unlink($this->out_filename);
+	}
+	
 	/**
 	 * @expectedException NoiseLabs\ToolKit\ConfigParser\Exception\DuplicateSectionException
 	 */
@@ -23,10 +47,9 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
 	{
 		$section = 'github.com';
 
-		$cfg = new ConfigParser();
-		$cfg->read(__DIR__.'/Fixtures/source.cfg');
-
-		$cfg->addSection($section);
+		$this->cfg->read($this->getFilename());
+		
+		$this->cfg->addSection($section);
 	}
 
 	/**
@@ -36,8 +59,9 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
 	{
 		$section = array();
 
-		$cfg = $this->create();
-		$cfg->addSection($section);
+		$this->cfg->read($this->getFilename());
+		
+		$this->cfg->addSection($section);
 	}
 
 	/**
@@ -47,50 +71,37 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
 	{
 		$section = 'DeFaulT';
 
-		$cfg = $this->create();
-		$cfg->addSection($section);
+		$this->cfg->read($this->getFilename());
+		
+		$this->cfg->addSection($section);
 	}
 
 	public function testHasSection()
 	{
-		$cfg = $this->create();
+		$this->cfg->read($this->getFilename());
 
-		$this->assertFalse($cfg->hasSection('non-existing-section'));
+		$this->assertFalse($this->cfg->hasSection('non-existing-section'));
 
-		$this->assertFalse($cfg->hasSection('default'));
+		$this->assertFalse($this->cfg->hasSection('default'));
 
-		$this->assertTrue($cfg->hasSection('github.com'));
+		$this->assertTrue($this->cfg->hasSection('github.com'));
 	}
 
 	public function testHasOption()
 	{
-		$cfg = $this->create();
+		$this->cfg->read($this->getFilename());
 
-		$this->assertTrue($cfg->hasOption('github.com', 'User'));
+		$this->assertTrue($this->cfg->hasOption('github.com', 'User'));
 
-		$this->assertFalse($cfg->hasOption('non-existing-section', 'User'));
+		$this->assertFalse($this->cfg->hasOption('non-existing-section', 'User'));
 
-		$this->assertFalse($cfg->hasOption('github.com', 'non-existing-option'));
+		$this->assertFalse($this->cfg->hasOption('github.com', 'non-existing-option'));
 
-		$this->assertTrue($cfg->hasOption(null, 'ForwardX11'));
+		$this->assertTrue($this->cfg->hasOption(null, 'ForwardX11'));
 
-		$this->assertTrue($cfg->hasOption('', 'ForwardX11'));
+		$this->assertTrue($this->cfg->hasOption('', 'ForwardX11'));
 
-		$this->assertFalse($cfg->hasOption('', 'User'));
-	}
-
-	protected function create($file = null)
-	{
-		$cfg = new ConfigParser();
-
-		if (isset($file)) {
-			$cfg->read(__DIR__.'/Fixtures/'.$file);
-		}
-		else {
-			$cfg->read(__DIR__.'/Fixtures/source.cfg');
-		}
-
-		return $cfg;
+		$this->assertFalse($this->cfg->hasOption('', 'User'));
 	}
 }
 
