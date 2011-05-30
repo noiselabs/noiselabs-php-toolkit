@@ -28,21 +28,19 @@
 
 namespace NoiseLabs\ToolKit\Process;
 
-interface ProcessInterface
+use NoiseLabs\ToolKit\Process\Process;
+
+interface ProcessManagerInterface extends \ArrayAccess, \IteratorAggregate, \Countable
 {
-	public function getCommand();
+	public function has($id);
 
-	public function setCommand($command);
+	public function add($id, Process $process);
 
-	public static function buildDefaultSettings();
+	public function set($id, Process $process);
 
-	public function run();
+	public function get($id);
 
-	public function getOutput();
-
-	public function getReturnCode();
-
-	public function log($message, $level);
+	public function remove($id);
 }
 
 ?>
