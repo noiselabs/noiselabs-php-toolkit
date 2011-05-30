@@ -38,23 +38,6 @@ class Process implements ProcessInterface
 	protected $_output = array();
 	protected $_retcode;
 	protected $_descriptorspec;
-	public $settings;
-
-	public function __construct($command, array $settings = array())
-	{
-		$this->setCommand($command);
-
-		// default settings
-		$this->settings = new ParameterBag(static::buildDefaultSettings());
-
-		$this->settings->add($settings);
-
-		$this->_descriptorspec = array(
-					0 => array('pipe', 'r'),
-					1 => array('pipe', 'w'),
-					2 => array('pipe', 'w')
-					);
-	}
 
 	/**
 	 * Known settings:
@@ -72,15 +55,29 @@ class Process implements ProcessInterface
 	 *		be run, or NULL to use the same environment as the current PHP
 	 *		process.
 	 *
-	 * @return array
+	 * @var array
 	 */
-	public static function buildDefaultSettings()
-	{
-		return array(
-				'sudo'	=> true,
+	protected $_defaults = array(
+				'sudo'	=> false,
 				'cwd'	=> null,
 				'env'	=> null
 				);
+
+	public $settings;
+
+	public function __construct($command, array $settings = array())
+	{
+		$this->setCommand($command);
+
+		// default settings
+		$this->settings = new ParameterBag($this->_defaults);
+		$this->settings->add($settings);
+
+		$this->_descriptorspec = array(
+					0 => array('pipe', 'r'),
+					1 => array('pipe', 'w'),
+					2 => array('pipe', 'w')
+					);
 	}
 
 	public function getCommand()
@@ -105,14 +102,14 @@ class Process implements ProcessInterface
 		$this->reset();
 
 		// use sudo?
-		$command = (true === $this->settings->get('sudo', false)) ?
+		$command = (true === $this->settings->get('sudo', $this->_defaults['sudo'])) ?
 			'sudo '.$this->command : $this->command;
 
 		// current working directory
-		$cwd = $this->settings->get('cwd', null);
+		$cwd = $this->settings->get('cwd', $this->_defaults['cwd']);
 
 		// environment variables
-		$env = $this->settings->get('env', null);
+		$env = $this->settings->get('env', $this->_defaults['env']);
 
 		$this->_resource = proc_open(
 						$command,
@@ -156,6 +153,11 @@ class Process implements ProcessInterface
 	public function exec()
 	{
 		return $this->run();
+	}
+
+	public function success()
+	{
+		return (0 === $this->getReturnCode());
 	}
 
 	public function getOutput()

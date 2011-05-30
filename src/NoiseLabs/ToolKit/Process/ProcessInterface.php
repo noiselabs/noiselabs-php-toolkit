@@ -34,11 +34,11 @@ interface ProcessInterface
 
 	public function setCommand($command);
 
-	public static function buildDefaultSettings();
-
 	public function run();
 
 	public function getOutput();
+
+	public function getErrorMessage();
 
 	public function getReturnCode();
 
