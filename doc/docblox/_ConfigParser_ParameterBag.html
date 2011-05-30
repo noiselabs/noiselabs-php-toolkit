@@ -1,0 +1,643 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">ConfigParser/ParameterBag.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>Classes</dt>
+<dd><a class="class" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag">ParameterBag</a></dd>
+</dl>
+<a name="classes"></a><a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag"></a><h2 class="class">NoiseLabs\ToolKit\ConfigParser\ParameterBag<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>author</dt>
+<dd>Fabien Potencier &lt;fabien@symfony.com&gt;</dd>
+<dt>Properties</dt>
+<dd><a class="property" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::%24parameters">$parameters</a></dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::__construct()">__construct</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::all()">all</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::keys()">keys</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::replace()">replace</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::add()">add</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::get()">get</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::getDeep()">getDeep</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::set()">set</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::has()">has</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::remove()">remove</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::getAlpha()">getAlpha</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::getAlnum()">getAlnum</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::getDigits()">getDigits</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag::getInt()">getInt</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">ParameterBag is a container for key/value pairs.</p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::$parameters"></a><h4 class="property">$parameters<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CConfigParser%5CParameterBag">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$parameters</span> = ''</code><div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::__construct()"></a><h4 class="method">__construct<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          array $parameters
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description">Constructor.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$parameters</dt>
+<dd>array<br><em>An array of parameters</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::add()"></a><h4 class="method">add<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">add</span><span class="nb-faded-text">(
+          array $parameters
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description">Adds parameters.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$parameters</dt>
+<dd>array<br><em>An array of parameters</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::all()"></a><h4 class="method">all<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">all</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        array</code><p class="short-description">Returns the parameters.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em>An array of parameters</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::get()"></a><h4 class="method">get<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">get</span><span class="nb-faded-text">(
+          string $key, mixed $default
+              =
+              null
+          )
+        </span>
+        :
+        </code><p class="short-description">Returns a parameter by name.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The key</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>The default value</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::getAlnum()"></a><h4 class="method">getAlnum<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getAlnum</span><span class="nb-faded-text">(
+          string $key, mixed $default
+          )
+        </span>
+        :
+        string</code><p class="short-description">Returns the alphabetic characters and digits of the parameter value.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The parameter key</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>The default value</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The filtered value</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::getAlpha()"></a><h4 class="method">getAlpha<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getAlpha</span><span class="nb-faded-text">(
+          string $key, mixed $default
+          )
+        </span>
+        :
+        string</code><p class="short-description">Returns the alphabetic characters of the parameter value.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The parameter key</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>The default value</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The filtered value</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::getDeep()"></a><h4 class="method">getDeep<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getDeep</span><span class="nb-faded-text">(
+          string $path, mixed $default
+              =
+              null
+          )
+        </span>
+        :
+        </code><p class="short-description">Returns a parameter by name allowing to specify a path with arbitrary depth.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$path</dt>
+<dd>string<br><em>The path, e.g. foo[bar]</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>The default value</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::getDigits()"></a><h4 class="method">getDigits<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getDigits</span><span class="nb-faded-text">(
+          string $key, mixed $default
+          )
+        </span>
+        :
+        string</code><p class="short-description">Returns the digits of the parameter value.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The parameter key</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>The default value</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The filtered value</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::getInt()"></a><h4 class="method">getInt<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getInt</span><span class="nb-faded-text">(
+          string $key, mixed $default
+              =
+              0
+          )
+        </span>
+        :
+        string</code><p class="short-description">Returns the parameter value converted to integer.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The parameter key</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>The default value</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The filtered value</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::has()"></a><h4 class="method">has<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">has</span><span class="nb-faded-text">(
+          string $key
+          )
+        </span>
+        :
+        Boolean</code><p class="short-description">Returns true if the parameter is defined.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The key</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>Boolean</dt>
+<dd><em>true if the parameter exists, false otherwise</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::keys()"></a><h4 class="method">keys<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">keys</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        array</code><p class="short-description">Returns the parameter keys.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em>An array of parameter keys</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::remove()"></a><h4 class="method">remove<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">remove</span><span class="nb-faded-text">(
+          string $key
+          )
+        </span>
+        :
+        </code><p class="short-description">Removes a parameter.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The key</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::replace()"></a><h4 class="method">replace<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">replace</span><span class="nb-faded-text">(
+          array $parameters
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description">Replaces the current parameters by a new set.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$parameters</dt>
+<dd>array<br><em>An array of parameters</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ParameterBag::set()"></a><h4 class="method">set<div class="to-top"><a href="#ParameterBag">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">set</span><span class="nb-faded-text">(
+          string $key, mixed $value
+          )
+        </span>
+        :
+        </code><p class="short-description">Sets a parameter by name.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>The key</em>
+</dd>
+<dt>$value</dt>
+<dd>mixed<br><em>The value</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox</a>.
+    </small></body></html>

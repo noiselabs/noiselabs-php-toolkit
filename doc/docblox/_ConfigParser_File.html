@@ -39,19 +39,31 @@
 <dt>category</dt>
 <dd>NoiseLabs</dd>
 <dt>copyright</dt>
-<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.</dd>
+<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
 <dt>package</dt>
 <dd>ConfigParser</dd>
 <dt>version</dt>
-<dd>0.1.0</dd>
+<dd>0.1.1</dd>
 <dt>Classes</dt>
 <dd><a class="class" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile">File</a></dd>
 </dl>
 <h2>Description</h2>
-<p class="short-description"></p>
-<div class="long-description">
+<p class="short-description">This file is part of NoiseLabs-PHP-ToolKit</p>
+<div class="long-description"><p>NoiseLabs-PHP-ToolKit is free software; you can redistribute it
+and/or modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 3 of the License, or (at your option) any later version.</p>
+
+<p>NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU Lesser General Public
+License along with NoiseLabs-PHP-ToolKit; if not, see
+<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+<p>Copyright (C) 2011 Vítor Brandão <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x6e;&#111;&#x69;&#115;&#x65;&#98;&#x6c;&#101;&#x65;&#100;&#x40;&#110;&#x6f;&#105;&#x73;&#101;&#x6c;&#97;&#x62;&#115;&#x2e;&#111;&#x72;&#103;">&#x6e;&#111;&#x69;&#115;&#x65;&#98;&#x6c;&#101;&#x65;&#100;&#x40;&#110;&#x6f;&#105;&#x73;&#101;&#x6c;&#97;&#x62;&#115;&#x2e;&#111;&#x72;&#103;</a></p>
 </div>
 <a name="classes"></a><a id="NoiseLabs\ToolKit\ConfigParser\File"></a><h2 class="class">NoiseLabs\ToolKit\ConfigParser\File<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
@@ -63,8 +75,13 @@ file that was distributed with this source code.</dd>
 <dd><a class="property" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::%24_mode">$_mode</a></dd>
 <dt>Methods</dt>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::__construct()">__construct</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::getPathname()">getPathname</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::open()">open</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::write()">write</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::close()">close</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::isReadable()">isReadable</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::isWritable()">isWritable</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile::remove()">remove</a></dd>
 </dl>
 <h3>Properties</h3>
 <div>
@@ -128,9 +145,9 @@ created. If it exists, it is neither truncated (as opposed to 'w'), nor
 the call to this function fails (as is the case with 'x'). The file
 pointer is positioned on the beginning of the file. This may be useful
 if it's desired to get an advisory lock (see flock()) before attempting
-to modify the file, as using 'w' could truncate the file before the lock
-was obtained (if truncation is desired, ftruncate() can be used after
-the lock is requested).</p>
+to modify the file, as using 'w' could truncate the file before the
+lock was obtained (if truncation is desired, ftruncate() can be used
+after the lock is requested).</p>
 
 <p>'c+': Open the file for reading and writing; otherwise it has the
 same behavior as 'c'.</p>
@@ -154,7 +171,10 @@ same behavior as 'c'.</p>
 <a id="NoiseLabs\ToolKit\ConfigParser\File::$_path"></a><h4 class="property">$_path<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CConfigParser%5CFile">jump to class</a></div>
 </h4>
 <div class="property">
-<code> <span class="highlight">$_path</span> = ''</code><div class="api-section">
+<code> <span class="highlight">$_path</span> = ''</code><p class="short-description">Pathname</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h4 class="info">
 <img src="images/arrow_right.gif"> Details</h4>
 <dl class="property-info">
@@ -229,15 +249,143 @@ same behavior as 'c'.</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="NoiseLabs\ToolKit\ConfigParser\File::open()"></a><h4 class="method">open<div class="to-top"><a href="#File">jump to class</a></div>
+<a id="NoiseLabs\ToolKit\ConfigParser\File::getPathname()"></a><h4 class="method">getPathname<div class="to-top"><a href="#File">jump to class</a></div>
 </h4>
 <div class="method">
-<code><span class="highlight">open</span><span class="nb-faded-text">(
+<code><span class="highlight">getPathname</span><span class="nb-faded-text">(
           
           )
         </span>
         :
         </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\File::isReadable()"></a><h4 class="method">isReadable<div class="to-top"><a href="#File">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">isReadable</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\File::isWritable()"></a><h4 class="method">isWritable<div class="to-top"><a href="#File">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">isWritable</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\File::open()"></a><h4 class="method">open<div class="to-top"><a href="#File">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">open</span><span class="nb-faded-text">(
+           $mode
+              =
+              null
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$mode</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\File::remove()"></a><h4 class="method">remove<div class="to-top"><a href="#File">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">remove</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\File::write()"></a><h4 class="method">write<div class="to-top"><a href="#File">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">write</span><span class="nb-faded-text">(
+           $content
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$content</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">

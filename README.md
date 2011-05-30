@@ -20,7 +20,7 @@ Requirements
 License
 -------
 
-The NoiseLabs PHP ToolKit is licensed under the BSD-2 License. See the LICENSE file for details.
+The NoiseLabs PHP ToolKit is licensed under the LGPLv3 License. See the LICENSE file for details.
 
 Installation
 ------------

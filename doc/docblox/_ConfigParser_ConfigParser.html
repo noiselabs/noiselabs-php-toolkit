@@ -39,41 +39,49 @@
 <dt>category</dt>
 <dd>NoiseLabs</dd>
 <dt>copyright</dt>
-<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.</dd>
+<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
 <dt>package</dt>
 <dd>ConfigParser</dd>
 <dt>version</dt>
-<dd>0.1.0</dd>
+<dd>0.1.1</dd>
 <dt>Classes</dt>
 <dd><a class="class" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser">ConfigParser</a></dd>
 </dl>
 <h2>Description</h2>
-<p class="short-description"></p>
-<div class="long-description">
+<p class="short-description">This file is part of NoiseLabs-PHP-ToolKit</p>
+<div class="long-description"><p>NoiseLabs-PHP-ToolKit is free software; you can redistribute it
+and/or modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 3 of the License, or (at your option) any later version.</p>
+
+<p>NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU Lesser General Public
+License along with NoiseLabs-PHP-ToolKit; if not, see
+<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+<p>Copyright (C) 2011 Vítor Brandão <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x6e;&#111;&#x69;&#115;&#x65;&#98;&#x6c;&#101;&#x65;&#100;&#x40;&#110;&#x6f;&#105;&#x73;&#101;&#x6c;&#97;&#x62;&#115;&#x2e;&#111;&#x72;&#103;">&#x6e;&#111;&#x69;&#115;&#x65;&#98;&#x6c;&#101;&#x65;&#100;&#x40;&#110;&#x6f;&#105;&#x73;&#101;&#x6c;&#97;&#x62;&#115;&#x2e;&#111;&#x72;&#103;</a></p>
 </div>
 <a name="classes"></a><a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser"></a><h2 class="class">NoiseLabs\ToolKit\ConfigParser\ConfigParser<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
 <div class="class">
 <dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_ConfigParser_BaseConfigParser.html#NoiseLabs%5CToolKit%5CConfigParser%5CBaseConfigParser">NoiseLabs\ToolKit\ConfigParser\BaseConfigParser</a></dd>
 <dt>Implements</dt>
-<dd></dd>
 <dd><a href="_ConfigParser_ConfigParserInterface.html#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParserInterface">NoiseLabs\ToolKit\ConfigParser\ConfigParserInterface</a></dd>
+<dt>author</dt>
+<dd>Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
 <dt>note</dt>
 <dd>This class does not interpret or write the value-type prefixes
 used in the Windows Registry extended version of INI syntax.</dd>
 <dt>Constants</dt>
 <dd><a class="constant" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::DEFAULT_SECTION">DEFAULT_SECTION</a></dd>
 <dd><a class="constant" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::HAS_SECTIONS">HAS_SECTIONS</a></dd>
-<dt>Properties</dt>
-<dd><a class="property" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::%24_data">$_data</a></dd>
-<dd><a class="property" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::%24_defaults">$_defaults</a></dd>
-<dd><a class="property" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::%24_files">$_files</a></dd>
 <dt>Methods</dt>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::__construct()">__construct</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::getConfig()">getConfig</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::defaults()">defaults</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::sections()">sections</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::addSection()">addSection</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::hasSection()">hasSection</a></dd>
@@ -81,31 +89,14 @@ used in the Windows Registry extended version of INI syntax.</dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::hasOption()">hasOption</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::setOptions()">setOptions</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::read()">read</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::readFile()">readFile</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::readString()">readString</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::readArray()">readArray</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::get()">get</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::getInt()">getInt</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::getFloat()">getFloat</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::getBoolean()">getBoolean</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::set()">set</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::write()">write</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::_buildOptionValueLine()">_buildOptionValueLine</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::_buildOutputString()">_buildOutputString</a></dd>
 <dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::removeOption()">removeOption</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::removeSection()">removeSection</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::read_()">read_</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::get_()">get_</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::sections_()">sections_</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::has_section()">has_section</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::has_option()">has_option</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::set_()">set_</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::write_()">write_</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::dump()">dump</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::offsetExists()">offsetExists</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::offsetGet()">offsetGet</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::offsetSet()">offsetSet</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::offsetUnset()">offsetUnset</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::getIterator()">getIterator</a></dd>
-<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser::count()">count</a></dd>
 </dl>
 <h3>Description</h3>
 <p class="short-description">The ConfigParser class implements a basic configuration language which
@@ -148,94 +139,22 @@ http://docs.python.org/dev/library/configparser.html</p>
 </div>
 </div>
 </div>
-<h3>Properties</h3>
-<div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::$_data"></a><h4 class="property">$_data<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser">jump to class</a></div>
-</h4>
-<div class="property">
-<code>array <span class="highlight">$_data</span> = 'array'</code><p class="short-description">The configuration representation is stored here.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h4 class="info">
-<img src="images/arrow_right.gif"> Details</h4>
-<dl class="property-info">
-<dt>$_data</dt>
-<dd>array<br><em></em>
-</dd>
-<dt>visibility</dt>
-<dd>private</dd>
-<dt>default</dt>
-<dd>array</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::$_defaults"></a><h4 class="property">$_defaults<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser">jump to class</a></div>
-</h4>
-<div class="property">
-<code> <span class="highlight">$_defaults</span> = 'array'</code><div class="api-section">
-<h4 class="info">
-<img src="images/arrow_right.gif"> Details</h4>
-<dl class="property-info">
-<dt>visibility</dt>
-<dd>private</dd>
-<dt>default</dt>
-<dd>array</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::$_files"></a><h4 class="property">$_files<div class="to-top"><a href="#NoiseLabs%5CToolKit%5CConfigParser%5CConfigParser">jump to class</a></div>
-</h4>
-<div class="property">
-<code>array <span class="highlight">$_files</span> = 'array'</code><p class="short-description">An array of FILE objects representing the loaded files.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h4 class="info">
-<img src="images/arrow_right.gif"> Details</h4>
-<dl class="property-info">
-<dt>$_files</dt>
-<dd>array<br><em></em>
-</dd>
-<dt>visibility</dt>
-<dd>private</dd>
-<dt>default</dt>
-<dd>array</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-</div>
 <h3>Methods</h3>
 <div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::__construct()"></a><h4 class="method">__construct<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::_buildOptionValueLine()"></a><h4 class="method">_buildOptionValueLine<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
 </h4>
 <div class="method">
-<code><span class="highlight">__construct</span><span class="nb-faded-text">(
-           $defaults
-              =
-              array
+<code><span class="highlight">_buildOptionValueLine</span><span class="nb-faded-text">(
+           $key,  $value
           )
         </span>
         :
         </code><div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
-<dt>$defaults</dt>
+<dt>$key</dt>
+<dd><em></em></dd>
+<dt>$value</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -245,7 +164,29 @@ http://docs.python.org/dev/library/configparser.html</p>
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
 <dt>visibility</dt>
-<dd>public</dd>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::_buildOutputString()"></a><h4 class="method">_buildOutputString<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_buildOutputString</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
 <dt>final</dt>
 <dd>false</dd>
 <dt>static</dt>
@@ -290,107 +231,42 @@ InvalidArgumentException is raised too.</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::count()"></a><h4 class="method">count<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">count</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-        integer</code><p class="short-description">Returns the number of sections (implements the \Countable interface).</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>integer</dt>
-<dd><em>The number of sections</em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::defaults()"></a><h4 class="method">defaults<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">defaults</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-        </code><p class="short-description">Return an associative array containing the instance-wide defaults.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::dump()"></a><h4 class="method">dump<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">dump</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-        </code><p class="short-description">Output the current configuration representation.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
 <a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::get()"></a><h4 class="method">get<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
 </h4>
 <div class="method">
 <code><span class="highlight">get</span><span class="nb-faded-text">(
-           $section,  $option
+          NoiseLabs\ToolKit\ConfigParser\$section $section, NoiseLabs\ToolKit\ConfigParser\$option $option, NoiseLabs\ToolKit\ConfigParser\$fallback $fallback
+              =
+              null
           )
         </span>
         :
-        </code><p class="short-description">Get an option value for the named section.</p>
-<div class="long-description">
+        NoiseLabs\ToolKit\ConfigParser\Option</code><p class="short-description">Get an option value for the named section.</p>
+<div class="long-description"><p>If the option doesn't exist in the configuration $defaults is used.
+If $defaults doesn't have this option too then we look for the
+$fallback parameter.
+If everything fails throw a NoOptionException.</p>
 </div>
 <div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$section</dt>
-<dd><em></em></dd>
+<dd>NoiseLabs\ToolKit\ConfigParser\$section<br><em>Section name</em>
+</dd>
 <dt>$option</dt>
-<dd><em></em></dd>
+<dd>NoiseLabs\ToolKit\ConfigParser\$option<br><em>Option name</em>
+</dd>
+<dt>$fallback</dt>
+<dd>NoiseLabs\ToolKit\ConfigParser\$fallback<br><em>A fallback value to use if the option isn&amp;#039;t found in the configuration and $defaults.</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\ConfigParser\Option</dt>
+<dd><em>value (if available)</em></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -404,6 +280,8 @@ InvalidArgumentException is raised too.</p>
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+<dt>throws</dt>
+<dd>Couldn&#039;t find the desired option in the configuration, $defaults or as a fallback value.</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -412,7 +290,9 @@ InvalidArgumentException is raised too.</p>
 </h4>
 <div class="method">
 <code><span class="highlight">getBoolean</span><span class="nb-faded-text">(
-           $section,  $option
+           $section,  $option,  $fallback
+              =
+              null
           )
         </span>
         :
@@ -430,43 +310,7 @@ other value will cause it to raise ValueException.</p>
 <dd><em></em></dd>
 <dt>$option</dt>
 <dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::getConfig()"></a><h4 class="method">getConfig<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">getConfig</span><span class="nb-faded-text">(
-           $filename,  $has_sections
-              =
-              true,  $safemode
-              =
-              false
-          )
-        </span>
-        :
-        </code><div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$filename</dt>
-<dd><em></em></dd>
-<dt>$has_sections</dt>
-<dd><em></em></dd>
-<dt>$safemode</dt>
+<dt>$fallback</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -480,7 +324,7 @@ other value will cause it to raise ValueException.</p>
 <dt>final</dt>
 <dd>false</dd>
 <dt>static</dt>
-<dd>true</dd>
+<dd>false</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -489,7 +333,9 @@ other value will cause it to raise ValueException.</p>
 </h4>
 <div class="method">
 <code><span class="highlight">getFloat</span><span class="nb-faded-text">(
-           $section,  $option
+           $section,  $option,  $fallback
+              =
+              null
           )
         </span>
         :
@@ -503,6 +349,8 @@ to a floating point number.</p>
 <dt>$section</dt>
 <dd><em></em></dd>
 <dt>$option</dt>
+<dd><em></em></dd>
+<dt>$fallback</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -525,7 +373,9 @@ to a floating point number.</p>
 </h4>
 <div class="method">
 <code><span class="highlight">getInt</span><span class="nb-faded-text">(
-           $section,  $option
+           $section,  $option,  $fallback
+              =
+              null
           )
         </span>
         :
@@ -540,75 +390,7 @@ to an integer.</p>
 <dd><em></em></dd>
 <dt>$option</dt>
 <dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::getIterator()"></a><h4 class="method">getIterator<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">getIterator</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-        \ArrayIterator</code><p class="short-description">Returns the iterator for this group.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>\ArrayIterator</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::get_()"></a><h4 class="method">get_<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">get_</span><span class="nb-faded-text">(
-           $section,  $option
-              =
-              NULL
-          )
-        </span>
-        :
-        </code><p class="short-description">Get an option value for the named section.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$section</dt>
-<dd><em></em></dd>
-<dt>$option</dt>
+<dt>$fallback</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -697,233 +479,6 @@ empty string, DEFAULT is assumed.</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::has_option()"></a><h4 class="method">has_option<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">has_option</span><span class="nb-faded-text">(
-           $section,  $option
-              =
-              NULL
-          )
-        </span>
-        :
-        </code><p class="short-description">If the given section exists, and contains the given option, return True;
-otherwise return False.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$section</dt>
-<dd><em></em></dd>
-<dt>$option</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::has_section()"></a><h4 class="method">has_section<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">has_section</span><span class="nb-faded-text">(
-           $section
-          )
-        </span>
-        :
-        </code><p class="short-description">Indicates whether the named section is present in the configuration.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$section</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::offsetExists()"></a><h4 class="method">offsetExists<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">offsetExists</span><span class="nb-faded-text">(
-          string $offset
-          )
-        </span>
-        :
-        Boolean</code><p class="short-description">Returns true if the section exists (implements the \ArrayAccess
-interface).</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$offset</dt>
-<dd>string<br><em>The name of the section</em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>Boolean</dt>
-<dd><em>true if the section exists, false otherwise</em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::offsetGet()"></a><h4 class="method">offsetGet<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">offsetGet</span><span class="nb-faded-text">(
-          string $offset
-          )
-        </span>
-        :
-        mixed</code><p class="short-description">Returns the array of options associated with the section (implements
-the \ArrayAccess interface).</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$offset</dt>
-<dd>string<br><em>The offset of the value to get</em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>mixed</dt>
-<dd><em>The array of options associated with the section</em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::offsetSet()"></a><h4 class="method">offsetSet<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">offsetSet</span><span class="nb-faded-text">(
-           $offset,  $value
-          )
-        </span>
-        :
-        </code><p class="short-description">Adds an array of options to the given section (implements the
-\ArrayAccess interface).</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$offset</dt>
-<dd><em></em></dd>
-<dt>$value</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::offsetUnset()"></a><h4 class="method">offsetUnset<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">offsetUnset</span><span class="nb-faded-text">(
-          string $name
-          )
-        </span>
-        :
-        </code><p class="short-description">Removes the child with the given name from the form (implements the \ArrayAccess interface).</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$name</dt>
-<dd>string<br><em>The name of the child to be removed</em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
 <a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::options()"></a><h4 class="method">options<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
 </h4>
 <div class="method">
@@ -961,141 +516,6 @@ the \ArrayAccess interface).</p>
 </h4>
 <div class="method">
 <code><span class="highlight">read</span><span class="nb-faded-text">(
-           $filenames
-              =
-              array
-          )
-        </span>
-        :
-        </code><p class="short-description">Attempt to read and parse a list of filenames, returning a list of
-filenames which were successfully parsed. If filenames is a string, it
-is treated as a single filename. If a file named in filenames cannot be
-opened, that file will be ignored. This is designed so that you can
-specify a list of potential configuration file locations (for example,
-the current directory, the user’s home directory, and some system-wide
-directory), and all existing configuration files in the list will be
-read. If none of the named files exist, the ConfigParser instance will
-contain an empty dataset. An application which requires initial values
-to be loaded from a file should load the required file or files using
-read_file() before calling read() for any optional files:</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$filenames</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::readArray()"></a><h4 class="method">readArray<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">readArray</span><span class="nb-faded-text">(
-           $array
-          )
-        </span>
-        :
-        </code><div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$array</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::readFile()"></a><h4 class="method">readFile<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">readFile</span><span class="nb-faded-text">(
-           $filehandler
-          )
-        </span>
-        :
-        </code><div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$filehandler</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::readString()"></a><h4 class="method">readString<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">readString</span><span class="nb-faded-text">(
-           $string
-          )
-        </span>
-        :
-        </code><div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$string</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::read_()"></a><h4 class="method">read_<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">read_</span><span class="nb-faded-text">(
            $filenames
               =
               array
@@ -1161,40 +581,6 @@ removed, return TRUE; otherwise return FALSE.</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::removeSection()"></a><h4 class="method">removeSection<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">removeSection</span><span class="nb-faded-text">(
-           $section
-          )
-        </span>
-        :
-        </code><p class="short-description">Remove the specified section from the configuration. If the section in
-fact existed, return TRUE. Otherwise return FALSE.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$section</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
 <a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::sections()"></a><h4 class="method">sections<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
 </h4>
 <div class="method">
@@ -1205,31 +591,6 @@ fact existed, return TRUE. Otherwise return FALSE.</p>
         :
         </code><p class="short-description">Return a list of the sections available; the default section is not
 included in the list.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::sections_()"></a><h4 class="method">sections_<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">sections_</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-        </code><p class="short-description">Prints all available sections</p>
 <div class="long-description">
 </div>
 <div class="api-section">
@@ -1321,121 +682,6 @@ value; otherwise raise NoSectionException.</p>
 <dd>false</dd>
 <dt>throws</dt>
 <dd>if section doesn&#039;t exist</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::set_()"></a><h4 class="method">set_<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">set_</span><span class="nb-faded-text">(
-           $section,  $option,  $value
-              =
-              NULL
-          )
-        </span>
-        :
-        </code><div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$section</dt>
-<dd><em></em></dd>
-<dt>$option</dt>
-<dd><em></em></dd>
-<dt>$value</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::write()"></a><h4 class="method">write<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">write</span><span class="nb-faded-text">(
-           $filename
-              =
-              NULL,  $space_around_delimiters
-              =
-              true
-          )
-        </span>
-        :
-        </code><div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$filename</dt>
-<dd><em></em></dd>
-<dt>$space_around_delimiters</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="NoiseLabs\ToolKit\ConfigParser\ConfigParser::write_()"></a><h4 class="method">write_<div class="to-top"><a href="#ConfigParser">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">write_</span><span class="nb-faded-text">(
-           $filename
-              =
-              NULL,  $space_around_delimiters
-              =
-              true
-          )
-        </span>
-        :
-        </code><p class="short-description">Write a representation of the configuration to the specified
-filename. This representation can be parsed by a future read() call.</p>
-<div class="long-description"><p>If $space_around_delimiters is true, delimiters between keys and
-values are surrounded by spaces.</p>
-
-<p>When $filename is NULL, the last file loaded (if any) is used.</p>
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$filename</dt>
-<dd><em></em></dd>
-<dt>$space_around_delimiters</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
 </dl>
 <div class="clear"></div>
 </div>

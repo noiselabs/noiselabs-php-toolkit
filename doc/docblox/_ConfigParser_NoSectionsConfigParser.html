@@ -1,0 +1,365 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">ConfigParser/NoSectionsConfigParser.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>author</dt>
+<dd>Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
+<dt>category</dt>
+<dd>NoiseLabs</dd>
+<dt>copyright</dt>
+<dd>(C) 2011 Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
+<dt>package</dt>
+<dd>ConfigParser</dd>
+<dt>version</dt>
+<dd>0.1.1</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser">NoSectionsConfigParser</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">This file is part of NoiseLabs-PHP-ToolKit</p>
+<div class="long-description"><p>NoiseLabs-PHP-ToolKit is free software; you can redistribute it
+and/or modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 3 of the License, or (at your option) any later version.</p>
+
+<p>NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU Lesser General Public
+License along with NoiseLabs-PHP-ToolKit; if not, see
+<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+<p>Copyright (C) 2011 Vítor Brandão <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x6e;&#111;&#x69;&#115;&#x65;&#98;&#x6c;&#101;&#x65;&#100;&#x40;&#110;&#x6f;&#105;&#x73;&#101;&#x6c;&#97;&#x62;&#115;&#x2e;&#111;&#x72;&#103;">&#x6e;&#111;&#x69;&#115;&#x65;&#98;&#x6c;&#101;&#x65;&#100;&#x40;&#110;&#x6f;&#105;&#x73;&#101;&#x6c;&#97;&#x62;&#115;&#x2e;&#111;&#x72;&#103;</a></p>
+</div>
+<a name="classes"></a><a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser"></a><h2 class="class">NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_ConfigParser_BaseConfigParser.html#NoiseLabs%5CToolKit%5CConfigParser%5CBaseConfigParser">NoiseLabs\ToolKit\ConfigParser\BaseConfigParser</a></dd>
+<dt>Implements</dt>
+<dd><a href="_ConfigParser_NoSectionsConfigParserInterface.html#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParserInterface">NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParserInterface</a></dd>
+<dt>author</dt>
+<dd>Vítor Brandão &lt;noisebleed@noiselabs.org&gt;</dd>
+<dt>Constants</dt>
+<dd><a class="constant" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::HAS_SECTIONS">HAS_SECTIONS</a></dd>
+<dt>Methods</dt>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::options()">options</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::hasOption()">hasOption</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::get()">get</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::getInt()">getInt</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::getFloat()">getFloat</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::getBoolean()">getBoolean</a></dd>
+<dd><a class="method" href="#NoiseLabs%5CToolKit%5CConfigParser%5CNoSectionsConfigParser::_buildOutputString()">_buildOutputString</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">This class is a version of the ConfigParser class meant to be used for
+configuration files that don't have sections.</p>
+<div class="long-description">
+</div>
+<h3>Constants</h3>
+<div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::HAS_SECTIONS"></a><h4 class="constant">HAS_SECTIONS<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="constant">
+<code> <span class="highlight">HAS_SECTIONS</span> = 'false'
+      </code><div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="constant-info">
+<dt>value</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::_buildOutputString()"></a><h4 class="method">_buildOutputString<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_buildOutputString</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::get()"></a><h4 class="method">get<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">get</span><span class="nb-faded-text">(
+          NoiseLabs\ToolKit\ConfigParser\$option $option, NoiseLabs\ToolKit\ConfigParser\$fallback $fallback
+              =
+              null
+          )
+        </span>
+        :
+        NoiseLabs\ToolKit\ConfigParser\Option</code><p class="short-description">Get an option value for the named section.</p>
+<div class="long-description"><p>If the option doesn't exist in the configuration $defaults is used.
+If $defaults doesn't have this option too then we look for the
+$fallback parameter.
+If everything fails throw a NoOptionException.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$option</dt>
+<dd>NoiseLabs\ToolKit\ConfigParser\$option<br><em>Option name</em>
+</dd>
+<dt>$fallback</dt>
+<dd>NoiseLabs\ToolKit\ConfigParser\$fallback<br><em>A fallback value to use if the option isn&amp;#039;t found in the configuration.</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>NoiseLabs\ToolKit\ConfigParser\Option</dt>
+<dd><em>value (if available)</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd>Couldn&#039;t find the desired option in the configuration or as a fallback value.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::getBoolean()"></a><h4 class="method">getBoolean<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getBoolean</span><span class="nb-faded-text">(
+           $option,  $fallback
+              =
+              null
+          )
+        </span>
+        :
+        </code><p class="short-description">A convenience method which coerces the option value to a Boolean value.</p>
+<div class="long-description"><p>Note that the accepted values for the option are '1', 'yes', 'true',
+and 'on', which cause this method to return TRUE, and '0', 'no',
+'false', and 'off', which cause it to return FALSE.
+These string values are checked in a case-insensitive manner. Any
+other value will cause it to raise ValueException.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$option</dt>
+<dd><em></em></dd>
+<dt>$fallback</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::getFloat()"></a><h4 class="method">getFloat<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getFloat</span><span class="nb-faded-text">(
+           $option,  $fallback
+              =
+              null
+          )
+        </span>
+        :
+        </code><p class="short-description">A convenience method which coerces the option value to a floating
+point number.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$option</dt>
+<dd><em></em></dd>
+<dt>$fallback</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::getInt()"></a><h4 class="method">getInt<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getInt</span><span class="nb-faded-text">(
+           $option,  $fallback
+              =
+              null
+          )
+        </span>
+        :
+        </code><p class="short-description">A convenience method which coerces the option value to an integer.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$option</dt>
+<dd><em></em></dd>
+<dt>$fallback</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::hasOption()"></a><h4 class="method">hasOption<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">hasOption</span><span class="nb-faded-text">(
+           $option
+          )
+        </span>
+        :
+        </code><p class="short-description">If the given option exists, return TRUE; otherwise return FALSE.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$option</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="NoiseLabs\ToolKit\ConfigParser\NoSectionsConfigParser::options()"></a><h4 class="method">options<div class="to-top"><a href="#NoSectionsConfigParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">options</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Return a list of options available</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox</a>.
+    </small></body></html>
