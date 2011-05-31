@@ -81,6 +81,11 @@ class Process implements ProcessInterface
 					);
 	}
 
+	public static function create($command, array $settings = array())
+	{
+		return new static($command, $settings);
+	}
+
 	public function __toString()
 	{
 		return 'Return code: '.$this->getReturnCode();

@@ -72,17 +72,72 @@ To quickstart let's run `ls` from a web script:
 
 	$proc = new Process('ls -l');
 
-	$proc->exec();
+	$proc->run();
 
 	if (0 === $this->getReturnCode()) {
 		echo $proc->getOutput();
-		/*
-		* prints:
-		* apc.php app.php check.php config.php favicon.ico robots.txt
-		*/
+		// prints: apc.php app.php check.php favicon.ico robots.txt
 	}
 
 	?>
+
+### Configuring Runner behaviour
+
+The Process class is configurable through the `$settings` public variable. This allows us, for instance, to change the current working directory or to run every command as `sudo`.
+
+**Known settings**:
+* 'sudo': If TRUE, prepend every command with 'sudo'.
+* 'cwd': The initial working dir for the command. This must be an absolute directory path, or NULL if you want to use the default value (the working dir of the current PHP process).
+* 'env': An array with the environment variables for the command that will be run, or NULL to use the same environment as the current PHP process.
+
+**Usage**:
+
+	$proc = new Process('ls -l');
+
+	// change the current working directory
+	$proc->settings->set('cwd', '/usr/share/php');
+
+	// now execute with these new settings
+	$proc->run();
+
+### Using a custom logger
+
+By default Runner will use `error_log()` to record the it's messages. To override the original logger method just extend Runner and replace `Runner::log()` with your own implementation.
+
+[Monolog](https://github.com/Seldaek/monolog) is a great logging library for PHP 5.3 and will be used as our custom logger in the following example.
+
+	<?php
+
+	namespace Your\Namespace;
+
+	use NoiseLabs\ToolKit\Runner\Process;
+	use Monolog\Logger;
+	use Monolog\Handler\StreamHandler;
+
+	class MyProcess extends Process
+	{
+		protected $logger;
+
+		public function __construct($command, array $settings = array())
+		{
+			parent::__construct($command, $settings);
+
+			// create a log channel
+			$this->logger = new Logger('Runner');
+			$this->logger->pushHandler(new StreamHandler('path/to/your.log', Logger::WARNING));
+		}
+
+		public function log($message, $level = null)
+		{
+			// add records to the log
+			$this->logger->info($message);
+		}
+	}
+
+	?>
+
+
+
 
 Development
 ===========
