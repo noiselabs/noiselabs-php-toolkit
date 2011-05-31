@@ -26,11 +26,11 @@
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
  */
 
-namespace NoiseLabs\ToolKit\Process;
+namespace NoiseLabs\ToolKit\Runner;
 
-use NoiseLabs\ToolKit\Process\ParameterBag;
-use NoiseLabs\ToolKit\Process\Process;
-use NoiseLabs\ToolKit\Process\ProcessManagerInterface;
+use NoiseLabs\ToolKit\Runner\ParameterBag;
+use NoiseLabs\ToolKit\Runner\ProcessInterface;
+use NoiseLabs\ToolKit\Runner\ProcessManagerInterface;
 
 class ProcessManager implements ProcessManagerInterface
 {
@@ -47,7 +47,7 @@ class ProcessManager implements ProcessManagerInterface
 		return isset($this->processes[$id]);
 	}
 
-	public function add($id, Process $process)
+	public function add($id, ProcessInterface $process)
 	{
 		if ($this->has($id)) {
 			throw new \InvalidArgumentException(sprintf('A process with ID "%s" already exists.', $id));
@@ -56,7 +56,7 @@ class ProcessManager implements ProcessManagerInterface
 		return $this->set($id, $process);
 	}
 
-	public function set($id, Process $process)
+	public function set($id, ProcessInterface $process)
 	{
 		if (!is_string($id)) {
 			throw new \InvalidArgumentException('$id must be a string');

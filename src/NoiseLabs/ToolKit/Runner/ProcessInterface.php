@@ -26,7 +26,7 @@
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
  */
 
-namespace NoiseLabs\ToolKit\Process;
+namespace NoiseLabs\ToolKit\Runner;
 
 interface ProcessInterface
 {

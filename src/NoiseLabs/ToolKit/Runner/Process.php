@@ -26,13 +26,14 @@
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
  */
 
-namespace NoiseLabs\ToolKit\Process;
+namespace NoiseLabs\ToolKit\Runner;
 
-use NoiseLabs\ToolKit\Process\ParameterBag;
-use NoiseLabs\ToolKit\Process\ProcessInterface;
+use NoiseLabs\ToolKit\Runner\ParameterBag;
+use NoiseLabs\ToolKit\Runner\ProcessInterface;
 
 class Process implements ProcessInterface
 {
+	const PACKAGE = 'Runner';
 	protected $command;
 	protected $_resource;
 	protected $_output = array();
@@ -78,6 +79,11 @@ class Process implements ProcessInterface
 					1 => array('pipe', 'w'),
 					2 => array('pipe', 'w')
 					);
+	}
+
+	public function __toString()
+	{
+		return 'Return code: '.$this->getReturnCode();
 	}
 
 	public function getCommand()
@@ -132,7 +138,8 @@ class Process implements ProcessInterface
 			// proc_close in order to avoid a deadlock
 			$this->_retcode = proc_close($this->_resource);
 
-			$msg = sprintf("Process: executed '%s' (ReturnCode: %d",
+			$msg = sprintf("%s: executed '%s' (ReturnCode: %d",
+					static::PACKAGE,
 					$this->command,
 					$this->getReturnCode()
 					);
@@ -144,7 +151,7 @@ class Process implements ProcessInterface
 			$this->log($msg);
 		}
 		else {
-			$this->log("Process: failed to open resource using proc_open");
+			$this->log(static::PACKAGE.": failed to open resource using proc_open");
 		}
 
 		return $this;

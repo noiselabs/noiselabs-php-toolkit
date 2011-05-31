@@ -26,17 +26,17 @@
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
  */
 
-namespace NoiseLabs\ToolKit\Process;
+namespace NoiseLabs\ToolKit\Runner;
 
-use NoiseLabs\ToolKit\Process\Process;
+use NoiseLabs\ToolKit\Runner\ProcessInterface;
 
 interface ProcessManagerInterface extends \ArrayAccess, \IteratorAggregate, \Countable
 {
 	public function has($id);
 
-	public function add($id, Process $process);
+	public function add($id, ProcessInterface $process);
 
-	public function set($id, Process $process);
+	public function set($id, ProcessInterface $process);
 
 	public function get($id);
 

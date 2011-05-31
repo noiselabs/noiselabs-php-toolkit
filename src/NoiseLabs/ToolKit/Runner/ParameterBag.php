@@ -28,7 +28,7 @@
  *  DEALINGS IN THE SOFTWARE
  */
 
-namespace NoiseLabs\ToolKit\Process;
+namespace NoiseLabs\ToolKit\Runner;
 
 /**
  * ParameterBag is a container for key/value pairs.
