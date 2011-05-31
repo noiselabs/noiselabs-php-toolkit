@@ -99,7 +99,7 @@ class ProcessManager implements ProcessManagerInterface
 	public function remove($id)
 	{
 		if ($this->has($id)) {
-			return $this->processes[$id];
+			unset($this->processes[$id]);
 		}
 		else {
 			throw new \InvalidArgumentException(sprintf('Process ID "%s" does not exist.', $id));
