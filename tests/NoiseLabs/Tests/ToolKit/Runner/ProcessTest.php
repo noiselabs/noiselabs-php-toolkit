@@ -29,16 +29,60 @@
 
 namespace NoiseLabs\Tests\ToolKit\Runner;
 
-use NoiseLabs\ToolKit\RunnerProcess;
+use NoiseLabs\ToolKit\Runner\Process;
 
 class ProcessTest extends \PHPUnit_Framework_TestCase
 {
+	public function setUp()
+	{
+		$this->app = __DIR__.'/Fixtures/app.php';
+	}
+
+	public function testSettings()
+	{
+		$settings = array(
+						'cwd' 			=> '/tmp',
+						'new-setting' 	=> 'new-value'
+						);
+
+		$proc = new Process('free', $settings);
+
+		$this->assertEquals('/tmp', $proc->settings->get('cwd'));
+		$this->assertEquals('new-value', $proc->settings->get('new-setting'));
+
+		$wd = '/var/tmp';
+		$proc->settings->set('cwd', $wd);
+		$this->assertEquals($wd, $proc->settings->get('cwd'));
+	}
+
 	/**
      * @covers NoiseLabs\ToolKit\Runner\Process::run
      */
 	public function testRun()
 	{
 
+	}
+
+	public function testAddArguments()
+	{
+		$proc = new Process('free');
+
+		$this->assertEquals('free', $proc->getCommand());
+
+		$proc->addArguments('-m -l');
+
+		$this->assertEquals('free -m -l', $proc->getCommand());
+	}
+
+	public function testReplaceArguments()
+	{
+		$proc = new Process('/usr/bin/free -m -l');
+
+		$this->assertEquals('/usr/bin/free -m -l', $proc->getCommand());
+
+		$proc->replaceArguments('--help');
+
+		$this->assertEquals('/usr/bin/free --help', $proc->getCommand());
 	}
 }
 

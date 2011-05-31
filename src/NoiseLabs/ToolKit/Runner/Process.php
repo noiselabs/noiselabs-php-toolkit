@@ -101,6 +101,36 @@ class Process implements ProcessInterface
 		$this->command = escapeshellcmd($command);
 	}
 
+	/**
+	 * Append arguments to the currently set $command.
+	 *
+	 * @throws InvalidArgumentException if $args is not a string
+	 */
+	public function addArguments($args)
+	{
+		if (!is_string($args)) {
+			throw new \InvalidArgumentException('arguments must be a string');
+		}
+
+		$this->command .= ' '.trim($args);
+	}
+
+	/**
+	 * Replace arguments set in $command with a new string
+	 *
+	 * @throws InvalidArgumentException if $args is not a string
+	 */
+	public function replaceArguments($args)
+	{
+		if (!is_string($args)) {
+			throw new \InvalidArgumentException('arguments must be a string');
+		}
+
+		$this->command = reset(explode(' ', $this->command));
+
+		return $this->addArguments($args);
+	}
+
 	protected function reset()
 	{
 		$this->_resource = false;
@@ -189,7 +219,7 @@ class Process implements ProcessInterface
 
 	public function getName()
 	{
-		return basename(current(explode(' ', $this->command)));
+		return basename(reset(explode(' ', $this->command)));
 	}
 
 	public function log($message, $level = 'info')
