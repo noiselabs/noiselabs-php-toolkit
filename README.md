@@ -11,7 +11,7 @@ Components
 
 * **[ConfigParser](https://github.com/noiselabs/noiselabs-php-toolkit/tree/master/src/NoiseLabs/ToolKit/ConfigParser)** - A configuration file parser for PHP 5.3 heavily inspired by Python's [configparser](http://docs.python.org/dev/library/configparser.html) library.
 * **[Google](https://github.com/noiselabs/noiselabs-php-toolkit/tree/master/src/NoiseLabs/ToolKit/Google)** - Provides a GoogleMaps API to easily build dynamic Google Maps.
-* **[Runner](https://github.com/noiselabs/noiselabs-php-toolkit/tree/master/src/NoiseLabs/ToolKit/Runner) - A library meant to ease the execution of subprocesses in PHP scripts.
+* **[Runner](https://github.com/noiselabs/noiselabs-php-toolkit/tree/master/src/NoiseLabs/ToolKit/Runner)** - A library meant to ease the execution of subprocesses in PHP scripts.
 
 Requirements
 ------------
