@@ -20,7 +20,7 @@
  *
  *
  * @category NoiseLabs
- * @package Process
+ * @package Runner
  * @version 0.1.1
  * @author Vítor Brandão <noisebleed@noiselabs.org>
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>

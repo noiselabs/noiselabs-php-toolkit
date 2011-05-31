@@ -3,7 +3,7 @@
 <phpunit bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="NoiseLabs ToolKit Test Suite">
-            <directory>tests/Monolog/</directory>
+            <directory>tests/NoiseLabs</directory>
         </testsuite>
     </testsuites>
 

@@ -56,6 +56,16 @@ class ProcessManager implements ProcessManagerInterface
 		return $this->set($id, $process);
 	}
 
+	/**
+	 * Add a new Process to the container.
+	 * A previous process with the same ID will be overridden.
+	 *
+	 * @param string $id Process ID
+	 * @param NoiseLabs\ToolKit\Runner\ProcessInterface The Process object to
+	 * add
+	 *
+	 * @return self (ProcessManager)
+	 */
 	public function set($id, ProcessInterface $process)
 	{
 		if (!is_string($id)) {
@@ -66,7 +76,7 @@ class ProcessManager implements ProcessManagerInterface
 		// Copy our own set of settings over Process current settings
 		$this->processes[$id]->settings->add($this->settings->all());
 
-		return $this->processes[$id];
+		return $this;
 	}
 
 	/**
