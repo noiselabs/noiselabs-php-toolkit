@@ -86,9 +86,10 @@ To quickstart let's run `ls` from a web script:
 The Process class is configurable through the `$settings` public variable. This allows us, for instance, to change the current working directory or to run every command as `sudo`.
 
 **Known settings**:
-* 'sudo': If TRUE, prepend every command with 'sudo'.
-* 'cwd': The initial working dir for the command. This must be an absolute directory path, or NULL if you want to use the default value (the working dir of the current PHP process).
-* 'env': An array with the environment variables for the command that will be run, or NULL to use the same environment as the current PHP process.
+
+- 'sudo': If TRUE, prepend every command with 'sudo'.
+- 'cwd': The initial working dir for the command. This must be an absolute directory path, or NULL if you want to use the default value (the working dir of the current PHP process).
+- 'env': An array with the environment variables for the command that will be run, or NULL to use the same environment as the current PHP process.
 
 **Usage**:
 
@@ -102,7 +103,7 @@ The Process class is configurable through the `$settings` public variable. This 
 
 ### Using a custom logger
 
-By default Runner will use `error_log()` to record the it's messages. To override the original logger method just extend Runner and replace `Runner::log()` with your own implementation.
+By default Runner will use `error_log()` to record it's messages. To override the original logger method just extend Runner and replace `Runner::log()` with your own implementation.
 
 [Monolog](https://github.com/Seldaek/monolog) is a great logging library for PHP 5.3 and will be used as our custom logger in the following example.
 
@@ -136,8 +137,23 @@ By default Runner will use `error_log()` to record the it's messages. To overrid
 
 	?>
 
+### ProcessManager
 
+The ProcessManager class is a container for Process objects that allows a _set-once-set-all_ procedure and easy reutilization of commands.
 
+	$procman = new ProcessManager();
+
+	// these settings will be used for every process registered within this class
+	$procman->settings->set('sudo', true);
+
+	// now, add some commands...
+	$procman->
+		add('users', new Process('users'))->
+		add('uptime', new Process('uptime'))->
+		add('free', new Process('free -m'));
+
+	// ...and run 'free'
+	$procman->get('free')->run();
 
 Development
 ===========
