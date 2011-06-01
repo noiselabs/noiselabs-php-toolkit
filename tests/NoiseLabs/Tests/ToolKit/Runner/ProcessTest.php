@@ -107,6 +107,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
 		$proc->addArguments('-m -l');
 		$this->assertEquals('free -m -l', $proc->getCommand());
+
+		$this->assertEquals($proc, $proc->addArguments('--help'));
 	}
 
 	/**
