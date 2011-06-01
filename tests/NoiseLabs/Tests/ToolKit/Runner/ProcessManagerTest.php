@@ -22,7 +22,7 @@
  * @package Runner
  * @author Vítor Brandão <noisebleed@noiselabs.org>
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- * @license http://opensource.org/licenses/LGPL-3.0 LGPL-3.0
+ * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link http://www.noiselabs.org
  * @since 0.2.0
  */

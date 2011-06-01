@@ -22,7 +22,7 @@
  * @package Runner
  * @author Vítor Brandão <noisebleed@noiselabs.org>
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- * @license http://opensource.org/licenses/LGPL-3.0 LGPL-3.0
+ * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link http://www.noiselabs.org
  * @since 0.2.0
  */
@@ -55,33 +55,69 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($wd, $proc->settings->get('cwd'));
 	}
 
+	public function testBeforeRun()
+	{
+		$proc = new Process('free');
+
+		$this->assertEquals(null, $proc->getReturnCode());
+		$this->assertEquals(null, $proc->getOutput());
+		$this->assertEquals(null, $proc->getErrorMessage());
+		$this->assertEquals('free', $proc->getCommand());
+	}
+
 	/**
      * @covers NoiseLabs\ToolKit\Runner\Process::run
      */
 	public function testRun()
 	{
+		$proc = $this->runApp();
 
+		$this->assertEquals('testing string', $proc->getOutput());
+		$this->assertEquals(254, $proc->getReturnCode());
+		$this->assertEquals('these are errors', $proc->getErrorMessage());
 	}
 
+	protected function runApp()
+	{
+		$proc = new Process('php '.$this->app);
+		$proc->run();
+
+		return $proc;
+	}
+
+	/**
+     * @covers NoiseLabs\ToolKit\Runner\Process::setCommand
+     */
+	public function testSetCommand()
+	{
+		$proc = new Process('free');
+		$this->assertEquals('free', $proc->getCommand());
+
+		$proc->setCommand('uptime');
+		$this->assertEquals('uptime', $proc->getCommand());
+	}
+
+	/**
+     * @covers NoiseLabs\ToolKit\Runner\Process::addArguments
+     */
 	public function testAddArguments()
 	{
 		$proc = new Process('free');
-
 		$this->assertEquals('free', $proc->getCommand());
 
 		$proc->addArguments('-m -l');
-
 		$this->assertEquals('free -m -l', $proc->getCommand());
 	}
 
+	/**
+     * @covers NoiseLabs\ToolKit\Runner\Process::replaceArguments
+     */
 	public function testReplaceArguments()
 	{
 		$proc = new Process('/usr/bin/free -m -l');
-
 		$this->assertEquals('/usr/bin/free -m -l', $proc->getCommand());
 
 		$proc->replaceArguments('--help');
-
 		$this->assertEquals('/usr/bin/free --help', $proc->getCommand());
 	}
 }

@@ -16,14 +16,15 @@
  * License along with NoiseLabs-PHP-ToolKit; if not, see
  * <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- *
+ * Copyright (C) 2011 Vítor Brandão
  *
  * @category NoiseLabs
  * @package Runner
- * @version 0.1.1
  * @author Vítor Brandão <noisebleed@noiselabs.org>
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
+ * @link http://www.noiselabs.org
+ * @since 0.2.0
  */
 
 namespace NoiseLabs\ToolKit\Runner;
@@ -75,10 +76,12 @@ class Process implements ProcessInterface
 		$this->settings->add($settings);
 
 		$this->_descriptorspec = array(
-					0 => array('pipe', 'r'),
-					1 => array('pipe', 'w'),
-					2 => array('pipe', 'w')
+					0 => array('pipe', 'r'),	// stdin
+					1 => array('pipe', 'w'),	// stdout
+					2 => array('pipe', 'w')		// stderr
 					);
+
+		$this->reset();
 	}
 
 	public static function create($command, array $settings = array())
@@ -163,6 +166,7 @@ class Process implements ProcessInterface
 			// $pipes now looks like this:
 			// 0 => writeable handle connected to child stdin
 			// 1 => readable handle connected to child stdout
+			// 2 => readable handle connected to child stderr
 			fclose($pipes[0]);
 			$this->_output['stdout'] = stream_get_contents($pipes[1]);
 			fclose($pipes[1]);
@@ -204,7 +208,7 @@ class Process implements ProcessInterface
 
 	public function getOutput()
 	{
-		return $this->_output['stdout'];
+		return isset($this->_output['stdout']) ? $this->_output['stdout'] : null;
 	}
 
 	public function getErrorMessage()

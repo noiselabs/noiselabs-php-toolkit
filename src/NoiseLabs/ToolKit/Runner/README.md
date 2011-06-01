@@ -78,6 +78,9 @@ To quickstart let's run `ls` from a web script:
 		echo $proc->getOutput();
 		// prints: apc.php app.php check.php favicon.ico robots.txt
 	}
+	else {
+		echo 'Execution failed with error: '.$proc->getErrorMessage();
+	}
 
 	?>
 
@@ -103,7 +106,7 @@ The Process class is configurable through the `$settings` public variable. This 
 
 ### Using a custom logger
 
-By default Runner will use `error_log()` to record it's messages. To override the original logger method just extend Runner and replace `Runner::log()` with your own implementation.
+By default Process will use `error_log()` to record it's messages. To override the original logger method just extend Process and replace `Process::log()` with your own implementation.
 
 [Monolog](https://github.com/Seldaek/monolog) is a great logging library for PHP 5.3 and will be used as our custom logger in the following example.
 
@@ -143,7 +146,7 @@ The ProcessManager class is a container for Process objects that allows a _set-o
 
 	$procman = new ProcessManager();
 
-	// these settings will be used for every process registered within this class
+	// apply settings for every process registered in this object
 	$procman->settings->set('sudo', true);
 
 	// now, add some commands...
