@@ -57,12 +57,17 @@ class Process implements ProcessInterface
 	 *		be run, or NULL to use the same environment as the current PHP
 	 *		process.
 	 *
+	 *  'dry-run':
+	 *		Fake the results of executing the process without actually
+	 *		running anything any files.
+	 *
 	 * @var array
 	 */
 	protected $_defaults = array(
-				'sudo'	=> false,
-				'cwd'	=> null,
-				'env'	=> null
+				'sudo'		=> false,
+				'cwd'		=> null,
+				'env'		=> null,
+				'dry-run'	=> false
 				);
 
 	public $settings;
@@ -116,6 +121,8 @@ class Process implements ProcessInterface
 		}
 
 		$this->command .= ' '.trim($args);
+
+		return $this;
 	}
 
 	/**
@@ -141,8 +148,37 @@ class Process implements ProcessInterface
 		$this->_retcode = null;
 	}
 
+	protected function dryrun()
+	{
+		$this->_resource = false;
+		$this->_output = array(
+				'stdout'	=> 'Here goes some *fake* output',
+				'stderr'	=> null
+				);
+		$this->_retcode = 0;
+
+		$msg = sprintf("%s: executed '%s' (ReturnCode: %d",
+					static::PACKAGE,
+					$this->command,
+					$this->getReturnCode()
+					);
+			if ($this->getErrorMessage() != null) {
+				$msg .= sprintf(", Error: '%s'", $this->getErrorMessage());
+			}
+			$msg .= ") [DRY-RUN]";
+
+			$this->log($msg);
+
+		return $this;
+	}
+
 	public function run()
 	{
+		// is it for real?
+		if (true === $this->settings->get('dry-run', $this->_defaults['dry-run'])) {
+			return $this->dryrun();
+		}
+
 		$this->reset();
 
 		// use sudo?
