@@ -16,19 +16,20 @@
  * License along with NoiseLabs-PHP-ToolKit; if not, see
  * <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- *
+ * Copyright (C) 2011 Vítor Brandão
  *
  * @category NoiseLabs
- * @package Google
- * @version 0.1.1
+ * @package GoogleAPI
  * @author Vítor Brandão <noisebleed@noiselabs.org>
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
+ * @link http://www.noiselabs.org
+ * @since 0.1.0
  */
 
-namespace NoiseLabs\ToolKit\Google\Maps;
+namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
-use NoiseLabs\ToolKit\Google\Maps\BaseMap;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\BaseMap;
 
 /**
  * A class that makes use of the Google Maps API to create customizable maps

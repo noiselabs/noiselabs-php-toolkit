@@ -29,7 +29,7 @@
  * @copyright    2005 system7designs
  */
 
-namespace NoiseLabs\ToolKit\Google;
+namespace NoiseLabs\ToolKit\GoogleAPI;
 
 /**
  * Uses Google Maps API to create customizable maps that can be embedded on your

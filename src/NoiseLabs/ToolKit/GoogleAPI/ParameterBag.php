@@ -28,7 +28,7 @@
  *  DEALINGS IN THE SOFTWARE
  */
 
-namespace NoiseLabs\ToolKit\Google;
+namespace NoiseLabs\ToolKit\GoogleAPI;
 
 /**
  * ParameterBag is a container for key/value pairs.
