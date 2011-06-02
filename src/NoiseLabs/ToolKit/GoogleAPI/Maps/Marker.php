@@ -29,7 +29,7 @@
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
-use NoiseLabs\Toolkit\GoogleAPI\ParameterBag;
+use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
 
 class Marker
 {
