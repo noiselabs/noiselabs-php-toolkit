@@ -141,6 +141,11 @@ class Process implements ProcessInterface
 		return $this->addArguments($args);
 	}
 
+	public function setArguments($args)
+	{
+		return $this->replaceArguments($args);
+	}
+
 	protected function reset()
 	{
 		$this->_resource = false;

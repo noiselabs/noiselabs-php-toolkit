@@ -122,6 +122,14 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 		$proc->replaceArguments('--help');
 		$this->assertEquals('/usr/bin/free --help', $proc->getCommand());
 	}
+
+	/**
+     * @covers NoiseLabs\ToolKit\Runner\Process::setArguments
+     */
+	public function testSetArguments()
+	{
+		return $this->testReplaceArguments();
+	}
 }
 
 ?>
