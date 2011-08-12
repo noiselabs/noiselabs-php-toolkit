@@ -1,4 +1,8 @@
 *~
 *.kate-swp
+*.swp
 src/NoiseLabs/ToolKit/ConfigParser/configparser.py
 src/NoiseLabs/ToolKit/ToolKitBundle.php
+.buildpath
+.project
+.settings/
