@@ -90,8 +90,6 @@ class Map extends BaseMap
 
 	public function render()
 	{
-		//var_dump($this->getMarkers());die;
-
 		// Create a div element to hold the Map.
 		echo "<div id=\"".$this->getId()."\" style=\"width:".$this->options->get('width')."; height:".$this->options->get('height')."\"></div>\n";
 
@@ -113,6 +111,7 @@ class Map extends BaseMap
 
 		// Create the map object
 		$kc = $this->options->get('center');
+
 		echo
 		"	var mapOptions = {\n".
 		"		zoom: ".$this->options->get('zoom').",\n".
@@ -149,10 +148,16 @@ class Map extends BaseMap
 			}
 			echo "	bounds.extend(markersArray[$k].getPosition());\n";
 		}
-		// Auto-center and auto-zoom
+
+		if (!$this->hasFocus())
+		{
+			// Auto-center and auto-zoom
+			echo
+			"	map.fitBounds(bounds);\n".
+			"	map.setCenter(bounds.getCenter());\n";
+		}
+
 		echo
-		"	map.fitBounds(bounds);\n".
-		"	map.setCenter(bounds.getCenter());\n".
 		"}\n".
 		"window.onload = showmap;\n".
 		"</script>\n";

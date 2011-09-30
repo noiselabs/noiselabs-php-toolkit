@@ -111,6 +111,7 @@ abstract class BaseMap implements MapInterface
 		 * resolution.
 		 */
 		$options['zoom'] = 12;
+		$options['default_zoom'] = 12;
 
 		/**
 		 * Map type. The following types are supported:
@@ -129,6 +130,11 @@ abstract class BaseMap implements MapInterface
 		$options['https'] = false;	// use https?
 
 		$options['center'] = 0; // center map on desidered Marker (array index)
+
+		/**
+		 * Focus map (center and zoom) on a given marker? Value is array index.
+		 */
+		$options['focus'] = false;
 
 		return $options;
 	}
@@ -156,9 +162,13 @@ abstract class BaseMap implements MapInterface
 		return in_array($marker, $this->markers, true);
 	}
 
-	public function addMarker(Marker $marker)
+	public function addMarker(Marker $marker, $focus = false)
 	{
 		$this->markers[] = $marker;
+
+		if (true === $focus) {
+			$this->setFocus(count($this->markers) - 1);
+		}
 	}
 
 	public function removeMarker(Marker $marker)
@@ -179,6 +189,43 @@ abstract class BaseMap implements MapInterface
 	public function getMarkers()
 	{
 		return $this->markers;
+	}
+
+	/**
+	 * @since 0.2.0-BETA2
+	 */
+	public function hasFocus()
+	{
+		return $this->options->get('focus');
+	}
+
+	/**
+	 * @param $data Marker instance or array index
+	 *
+	 * @since 0.2.0-BETA2
+	 */
+	public function setFocus($data)
+	{
+		if (is_int($data)) {
+			$this->options->set('center', $data);
+		}
+		elseif ($data instanceof Marker) {
+			if (($index =  array_search($data, $this->markers)) != false) {
+				$this->options->set('center', $index);
+			}
+		}
+
+		$this->options->set('zoom', 16);
+		$this->options->set('focus', true);
+	}
+
+	/**
+	 * @since 0.2.0-BETA2
+	 */
+	public function clearFocus()
+	{
+		$this->options->set('zoom', $this->options->get('default_zoom'));
+		$this->options->set('focus', false);
 	}
 
 	public static function create()
