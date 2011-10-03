@@ -38,6 +38,9 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Marker;
  *
  * Inspired by a GoogleMaps implementation made by tirnanog06.
  * @see https://github.com/kriswallsmith/GoogleBundle
+ *
+ * TODO: Please implement an addOverlay method and a protected $_overlays
+ * variable.
  */
 abstract class BaseMap implements MapInterface
 {
