@@ -31,7 +31,7 @@ namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
 use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\MapInterface;
-use NoiseLabs\ToolKit\GoogleAPI\Maps\Marker;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker;
 
 /**
  * GoogleMaps base class (abstract).
@@ -39,7 +39,7 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Marker;
  * Inspired by a GoogleMaps implementation made by tirnanog06.
  * @see https://github.com/kriswallsmith/GoogleBundle
  *
- * TODO: Please implement an addOverlay method and a protected $_overlays
+ * TODO: Please implement an addOverlay method and a protected $overlays
  * variable.
  */
 abstract class BaseMap implements MapInterface
@@ -51,6 +51,20 @@ abstract class BaseMap implements MapInterface
 	 * @var string
 	 */
 	protected $id;
+
+	/**
+	 * Array holding all overlays added to this map instance.
+	 *
+	 * @since 0.2.0-BETA2
+	 */
+	public $overlays = array();
+
+	/**
+	 * Supported overlay types.
+	 *
+	 * @since 0.2.0-BETA2
+	 */
+	protected $_overlay_types = array('marker', 'polyline');
 
 	/**
 	 * A collection of map markers. Each element of the array should be an
@@ -152,6 +166,42 @@ abstract class BaseMap implements MapInterface
 		return $this->id;
 	}
 
+	/**
+	 * @since 0.2.0-BETA2
+	 */
+	public function addOverlay($overlay)
+	{
+		$this->overlays[$overlay::OVERLAY_TYPE][] = $overlay;
+	}
+
+	/**
+	 * @param $type
+	 *
+	 * @since 0.2.0-BETA2
+	 */
+	public function getOverlays($type = null)
+	{
+		return (isset($type)) ? $this->overlays[$type] : $this->overlays;
+	}
+
+	/**
+	 * @param unknown_type $type
+	 *
+	 * @since 0.2.0-BETA2
+	 */
+	public function hasOverlays($type = null)
+	{
+		return isset($type) ? !empty($this->overlays[$type]) : !empty($this->overlays);
+	}
+
+	/**
+	 * @since 0.2.0-BETA2
+	 */
+	public function getOverlayTypes()
+	{
+		return array_keys($this->overlays);
+	}
+
 	public function hasMarkers()
 	{
 		if (!empty($this->markers)) {
@@ -160,11 +210,22 @@ abstract class BaseMap implements MapInterface
 		return false;
 	}
 
+	/**
+	 * @deprecated Please use hasOverlay() instead.
+	 *
+	 * @param Marker $marker
+	 */
 	public function hasMarker(Marker $marker)
 	{
 		return in_array($marker, $this->markers, true);
 	}
 
+	/**
+	 * @deprecated Please use addOverlay() instead.
+	 *
+	 * @param Marker $marker
+	 * @param unknown_type $focus
+	 */
 	public function addMarker(Marker $marker, $focus = false)
 	{
 		$this->markers[] = $marker;
@@ -204,10 +265,11 @@ abstract class BaseMap implements MapInterface
 
 	/**
 	 * @param $data Marker instance or array index
+	 * @param $zoom Zoom level to apply
 	 *
 	 * @since 0.2.0-BETA2
 	 */
-	public function setFocus($data)
+	public function setFocus($data, $zoom = 16)
 	{
 		if (is_int($data)) {
 			$this->options->set('center', $data);
@@ -218,7 +280,7 @@ abstract class BaseMap implements MapInterface
 			}
 		}
 
-		$this->options->set('zoom', 16);
+		$this->options->set('zoom', $zoom);
 		$this->options->set('focus', true);
 	}
 

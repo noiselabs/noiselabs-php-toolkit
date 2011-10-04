@@ -29,13 +29,14 @@
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
-use NoiseLabs\ToolKit\GoogleAPI\Maps\Marker;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker;
 
 interface MapInterface
 {
 	public function setId($id);
 	public function getId();
-	public function hasMarkers();
+	public function addOverlay($overlay);
+	public function hasOverlays($type = null);
 	public function hasMarker(Marker $marker);
 	public function setMarkers(array $markers);
 	public function getMarkers();

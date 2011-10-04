@@ -40,6 +40,9 @@ namespace NoiseLabs\ToolKit\GoogleAPI;
  *
  * @author Justin Johnson <justinjohnson@system7designs.com>
  * @author Vítor Brandão <noisebleed@noiselabs.org>
+ *
+ * @deprecated GoogleMap class is deprecated and marked for removal once 0.2.0
+ * becomes stable. Please avoid usage.
  */
 class GoogleMap
 {

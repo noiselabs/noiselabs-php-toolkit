@@ -40,6 +40,8 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\BaseMap;
  */
 class Map extends BaseMap
 {
+	const GOOGLE_MAPS_JAVASCRIPT_API = 'v3';
+
 	/**
 	 * For backwards compatibility.
 	 */
@@ -103,11 +105,19 @@ class Map extends BaseMap
 
 		echo
 		"<script type=\"text/javascript\">\n".
-		"function showmap() {\n".
+		"function showmap() {\n";
+
+		foreach ($this->getOverlayTypes() as $overlay_type) {
+			echo
+			"	var ".$overlay_type."sArray = [];\n";
+		}
+
+		echo
 		"	var markersArray = [];\n".
 		"	var bounds = new google.maps.LatLngBounds();\n".
-		"	var infowindowsArray = [];\n".
-		"\n";
+		"	var infowindowsArray = [];\n";
+
+		echo "\n";
 
 		// Create the map object
 		$kc = $this->options->get('center');
@@ -147,6 +157,13 @@ class Map extends BaseMap
 				"	});\n";
 			}
 			echo "	bounds.extend(markersArray[$k].getPosition());\n";
+		}
+
+		foreach ($this->getOverlayTypes() as $overlay_type) {
+			foreach (array_keys($this->overlays[$overlay_type]) as $k) {
+				echo $this->overlays[$overlay_type][$k]->buildJavascriptOutput('map', $overlay_type.'sArray', $k);
+			}
+			echo "\n";
 		}
 
 		if (!$this->hasFocus())

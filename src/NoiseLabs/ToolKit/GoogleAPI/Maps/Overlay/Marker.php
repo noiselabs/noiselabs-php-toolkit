@@ -27,29 +27,35 @@
  * @since 0.1.0
  */
 
-namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
+namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay;
 
 use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
 
-class Marker
+class Marker extends BaseOverlay
 {
+	const OVERLAY_TYPE = 'marker';
+
 	protected $latitude;
     protected $longitude;
 
-    /**
+	/**
 	 * Marker options.
 	 *
 	 * Known keys:
-	 *  - icon: 	An icon to show in place of the default icon
-	 *  - title:
+	 *  - animation: TODO
+	 *  - icon: 	 An icon to show in place of the default icon.
+	 *  - title:	 Marker title shown as tooltip.
 	 *
-	 * @var \NoiseLabs\ToolKit\ParameterBag
+	 *  @since 0.2.0-BETA2
 	 */
-	public $options;
-
-	public function __construct()
+	protected function getDefaultOptions()
 	{
-		$this->options = new ParameterBag();
+		return array(
+			'animation'	=> false,
+			'icon'		=> false,
+			'title'		=> "Unnamed marker"
+		);
 	}
 
     public static function create($latitude, $longitude, array $options = array())
@@ -80,6 +86,11 @@ class Marker
 	public function getLongitude()
 	{
 		return $this->longitude;
+	}
+
+	public function buildJavascriptOutput($js_map_variable, $js_array_name, $js_array_index)
+	{
+		;
 	}
 }
 
