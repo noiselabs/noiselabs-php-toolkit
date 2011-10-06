@@ -72,6 +72,11 @@ abstract class BaseOverlay
 
 	abstract public function buildJavascriptOutput($js_map_variable,
 	$js_array_name, $js_array_index);
+
+	public static function declareJavascriptVariables()
+	{
+		return "\tvar ".lcfirst(static::OVERLAY_TYPE)."sArray = [];\n";
+	}
 }
 
 ?>

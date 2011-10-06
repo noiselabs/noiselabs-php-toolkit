@@ -40,6 +40,10 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\BaseMap;
  */
 class Map extends BaseMap
 {
+	/**
+	 * The GoogleMaps Javascript API version supported in this PHP library.
+	 * @var string
+	 */
 	const GOOGLE_MAPS_JAVASCRIPT_API = 'v3';
 
 	/**
@@ -90,32 +94,25 @@ class Map extends BaseMap
 		echo $html;
 	}
 
+	/**
+	 * The method called to output the HTML and JavaScript code used to create
+	 * a GoogleMap. Must be called between <body> tags.
+	 */
 	public function render()
 	{
 		// Create a div element to hold the Map.
 		echo "<div id=\"".$this->getId()."\" style=\"width:".$this->options->get('width')."; height:".$this->options->get('height')."\"></div>\n";
 
-		// GoogleMaps won't work without at least one location.
-		if (!$this->hasMarkers()) {
-			return;
-		}
-		else {
-			$markers = $this->getMarkers();
-		}
-
 		echo
 		"<script type=\"text/javascript\">\n".
-		"function showmap() {\n";
+		"function show_googlemap_".$this->getId()."() {\n";
 
-		foreach ($this->getOverlayTypes() as $overlay_type) {
-			echo
-			"	var ".$overlay_type."sArray = [];\n";
+		foreach ($this->getOverlayClasses() as $class) {
+			echo $class::declareJavascriptVariables();
 		}
 
 		echo
-		"	var markersArray = [];\n".
-		"	var bounds = new google.maps.LatLngBounds();\n".
-		"	var infowindowsArray = [];\n";
+		"\tvar bounds = new google.maps.LatLngBounds();\n";
 
 		echo "\n";
 
@@ -125,39 +122,11 @@ class Map extends BaseMap
 		echo
 		"	var mapOptions = {\n".
 		"		zoom: ".$this->options->get('zoom').",\n".
-		"		center: new google.maps.LatLng(".$markers[$kc]->getLatitude().", ".$markers[$kc]->getLongitude()."),\n".
+		"		center: new google.maps.LatLng(0, 0),\n".
 		"		mapTypeId: google.maps.MapTypeId.".strtoupper($this->options->get('type'))."\n".
 		"	};\n".
 		"	var map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
 		"\n";
-
-		// Insert markers
-		foreach (array_keys($markers) as $k) {
-			echo
-			"	// Marker $k\n".
-			"	markersArray[$k] = new google.maps.Marker({\n".
-			"		position: new google.maps.LatLng(".$markers[$k]->getLatitude().", ".$markers[$k]->getLongitude()."),\n".
-			"		map: map";
-			if ($markers[$k]->options->has('icon')) {
-				echo ",\n		icon: '".$markers[$k]->options->get('icon')."'";
-			}
-			if ($markers[$k]->options->has('title')) {
-				echo ",\n		title: '".$markers[$k]->options->get('title')."'";
-			}
-			echo
-			"\n	});\n";
-			// Info windows
-			if ($markers[$k]->options->has('infowindow')) {
-				echo
-				"	infowindowsArray[$k] = new google.maps.InfoWindow({\n".
-				"		content: '".$markers[$k]->options->get('infowindow')."'\n".
-				"	});\n".
-				"	google.maps.event.addListener(markersArray[$k], 'click', function() {\n".
-				"		infowindowsArray[$k].open(map, markersArray[$k]);\n".
-				"	});\n";
-			}
-			echo "	bounds.extend(markersArray[$k].getPosition());\n";
-		}
 
 		foreach ($this->getOverlayTypes() as $overlay_type) {
 			foreach (array_keys($this->overlays[$overlay_type]) as $k) {
@@ -176,7 +145,7 @@ class Map extends BaseMap
 
 		echo
 		"}\n".
-		"window.onload = showmap;\n".
+		"window.onload = show_googlemap_".$this->getId().";\n".
 		"</script>\n";
 	}
 }

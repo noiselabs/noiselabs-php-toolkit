@@ -171,7 +171,7 @@ abstract class BaseMap implements MapInterface
 	 */
 	public function addOverlay($overlay)
 	{
-		$this->overlays[$overlay::OVERLAY_TYPE][] = $overlay;
+		$this->overlays[strtolower($overlay::OVERLAY_TYPE)][] = $overlay;
 	}
 
 	/**
@@ -181,7 +181,7 @@ abstract class BaseMap implements MapInterface
 	 */
 	public function getOverlays($type = null)
 	{
-		return (isset($type)) ? $this->overlays[$type] : $this->overlays;
+		return (isset($type)) ? $this->overlays[strtolower($type)] : $this->overlays;
 	}
 
 	/**
@@ -191,7 +191,7 @@ abstract class BaseMap implements MapInterface
 	 */
 	public function hasOverlays($type = null)
 	{
-		return isset($type) ? !empty($this->overlays[$type]) : !empty($this->overlays);
+		return isset($type) ? !empty($this->overlays[strtolower($type)]) : !empty($this->overlays);
 	}
 
 	/**
@@ -202,57 +202,23 @@ abstract class BaseMap implements MapInterface
 		return array_keys($this->overlays);
 	}
 
+	public function getOverlayClasses()
+	{
+		$classes = array();
+
+		foreach (array_keys($this->overlays) as $type) {
+			$classes[] = get_class(current($this->overlays[$type]));
+		}
+
+		return $classes;
+	}
+
 	public function hasMarkers()
 	{
 		if (!empty($this->markers)) {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * @deprecated Please use hasOverlay() instead.
-	 *
-	 * @param Marker $marker
-	 */
-	public function hasMarker(Marker $marker)
-	{
-		return in_array($marker, $this->markers, true);
-	}
-
-	/**
-	 * @deprecated Please use addOverlay() instead.
-	 *
-	 * @param Marker $marker
-	 * @param unknown_type $focus
-	 */
-	public function addMarker(Marker $marker, $focus = false)
-	{
-		$this->markers[] = $marker;
-
-		if (true === $focus) {
-			$this->setFocus(count($this->markers) - 1);
-		}
-	}
-
-	public function removeMarker(Marker $marker)
-	{
-		if (!$this->hasMarker($marker)) {
-			return null;
-		}
-
-		unset($this->markers[array_search($marker, $this->markers, true)]);
-		return $marker;
-	}
-
-	public function setMarkers(array $markers)
-	{
-		$this->markers = $markers;
-	}
-
-	public function getMarkers()
-	{
-		return $this->markers;
 	}
 
 	/**

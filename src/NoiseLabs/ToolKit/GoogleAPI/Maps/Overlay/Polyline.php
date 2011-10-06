@@ -24,7 +24,7 @@
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
  * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link http://www.noiselabs.org
- * @since 0.2.0-BETA2
+ * @since 0.2.0
  */
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay;
@@ -37,12 +37,12 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
  * a series of line segments that connect those locations in an ordered
  * sequence.
  *
- * @since 0.2.0-BETA2
+ * @since 0.2.0
  * @author Vítor Brandão <noisebleed@noiselabs.org>
  */
 class Polyline extends BaseOverlay
 {
-	const OVERLAY_TYPE 	= 'polyline';
+	const OVERLAY_TYPE 	= 'Polyline';
 
 	public $markers = array();
 
@@ -58,7 +58,7 @@ class Polyline extends BaseOverlay
 	 * 1.0 (default) of the opacity of the line's color.
 	 * - strokeWeight specifies the weight of the line's stroke in pixels.
 	 *
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	protected function getDefaultOptions()
 	{
@@ -76,7 +76,7 @@ class Polyline extends BaseOverlay
 	 *
 	 * An hex color between #000000 and #ffffff is returned.
 	 *
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	protected function getRandomColor()
 	{
@@ -102,7 +102,7 @@ class Polyline extends BaseOverlay
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function hasMarkers()
 	{
@@ -113,7 +113,7 @@ class Polyline extends BaseOverlay
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function hasMarker(Marker $marker)
 	{
@@ -121,7 +121,7 @@ class Polyline extends BaseOverlay
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function addMarker(Marker $marker, $focus = false)
 	{
@@ -129,7 +129,7 @@ class Polyline extends BaseOverlay
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function removeMarker(Marker $marker)
 	{
@@ -142,7 +142,7 @@ class Polyline extends BaseOverlay
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function setMarkers(array $markers)
 	{

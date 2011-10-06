@@ -80,6 +80,8 @@ class Geolocation
 						'speed'		=> $speed,
 						'timestamp'	=> $timestamp
 		));
+
+		return $geolocation;
 	}
 }
 

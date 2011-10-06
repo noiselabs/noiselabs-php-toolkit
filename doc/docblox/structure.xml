@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project version="0.14.0" title="">
-  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Map.php" hash="feec65ef2cf1a11a16fed9dbd9bd90a1" package="GoogleAPI">
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Map.php" hash="fa2070807867d0c06b0f2d0195d04421" package="GoogleAPI">
     <docblock>
       <description>This file is part of NoiseLabs-PHP-ToolKit</description>
       <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
@@ -68,7 +68,141 @@ that can be embedded on your website.</description>
       </method>
     </class>
   </file>
-  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/BaseMap.php" hash="37545a0d4f7fbfbb2ff35beabd7de11b" package="GoogleAPI">
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Geolocation.php" hash="f072504aa44ac5bcb809a7b96639e97d" package="GoogleAPI">
+    <docblock>
+      <description>This file is part of NoiseLabs-PHP-ToolKit</description>
+      <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
+and/or modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 3 of the License, or (at your option) any later version.&lt;/p&gt;
+
+&lt;p&gt;NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.&lt;/p&gt;
+
+&lt;p&gt;You should have received a copy of the GNU Lesser General Public
+License along with NoiseLabs-PHP-ToolKit; if not, see
+&lt;a href="http://www.gnu.org/licenses/"&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Copyright (C) 2011 V&#xED;tor Brand&#xE3;o&lt;/p&gt;
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="GoogleAPI"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="license" description="http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3"/>
+      <tag name="link" description="http://www.noiselabs.org" link="http://www.noiselabs.org"/>
+      <tag name="since" description="0.2.0"/>
+    </docblock>
+    <parse_markers>
+      <error line="43">No DocBlock was found for Property $latitude</error>
+      <error line="44">No DocBlock was found for Property $longitude</error>
+      <error line="45">No DocBlock was found for Property $altitude</error>
+      <error line="46">No DocBlock was found for Property $speed</error>
+      <error line="47">No DocBlock was found for Property $timestamp</error>
+    </parse_markers>
+    <namespace-alias name="Helper">NoiseLabs\ToolKit\Helper</namespace-alias>
+    <class final="false" abstract="false" line="41" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps" package="Default">
+      <name>Geolocation</name>
+      <extends/>
+      <full_name>\NoiseLabs\ToolKit\GoogleAPI\Maps\Geolocation</full_name>
+      <docblock>
+        <description>The core class for each Overlay element containing GPS coordinates (latitude
+and longitude) to identify a specific position.</description>
+        <long-description>
+</long-description>
+        <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;" line="34"/>
+        <tag name="since" description="0.2.0" line="34"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="43" package="Default">
+        <name>$latitude</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="public" line="44" package="Default">
+        <name>$longitude</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="public" line="45" package="Default">
+        <name>$altitude</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="public" line="46" package="Default">
+        <name>$speed</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="public" line="47" package="Default">
+        <name>$timestamp</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="54" package="Default">
+        <name>__construct</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="array" variable="$properties" line="49">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="since" description="0.2.0" line="49"/>
+        </docblock>
+        <argument line="54">
+          <name>$properties</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="69" package="Default">
+        <name>create</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="float" variable="$latitude" line="61">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag name="param" description="" type="float" variable="$longitude" line="61">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag name="param" description="" type="float" variable="$altitude" line="61">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag name="param" description="" type="float" variable="$speed" line="61">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag name="param" description="" type="string" variable="$timestamp" line="61">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="69">
+          <name>$latitude</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="69">
+          <name>$longitude</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="69">
+          <name>$altitude</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="70">
+          <name>$speed</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="70">
+          <name>$timestamp</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/BaseMap.php" hash="7031bf206a2da2e5c9b687a8040d024e" package="GoogleAPI">
     <docblock>
       <description>This file is part of NoiseLabs-PHP-ToolKit</description>
       <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
@@ -96,24 +230,23 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
       <tag name="since" description="0.1.0"/>
     </docblock>
     <parse_markers>
-      <error line="78">No DocBlock was found for Property $https</error>
-      <notice line="83">Argument $id is missing from the function Docblock</notice>
-      <notice line="83">Argument $options is missing from the function Docblock</notice>
-      <notice line="83">Argument $parameters is missing from the function Docblock</notice>
-      <error line="98">No DocBlock was found for Method getOptionsDefaults</error>
-      <error line="146">No DocBlock was found for Method setId</error>
-      <error line="151">No DocBlock was found for Method getId</error>
-      <error line="156">No DocBlock was found for Method hasMarkers</error>
-      <error line="164">No DocBlock was found for Method hasMarker</error>
-      <error line="169">No DocBlock was found for Method addMarker</error>
-      <error line="178">No DocBlock was found for Method removeMarker</error>
-      <error line="188">No DocBlock was found for Method setMarkers</error>
-      <error line="193">No DocBlock was found for Method getMarkers</error>
-      <error line="236">No DocBlock was found for Method create</error>
+      <error line="91">No DocBlock was found for Property $https</error>
+      <notice line="96">Argument $id is missing from the function Docblock</notice>
+      <notice line="96">Argument $options is missing from the function Docblock</notice>
+      <notice line="96">Argument $parameters is missing from the function Docblock</notice>
+      <error line="111">No DocBlock was found for Method getOptionsDefaults</error>
+      <error line="159">No DocBlock was found for Method setId</error>
+      <error line="164">No DocBlock was found for Method getId</error>
+      <notice line="172">Argument $overlay is missing from the function Docblock</notice>
+      <error line="205">No DocBlock was found for Method hasMarkers</error>
+      <error line="238">No DocBlock was found for Method removeMarker</error>
+      <error line="248">No DocBlock was found for Method setMarkers</error>
+      <error line="253">No DocBlock was found for Method getMarkers</error>
+      <error line="296">No DocBlock was found for Method create</error>
     </parse_markers>
     <namespace-alias name="ParameterBag">NoiseLabs\ToolKit\GoogleAPI\ParameterBag</namespace-alias>
     <namespace-alias name="MapInterface">NoiseLabs\ToolKit\GoogleAPI\Maps\MapInterface</namespace-alias>
-    <namespace-alias name="Marker">NoiseLabs\ToolKit\GoogleAPI\Maps\Marker</namespace-alias>
+    <namespace-alias name="Marker">NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker</namespace-alias>
     <class final="false" abstract="true" line="45" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps" package="Default">
       <name>BaseMap</name>
       <extends/>
@@ -125,7 +258,7 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
         <tag name="see" description="\NoiseLabs\ToolKit\GoogleAPI\Maps\https://github.com/kriswallsmith/GoogleBundle" refers="\NoiseLabs\ToolKit\GoogleAPI\Maps\https://github.com/kriswallsmith/GoogleBundle" line="36"/>
       </docblock>
       <implements>\NoiseLabs\ToolKit\GoogleAPI\Maps\MapInterface</implements>
-      <property final="false" static="false" visibility="protected" line="54" package="Default">
+      <property final="false" static="false" visibility="protected" line="53" package="Default">
         <name>$id</name>
         <default/>
         <docblock>
@@ -133,12 +266,32 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
 maps. This is also used as the ID for the &lt;div&gt; element.</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="string" line="48">
+          <tag name="var" description="" type="string" line="47">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="60" package="Default">
+      <property final="false" static="false" visibility="public" line="60" package="Default">
+        <name>$overlays</name>
+        <default>array</default>
+        <docblock>
+          <description>Array holding all overlays added to this map instance.</description>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="55"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="67" package="Default">
+        <name>$_overlay_types</name>
+        <default>array</default>
+        <docblock>
+          <description>Supported overlay types.</description>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="62"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="73" package="Default">
         <name>$markers</name>
         <default>array</default>
         <docblock>
@@ -148,7 +301,7 @@ object of type Marker.</description>
 </long-description>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="68" package="Default">
+      <property final="false" static="false" visibility="public" line="81" package="Default">
         <name>$parameters</name>
         <default/>
         <docblock>
@@ -156,12 +309,12 @@ object of type Marker.</description>
 loaded.</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" line="62">
+          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" line="75">
             <type by_reference="false">\NoiseLabs\ToolKit\ParameterBag</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="76" package="Default">
+      <property final="false" static="false" visibility="public" line="89" package="Default">
         <name>$options</name>
         <default/>
         <docblock>
@@ -169,250 +322,216 @@ loaded.</description>
 usage of HTTPS.</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" line="70">
+          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" line="83">
             <type by_reference="false">\NoiseLabs\ToolKit\ParameterBag</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="78" package="Default">
+      <property final="false" static="false" visibility="public" line="91" package="Default">
         <name>$https</name>
         <default>false</default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="83" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="96" package="Default">
         <name>__construct</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
         </docblock>
-        <argument line="83">
+        <argument line="96">
           <name>$id</name>
           <default>map</default>
           <type/>
         </argument>
-        <argument line="83">
+        <argument line="96">
           <name>$options</name>
           <default>array</default>
           <type>array</type>
         </argument>
-        <argument line="83">
+        <argument line="96">
           <name>$parameters</name>
           <default>array</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" line="98" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" line="111" package="Default">
         <name>getOptionsDefaults</name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="146" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="159" package="Default">
         <name>setId</name>
-        <argument line="146">
+        <argument line="159">
           <name>$id</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="151" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="164" package="Default">
         <name>getId</name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="156" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="172" package="Default">
+        <name>addOverlay</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="169"/>
+        </docblock>
+        <argument line="172">
+          <name>$overlay</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="182" package="Default">
+        <name>getOverlays</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$type" line="177"/>
+          <tag name="since" description="0.2.0" line="177"/>
+        </docblock>
+        <argument line="182">
+          <name>$type</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="192" package="Default">
+        <name>hasOverlays</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\unknown_type" variable="$type" line="187">
+            <type by_reference="false">\NoiseLabs\ToolKit\GoogleAPI\Maps\unknown_type</type>
+          </tag>
+          <tag name="since" description="0.2.0" line="187"/>
+        </docblock>
+        <argument line="192">
+          <name>$type</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="200" package="Default">
+        <name>getOverlayTypes</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="197"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="205" package="Default">
         <name>hasMarkers</name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="164" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="218" package="Default">
         <name>hasMarker</name>
-        <argument line="164">
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="deprecated" description="Please use hasOverlay() instead." line="213"/>
+          <tag name="param" description="" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker" variable="$marker" line="213">
+            <type by_reference="false">\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker</type>
+          </tag>
+        </docblock>
+        <argument line="218">
           <name>$marker</name>
           <default/>
           <type>Marker</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="169" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="229" package="Default">
         <name>addMarker</name>
-        <argument line="169">
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="deprecated" description="Please use addOverlay() instead." line="223"/>
+          <tag name="param" description="" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker" variable="$marker" line="223">
+            <type by_reference="false">\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker</type>
+          </tag>
+          <tag name="param" description="" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\unknown_type" variable="$focus" line="223">
+            <type by_reference="false">\NoiseLabs\ToolKit\GoogleAPI\Maps\unknown_type</type>
+          </tag>
+        </docblock>
+        <argument line="229">
           <name>$marker</name>
           <default/>
           <type>Marker</type>
         </argument>
-        <argument line="169">
+        <argument line="229">
           <name>$focus</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="178" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="238" package="Default">
         <name>removeMarker</name>
-        <argument line="178">
+        <argument line="238">
           <name>$marker</name>
           <default/>
           <type>Marker</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="188" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="248" package="Default">
         <name>setMarkers</name>
-        <argument line="188">
+        <argument line="248">
           <name>$markers</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="193" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="253" package="Default">
         <name>getMarkers</name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="201" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="261" package="Default">
         <name>hasFocus</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag name="since" description="0.2.0-BETA2" line="198"/>
+          <tag name="since" description="0.2.0" line="258"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="212" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="272" package="Default">
         <name>setFocus</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag name="param" description="Marker instance or array index" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\$data" variable="$data" line="206">
+          <tag name="param" description="Marker instance or array index" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\$data" variable="$data" line="266">
             <type by_reference="false">\NoiseLabs\ToolKit\GoogleAPI\Maps\$data</type>
           </tag>
-          <tag name="param" description="Zoom level to apply" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\$zoom" variable="$zoom" line="206">
+          <tag name="param" description="Zoom level to apply" type="\NoiseLabs\ToolKit\GoogleAPI\Maps\$zoom" variable="$zoom" line="266">
             <type by_reference="false">\NoiseLabs\ToolKit\GoogleAPI\Maps\$zoom</type>
           </tag>
-          <tag name="since" description="0.2.0-BETA2" line="206"/>
+          <tag name="since" description="0.2.0" line="266"/>
         </docblock>
-        <argument line="212">
+        <argument line="272">
           <name>$data</name>
           <default/>
           <type/>
         </argument>
-        <argument line="212">
+        <argument line="272">
           <name>$zoom</name>
           <default>16</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="230" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="290" package="Default">
         <name>clearFocus</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag name="since" description="0.2.0-BETA2" line="227"/>
+          <tag name="since" description="0.2.0" line="287"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="236" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" line="296" package="Default">
         <name>create</name>
-      </method>
-    </class>
-  </file>
-  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Marker.php" hash="42f68e1428a04d6fa76bbe502c9f5a28" package="GoogleAPI">
-    <docblock>
-      <description>This file is part of NoiseLabs-PHP-ToolKit</description>
-      <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
-and/or modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 3 of the License, or (at your option) any later version.&lt;/p&gt;
-
-&lt;p&gt;NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Lesser General Public License for more details.&lt;/p&gt;
-
-&lt;p&gt;You should have received a copy of the GNU Lesser General Public
-License along with NoiseLabs-PHP-ToolKit; if not, see
-&lt;a href="http://www.gnu.org/licenses/"&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Copyright (C) 2011 V&#xED;tor Brand&#xE3;o&lt;/p&gt;
-</long-description>
-      <tag name="category" description="NoiseLabs"/>
-      <tag name="package" description="GoogleAPI"/>
-      <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
-      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
-      <tag name="license" description="http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3"/>
-      <tag name="link" description="http://www.noiselabs.org" link="http://www.noiselabs.org"/>
-      <tag name="since" description="0.1.0"/>
-    </docblock>
-    <parse_markers>
-      <error line="34">No DocBlock was found for Class Marker</error>
-      <error line="36">No DocBlock was found for Property $latitude</error>
-      <error line="37">No DocBlock was found for Property $longitude</error>
-      <error line="50">No DocBlock was found for Method __construct</error>
-      <error line="55">No DocBlock was found for Method create</error>
-      <error line="65">No DocBlock was found for Method setLatitude</error>
-      <error line="70">No DocBlock was found for Method getLatitude</error>
-      <error line="75">No DocBlock was found for Method setLongitude</error>
-      <error line="80">No DocBlock was found for Method getLongitude</error>
-    </parse_markers>
-    <namespace-alias name="ParameterBag">NoiseLabs\ToolKit\GoogleAPI\ParameterBag</namespace-alias>
-    <class final="false" abstract="false" line="34" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps" package="Default">
-      <name>Marker</name>
-      <extends>\NoiseLabs\ToolKit\GoogleAPI\Maps\BaseOverlay</extends>
-      <full_name>\NoiseLabs\ToolKit\GoogleAPI\Maps\Marker</full_name>
-      <property final="false" static="false" visibility="protected" line="36" package="Default">
-        <name>$latitude</name>
-        <default/>
-      </property>
-      <property final="false" static="false" visibility="protected" line="37" package="Default">
-        <name>$longitude</name>
-        <default/>
-      </property>
-      <property final="false" static="false" visibility="public" line="48" package="Default">
-        <name>$options</name>
-        <default/>
-        <docblock>
-          <description>Marker options.</description>
-          <long-description>&lt;p&gt;Known keys:
- - icon:    An icon to show in place of the default icon
- - title:&lt;/p&gt;
-</long-description>
-          <tag name="var" description="" type="\NoiseLabs\ToolKit\ParameterBag" line="39">
-            <type by_reference="false">\NoiseLabs\ToolKit\ParameterBag</type>
-          </tag>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="50" package="Default">
-        <name>__construct</name>
-      </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="55" package="Default">
-        <name>create</name>
-        <argument line="55">
-          <name>$latitude</name>
-          <default/>
-          <type/>
-        </argument>
-        <argument line="55">
-          <name>$longitude</name>
-          <default/>
-          <type/>
-        </argument>
-        <argument line="55">
-          <name>$options</name>
-          <default>array</default>
-          <type>array</type>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="65" package="Default">
-        <name>setLatitude</name>
-        <argument line="65">
-          <name>$latitude</name>
-          <default/>
-          <type/>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="70" package="Default">
-        <name>getLatitude</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="75" package="Default">
-        <name>setLongitude</name>
-        <argument line="75">
-          <name>$longitude</name>
-          <default/>
-          <type/>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="80" package="Default">
-        <name>getLongitude</name>
       </method>
     </class>
   </file>
@@ -457,7 +576,7 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
       </method>
     </class>
   </file>
-  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/MapInterface.php" hash="1841db4a404e552acef913164c071f8c" package="GoogleAPI">
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/MapInterface.php" hash="147bba9e28394d2e39003b78f17ea65f" package="GoogleAPI">
     <docblock>
       <description>This file is part of NoiseLabs-PHP-ToolKit</description>
       <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
@@ -488,15 +607,16 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
       <error line="34">No DocBlock was found for Interface MapInterface</error>
       <error line="36">No DocBlock was found for Method setId</error>
       <error line="37">No DocBlock was found for Method getId</error>
-      <error line="38">No DocBlock was found for Method hasMarkers</error>
-      <error line="39">No DocBlock was found for Method hasMarker</error>
-      <error line="40">No DocBlock was found for Method setMarkers</error>
-      <error line="41">No DocBlock was found for Method getMarkers</error>
-      <error line="42">No DocBlock was found for Method addMarker</error>
-      <error line="43">No DocBlock was found for Method removeMarker</error>
-      <error line="44">No DocBlock was found for Method render</error>
+      <error line="38">No DocBlock was found for Method addOverlay</error>
+      <error line="39">No DocBlock was found for Method hasOverlays</error>
+      <error line="40">No DocBlock was found for Method hasMarker</error>
+      <error line="41">No DocBlock was found for Method setMarkers</error>
+      <error line="42">No DocBlock was found for Method getMarkers</error>
+      <error line="43">No DocBlock was found for Method addMarker</error>
+      <error line="44">No DocBlock was found for Method removeMarker</error>
+      <error line="45">No DocBlock was found for Method render</error>
     </parse_markers>
-    <namespace-alias name="Marker">NoiseLabs\ToolKit\GoogleAPI\Maps\Marker</namespace-alias>
+    <namespace-alias name="Marker">NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker</namespace-alias>
     <interface namespace="NoiseLabs\ToolKit\GoogleAPI\Maps" line="34" package="Default">
       <name>MapInterface</name>
       <extends/>
@@ -513,37 +633,42 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
         <name>getId</name>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" line="38" package="Default">
-        <name>hasMarkers</name>
+        <name>addOverlay</name>
+        <argument line="38">
+          <name>$overlay</name>
+          <default/>
+          <type/>
+        </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" line="39" package="Default">
-        <name>hasMarker</name>
+        <name>hasOverlays</name>
         <argument line="39">
+          <name>$type</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="40" package="Default">
+        <name>hasMarker</name>
+        <argument line="40">
           <name>$marker</name>
           <default/>
           <type>Marker</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="40" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="41" package="Default">
         <name>setMarkers</name>
-        <argument line="40">
+        <argument line="41">
           <name>$markers</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="41" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="42" package="Default">
         <name>getMarkers</name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="42" package="Default">
-        <name>addMarker</name>
-        <argument line="42">
-          <name>$marker</name>
-          <default/>
-          <type>Marker</type>
-        </argument>
-      </method>
       <method final="false" abstract="false" static="false" visibility="public" line="43" package="Default">
-        <name>removeMarker</name>
+        <name>addMarker</name>
         <argument line="43">
           <name>$marker</name>
           <default/>
@@ -551,11 +676,19 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" line="44" package="Default">
+        <name>removeMarker</name>
+        <argument line="44">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="45" package="Default">
         <name>render</name>
       </method>
     </interface>
   </file>
-  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Overlay/Polyline.php" hash="b76ef412a367a220384bd9eb214860eb" package="GoogleAPI">
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Overlay/Icon.php" hash="731818c6995c7e56634aaef43dba0ede" package="GoogleAPI">
     <docblock>
       <description>This file is part of NoiseLabs-PHP-ToolKit</description>
       <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
@@ -580,16 +713,157 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
       <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
       <tag name="license" description="http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3"/>
       <tag name="link" description="http://www.noiselabs.org" link="http://www.noiselabs.org"/>
-      <tag name="since" description="0.2.0-BETA2"/>
+      <tag name="since" description="0.2.0"/>
     </docblock>
     <parse_markers>
-      <error line="46">No DocBlock was found for Property $_markers</error>
-      <error line="47">No DocBlock was found for Property $stroke_color</error>
-      <error line="48">No DocBlock was found for Property $stroke_opacity</error>
-      <error line="49">No DocBlock was found for Property $stroke_weight</error>
+      <error line="64">No DocBlock was found for Property $image</error>
+    </parse_markers>
+    <namespace-alias name="BaseOverlay">NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</namespace-alias>
+    <class final="false" abstract="false" line="62" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" package="Default">
+      <name>Icon</name>
+      <extends>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</extends>
+      <full_name>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Icon</full_name>
+      <docblock>
+        <description>Markers may define an icon to show in place of the default icon. Defining an
+icon involves setting a number of properties that define the visual behavior
+of the marker.</description>
+        <long-description>&lt;p&gt;Simple Icons:
+In the most basic case, an icon can simply indicate an image to use instead
+of the default Google Maps pushpin icon by setting the marker's icon property
+to the URL of an image. The Google Maps API will size the icon automatically
+in this case.&lt;/p&gt;
+
+&lt;p&gt;Complex Icons:
+More complex icons will want to specify complex shapes (which indicate
+regions that are clickable), add shadow images, and specify the "stack order"
+of how they should display relative to other overlays.
+Shadow images should generally be created at a 45 degree angle (upward and to
+the right) from the main image, and the bottom left corner of the shadow
+image should align with the bottom-left corner of the icon image. Shadow
+images should be 24-bit PNG images with alpha transparency so that image
+boundaries appear correctly on the map.&lt;/p&gt;
+
+&lt;p&gt;When dealing with "complex icons" the GoogleMaps Javascript API require the
+usage of a MarkerImage class but this PHP library uses the same Icon class
+for both "simple" and "complex" icons.&lt;/p&gt;
+</long-description>
+        <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;" line="34"/>
+        <tag name="since" description="0.2.0" line="34"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="64" package="Default">
+        <name>$image</name>
+        <default/>
+      </property>
+    </class>
+  </file>
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Overlay/InfoWindow.php" hash="77c2aa6af43b99eb054d2ab6692da7aa" package="GoogleAPI">
+    <docblock>
+      <description>This file is part of NoiseLabs-PHP-ToolKit</description>
+      <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
+and/or modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 3 of the License, or (at your option) any later version.&lt;/p&gt;
+
+&lt;p&gt;NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.&lt;/p&gt;
+
+&lt;p&gt;You should have received a copy of the GNU Lesser General Public
+License along with NoiseLabs-PHP-ToolKit; if not, see
+&lt;a href="http://www.gnu.org/licenses/"&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Copyright (C) 2011 V&#xED;tor Brand&#xE3;o&lt;/p&gt;
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="GoogleAPI"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="license" description="http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3"/>
+      <tag name="link" description="http://www.noiselabs.org" link="http://www.noiselabs.org"/>
+      <tag name="since" description="0.2.0"/>
+    </docblock>
+    <parse_markers>
+      <error line="46">No DocBlock was found for Constant OVERLAY_TYPE</error>
     </parse_markers>
     <namespace-alias name="BaseOverlay">NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</namespace-alias>
     <class final="false" abstract="false" line="44" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" package="Default">
+      <name>InfoWindow</name>
+      <extends>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</extends>
+      <full_name>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\InfoWindow</full_name>
+      <docblock>
+        <description>InfoWindows displays content in a floating window above the map. The info
+window looks a little like a comic-book word balloon; it has a content area
+and a tapered stem, where the tip of the stem is at a specified location on
+the map. You can see the info window in action by clicking business markers
+on Google Maps.</description>
+        <long-description>
+</long-description>
+        <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;" line="34"/>
+        <tag name="since" description="0.2.0" line="34"/>
+      </docblock>
+      <constant namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" line="46" package="Default">
+        <name>OVERLAY_TYPE</name>
+        <value>infowindow</value>
+      </constant>
+      <property final="false" static="false" visibility="public" line="55" package="Default">
+        <name>$content</name>
+        <default/>
+        <docblock>
+          <description>Content to display in the InfoWindow. This can be an HTML element, a
+plain-text string, or a string containing HTML. The InfoWindow will be
+sized according to the content. To set an explicit size for the content,
+set content to be a HTML element with that size.</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="47">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+    </class>
+  </file>
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Overlay/Polyline.php" hash="a5dabd262a4190ce6ea7aa1b1dc81199" package="GoogleAPI">
+    <docblock>
+      <description>This file is part of NoiseLabs-PHP-ToolKit</description>
+      <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
+and/or modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 3 of the License, or (at your option) any later version.&lt;/p&gt;
+
+&lt;p&gt;NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.&lt;/p&gt;
+
+&lt;p&gt;You should have received a copy of the GNU Lesser General Public
+License along with NoiseLabs-PHP-ToolKit; if not, see
+&lt;a href="http://www.gnu.org/licenses/"&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Copyright (C) 2011 V&#xED;tor Brand&#xE3;o&lt;/p&gt;
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="GoogleAPI"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="license" description="http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3"/>
+      <tag name="link" description="http://www.noiselabs.org" link="http://www.noiselabs.org"/>
+      <tag name="since" description="0.2.0"/>
+    </docblock>
+    <parse_markers>
+      <error line="45">No DocBlock was found for Constant OVERLAY_TYPE</error>
+      <error line="47">No DocBlock was found for Property $markers</error>
+      <error line="86">No DocBlock was found for Method create</error>
+      <notice line="118">Argument $marker is missing from the function Docblock</notice>
+      <notice line="126">Argument $marker is missing from the function Docblock</notice>
+      <notice line="126">Argument $focus is missing from the function Docblock</notice>
+      <notice line="134">Argument $marker is missing from the function Docblock</notice>
+      <notice line="147">Argument $markers is missing from the function Docblock</notice>
+      <error line="152">No DocBlock was found for Method getMarkers</error>
+      <error line="157">No DocBlock was found for Method buildJavascriptOutput</error>
+    </parse_markers>
+    <namespace-alias name="BaseOverlay">NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</namespace-alias>
+    <class final="false" abstract="false" line="43" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" package="Default">
       <name>Polyline</name>
       <extends>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</extends>
       <full_name>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Polyline</full_name>
@@ -600,28 +874,152 @@ a series of line segments that connect those locations in an ordered
 sequence.</description>
         <long-description>
 </long-description>
-        <tag name="since" description="0.2.0-BETA2" line="34"/>
+        <tag name="since" description="0.2.0" line="34"/>
         <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;" line="34"/>
       </docblock>
-      <property final="false" static="false" visibility="protected" line="46" package="Default">
-        <name>$_markers</name>
-        <default/>
-      </property>
+      <constant namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" line="45" package="Default">
+        <name>OVERLAY_TYPE</name>
+        <value>polyline</value>
+      </constant>
       <property final="false" static="false" visibility="public" line="47" package="Default">
-        <name>$stroke_color</name>
-        <default/>
+        <name>$markers</name>
+        <default>array</default>
       </property>
-      <property final="false" static="false" visibility="public" line="48" package="Default">
-        <name>$stroke_opacity</name>
-        <default/>
-      </property>
-      <property final="false" static="false" visibility="public" line="49" package="Default">
-        <name>$stroke_weight</name>
-        <default/>
-      </property>
+      <method final="false" abstract="false" static="false" visibility="protected" line="63" package="Default">
+        <name>getDefaultOptions</name>
+        <docblock>
+          <description>Polylines are drawn as a series of straight segments on the map. You can
+specify custom colors, weights, and opacities for the stroke of the line
+within a Polyline options object used when constructing your line, or
+change those properties after construction. A polyline supports the
+following stroke styles:
+- strokeColor specifies a hexadecimal HTML color of the format "#FFFFFF".</description>
+          <long-description>&lt;p&gt;The Polyline class does not support named colors.
+- strokeOpacity specifies a numerical fractional value between 0.0 and
+1.0 (default) of the opacity of the line's color.
+- strokeWeight specifies the weight of the line's stroke in pixels.&lt;/p&gt;
+</long-description>
+          <tag name="since" description="0.2.0" line="49"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="81" package="Default">
+        <name>getRandomColor</name>
+        <docblock>
+          <description>A simple method to calculate a random color for the polyline segments.</description>
+          <long-description>&lt;p&gt;This method is called when option 'randomStrokeColor' is set to TRUE.&lt;/p&gt;
+
+&lt;p&gt;An hex color between #000000 and #ffffff is returned.&lt;/p&gt;
+</long-description>
+          <tag name="since" description="0.2.0" line="73"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="86" package="Default">
+        <name>create</name>
+        <argument line="86">
+          <name>$markers</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+        <argument line="86">
+          <name>$options</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="107" package="Default">
+        <name>hasMarkers</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="104"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="118" package="Default">
+        <name>hasMarker</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="115"/>
+        </docblock>
+        <argument line="118">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="126" package="Default">
+        <name>addMarker</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="123"/>
+        </docblock>
+        <argument line="126">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+        <argument line="126">
+          <name>$focus</name>
+          <default>false</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="134" package="Default">
+        <name>removeMarker</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="131"/>
+        </docblock>
+        <argument line="134">
+          <name>$marker</name>
+          <default/>
+          <type>Marker</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="147" package="Default">
+        <name>setMarkers</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="144"/>
+        </docblock>
+        <argument line="147">
+          <name>$markers</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="152" package="Default">
+        <name>getMarkers</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="157" package="Default">
+        <name>buildJavascriptOutput</name>
+        <argument line="157">
+          <name>$js_map_variable</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="157">
+          <name>$js_array_name</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="157">
+          <name>$js_array_index</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
     </class>
   </file>
-  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Overlay/BaseOverlay.php" hash="13660da24b8d2fbeb27ead3609a7b94c" package="GoogleAPI">
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Overlay/Marker.php" hash="4ef3ed0813272427314a2fc070ee42c0" package="GoogleAPI">
     <docblock>
       <description>This file is part of NoiseLabs-PHP-ToolKit</description>
       <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
@@ -646,12 +1044,170 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
       <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
       <tag name="license" description="http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3"/>
       <tag name="link" description="http://www.noiselabs.org" link="http://www.noiselabs.org"/>
-      <tag name="since" description="0.2.0-BETA2"/>
+      <tag name="since" description="0.1.0"/>
+    </docblock>
+    <parse_markers>
+      <error line="45">No DocBlock was found for Constant OVERLAY_TYPE</error>
+      <error line="46">No DocBlock was found for Property $geolocation</error>
+      <error line="47">No DocBlock was found for Property $icon</error>
+      <error line="48">No DocBlock was found for Property $infowindow</error>
+      <error line="50">No DocBlock was found for Method getDefaultOptions</error>
+      <error line="59">No DocBlock was found for Method create</error>
+      <error line="88">No DocBlock was found for Method setLatitude</error>
+      <error line="93">No DocBlock was found for Method getLatitude</error>
+      <error line="98">No DocBlock was found for Method setLongitude</error>
+      <error line="103">No DocBlock was found for Method getLongitude</error>
+      <error line="108">No DocBlock was found for Method buildJavascriptOutput</error>
+    </parse_markers>
+    <namespace-alias name="ParameterBag">NoiseLabs\ToolKit\GoogleAPI\ParameterBag</namespace-alias>
+    <namespace-alias name="Geolocation">NoiseLabs\ToolKit\GoogleAPI\Maps\Geolocation</namespace-alias>
+    <namespace-alias name="BaseOverlay">NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</namespace-alias>
+    <namespace-alias name="InfoWindow">NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\InfoWindow</namespace-alias>
+    <class final="false" abstract="false" line="43" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" package="Default">
+      <name>Marker</name>
+      <extends>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay</extends>
+      <full_name>\NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker</full_name>
+      <docblock>
+        <description/>
+        <long-description>
+</long-description>
+        <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;" line="37"/>
+        <tag name="since" description="0.1.0" line="37"/>
+      </docblock>
+      <constant namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" line="45" package="Default">
+        <name>OVERLAY_TYPE</name>
+        <value>marker</value>
+      </constant>
+      <property final="false" static="false" visibility="protected" line="46" package="Default">
+        <name>$geolocation</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="47" package="Default">
+        <name>$icon</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="48" package="Default">
+        <name>$infowindow</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="protected" line="50" package="Default">
+        <name>getDefaultOptions</name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="59" package="Default">
+        <name>create</name>
+        <argument line="59">
+          <name>$latitude</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="59">
+          <name>$longitude</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="59">
+          <name>$options</name>
+          <default>array</default>
+          <type>array</type>
+        </argument>
+        <argument line="60">
+          <name>$infowindow</name>
+          <default>null</default>
+          <type>InfoWindow</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="75" package="Default">
+        <name>hasIcon</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="72"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="83" package="Default">
+        <name>hasInfoWindow</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="since" description="0.2.0" line="80"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="88" package="Default">
+        <name>setLatitude</name>
+        <argument line="88">
+          <name>$latitude</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="93" package="Default">
+        <name>getLatitude</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="98" package="Default">
+        <name>setLongitude</name>
+        <argument line="98">
+          <name>$longitude</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="103" package="Default">
+        <name>getLongitude</name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="108" package="Default">
+        <name>buildJavascriptOutput</name>
+        <argument line="108">
+          <name>$js_map_variable</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="108">
+          <name>$js_array_name</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="108">
+          <name>$js_array_index</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="NoiseLabs/ToolKit/GoogleAPI/Maps/Overlay/BaseOverlay.php" hash="cc619dc7c9288298d6be6b00ecff0c47" package="GoogleAPI">
+    <docblock>
+      <description>This file is part of NoiseLabs-PHP-ToolKit</description>
+      <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
+and/or modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 3 of the License, or (at your option) any later version.&lt;/p&gt;
+
+&lt;p&gt;NoiseLabs-PHP-ToolKit is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.&lt;/p&gt;
+
+&lt;p&gt;You should have received a copy of the GNU Lesser General Public
+License along with NoiseLabs-PHP-ToolKit; if not, see
+&lt;a href="http://www.gnu.org/licenses/"&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Copyright (C) 2011 V&#xED;tor Brand&#xE3;o&lt;/p&gt;
+</long-description>
+      <tag name="category" description="NoiseLabs"/>
+      <tag name="package" description="GoogleAPI"/>
+      <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
+      <tag name="license" description="http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3"/>
+      <tag name="link" description="http://www.noiselabs.org" link="http://www.noiselabs.org"/>
+      <tag name="since" description="0.2.0"/>
     </docblock>
     <parse_markers>
       <error line="64">No DocBlock was found for Property $options</error>
       <error line="66">No DocBlock was found for Method __construct</error>
       <error line="71">No DocBlock was found for Method getDefaultOptions</error>
+      <error line="73">No DocBlock was found for Method buildJavascriptOutput</error>
     </parse_markers>
     <namespace-alias name="ParameterBag">NoiseLabs\ToolKit\GoogleAPI\ParameterBag</namespace-alias>
     <class final="false" abstract="true" line="62" namespace="NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay" package="Default">
@@ -683,7 +1239,7 @@ location.&lt;/p&gt;
 above.&lt;/p&gt;
 </long-description>
         <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;" line="34"/>
-        <tag name="since" description="0.2.0-BETA2" line="34"/>
+        <tag name="since" description="0.2.0" line="34"/>
       </docblock>
       <property final="false" static="false" visibility="public" line="64" package="Default">
         <name>$options</name>
@@ -692,8 +1248,26 @@ above.&lt;/p&gt;
       <method final="false" abstract="false" static="false" visibility="public" line="66" package="Default">
         <name>__construct</name>
       </method>
-      <method final="false" abstract="true" static="false" visibility="public" line="71" package="Default">
+      <method final="false" abstract="true" static="false" visibility="protected" line="71" package="Default">
         <name>getDefaultOptions</name>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" line="73" package="Default">
+        <name>buildJavascriptOutput</name>
+        <argument line="73">
+          <name>$js_map_variable</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="74">
+          <name>$js_array_name</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="74">
+          <name>$js_array_index</name>
+          <default/>
+          <type/>
+        </argument>
       </method>
     </class>
   </file>
@@ -3311,7 +3885,7 @@ same behavior as 'c'.&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="NoiseLabs/ToolKit/Helper.php" hash="184057ab1d3aef2bb8ddbba29e6d4c10" package="ToolKit">
+  <file path="NoiseLabs/ToolKit/Helper.php" hash="2e619c79f8794b2c9e2c5c85cc38084a" package="ToolKit">
     <docblock>
       <description>This file is part of NoiseLabs-PHP-ToolKit</description>
       <long-description>&lt;p&gt;NoiseLabs-PHP-ToolKit is free software; you can redistribute it
@@ -3339,7 +3913,8 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
       <tag name="copyright" description="(C) 2011 V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;"/>
     </docblock>
     <parse_markers>
-      <notice line="99">Name of argument $method does not match with function Docblock</notice>
+      <error line="38">No DocBlock was found for Constant DATETIME_FORMAT</error>
+      <notice line="113">Name of argument $method does not match with function Docblock</notice>
     </parse_markers>
     <class final="false" abstract="false" line="36" namespace="NoiseLabs\ToolKit" package="Default">
       <name>Helper</name>
@@ -3351,94 +3926,115 @@ License along with NoiseLabs-PHP-ToolKit; if not, see
 </long-description>
         <tag name="author" description="V&#xED;tor Brand&#xE3;o &lt;noisebleed@noiselabs.org&gt;" line="31"/>
       </docblock>
-      <method final="false" abstract="false" static="true" visibility="public" line="49" package="Default">
+      <constant namespace="NoiseLabs\ToolKit" line="38" package="Default">
+        <name>DATETIME_FORMAT</name>
+        <value>Y-m-d G:i:s</value>
+      </constant>
+      <method final="false" abstract="false" static="true" visibility="public" line="47" package="Default">
+        <name>timestamp</name>
+        <docblock>
+          <description>Returns current timestamp.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$timestamp" line="40">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="since" description="0.2.0" line="40"/>
+        </docblock>
+        <argument line="47">
+          <name>$timestamp</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="63" package="Default">
         <name>sanitizeFileName</name>
         <docblock>
           <description>Returns a safe filename, for a given platform (OS), by replacing all
 dangerous characters with an underscore.</description>
           <long-description>
 </long-description>
-          <tag name="since" description="0.1.0" line="38"/>
-          <tag name="param" description="The source filename to be &quot;sanitized&quot;" type="string" variable="$dangerous_filename" line="38">
+          <tag name="since" description="0.1.0" line="52"/>
+          <tag name="param" description="The source filename to be &quot;sanitized&quot;" type="string" variable="$dangerous_filename" line="52">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The target OS" type="string" variable="$platform" line="38">
+          <tag name="param" description="The target OS" type="string" variable="$platform" line="52">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="string A safe version of the input filename" type="Boolean" line="38">
+          <tag name="return" description="string A safe version of the input filename" type="Boolean" line="52">
             <type by_reference="false">Boolean</type>
           </tag>
         </docblock>
-        <argument line="49">
+        <argument line="63">
           <name>$dangerous_filename</name>
           <default/>
           <type/>
         </argument>
-        <argument line="49">
+        <argument line="63">
           <name>$platform</name>
           <default>unix</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="75" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" line="89" package="Default">
         <name>buildArrayFromObjectsProperty</name>
         <docblock>
           <description>Returns an array made from property values extracted from each object in
 the array of objects.</description>
           <long-description>
 </long-description>
-          <tag name="since" description="0.1.0" line="64"/>
-          <tag name="param" description="The collection of objects holding the target property" type="array" variable="$objects" line="64">
+          <tag name="since" description="0.1.0" line="78"/>
+          <tag name="param" description="The collection of objects holding the target property" type="array" variable="$objects" line="78">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="param" description="Property name to collect data from" type="string" variable="$property" line="64">
+          <tag name="param" description="Property name to collect data from" type="string" variable="$property" line="78">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="array" line="64">
+          <tag name="return" description="" type="array" line="78">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="75">
+        <argument line="89">
           <name>$objects</name>
           <default/>
           <type>array</type>
         </argument>
-        <argument line="75">
+        <argument line="89">
           <name>$property</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="99" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" line="113" package="Default">
         <name>buildArrayFromObjectsMethod</name>
         <docblock>
           <description>Returns an array made from values extracted the array of obects using
 the given method.</description>
           <long-description>
 </long-description>
-          <tag name="since" description="0.1.0" line="88"/>
-          <tag name="param" description="The collection of objects holding the target method" type="array" variable="$objects" line="88">
+          <tag name="since" description="0.1.0" line="102"/>
+          <tag name="param" description="The collection of objects holding the target method" type="array" variable="$objects" line="102">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="param" description="Method name to ask for data" type="string" variable="$property" line="88">
+          <tag name="param" description="Method name to ask for data" type="string" variable="$property" line="102">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="array" line="88">
+          <tag name="return" description="" type="array" line="102">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="99">
+        <argument line="113">
           <name>$objects</name>
           <default/>
           <type>array</type>
         </argument>
-        <argument line="99">
+        <argument line="113">
           <name>$method</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="130" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" line="144" package="Default">
         <name>getPreferredLanguage</name>
         <docblock>
           <description>An implementation of PECL's http_negotiate_language as posted on
@@ -3449,23 +4045,23 @@ Accept-Language HTTP header. The qualifier is recognized and languages
 without qualifier are rated highest. The qualifier will be decreased by
 10% for partial matches (i.e. matching primary language).&lt;/p&gt;
 </long-description>
-          <tag name="since" description="0.1.0" line="112"/>
-          <tag name="param" description="Array with language-tag-strings that are available" type="array" variable="$available_languages" line="112">
+          <tag name="since" description="0.1.0" line="126"/>
+          <tag name="param" description="Array with language-tag-strings that are available" type="array" variable="$available_languages" line="126">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="param" description="The language to pick if none available" type="string" variable="$default_language" line="112">
+          <tag name="param" description="The language to pick if none available" type="string" variable="$default_language" line="126">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="Returns the negotiated language or the default language" type="string" line="112">
+          <tag name="return" description="Returns the negotiated language or the default language" type="string" line="126">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="130">
+        <argument line="144">
           <name>$available_languages</name>
           <default>array</default>
           <type>array</type>
         </argument>
-        <argument line="130">
+        <argument line="144">
           <name>$default_language</name>
           <default>en</default>
           <type/>
