@@ -35,6 +35,20 @@ namespace NoiseLabs\ToolKit;
  */
 class Helper
 {
+	const DATETIME_FORMAT = 'Y-m-d G:i:s';
+
+	/**
+	 * Returns current timestamp.
+	 *
+	 * @param string $timestamp
+	 *
+	 * @since 0.2.0
+	 */
+	public static function timestamp($timestamp = null)
+	{
+		return date(static::DATETIME_FORMAT, isset($timestamp) ? $timestamp : time());
+	}
+
 	/**
 	 * Returns a safe filename, for a given platform (OS), by replacing all
 	 * dangerous characters with an underscore.

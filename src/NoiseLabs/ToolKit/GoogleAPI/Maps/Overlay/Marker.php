@@ -30,14 +30,13 @@
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay;
 
 use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Geolocation;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
 
 class Marker extends BaseOverlay
 {
 	const OVERLAY_TYPE = 'marker';
-
-	protected $latitude;
-    protected $longitude;
+	protected $geolocation;
 
 	/**
 	 * Marker options.
@@ -47,7 +46,7 @@ class Marker extends BaseOverlay
 	 *  - icon: 	 An icon to show in place of the default icon.
 	 *  - title:	 Marker title shown as tooltip.
 	 *
-	 *  @since 0.2.0-BETA2
+	 *  @since 0.2.0
 	 */
 	protected function getDefaultOptions()
 	{
@@ -60,9 +59,8 @@ class Marker extends BaseOverlay
 
     public static function create($latitude, $longitude, array $options = array())
     {
-		$marker = new static();
-		$marker->setLatitude($latitude);
-		$marker->setLongitude($longitude);
+		$marker = new static(Geolocation::create($latitude, $longitude));
+
 		$marker->options->add($options);
 
 		return $marker;
@@ -70,22 +68,22 @@ class Marker extends BaseOverlay
 
 	public function setLatitude($latitude)
 	{
-		$this->latitude = (float) $latitude;
+		$this->geolocation->latitude = (float) $latitude;
 	}
 
 	public function getLatitude()
 	{
-		return $this->latitude;
+		return $this->geolocation->latitude;
 	}
 
 	public function setLongitude($longitude)
 	{
-		$this->longitude = (float) $longitude;
+		$this->geolocation->longitude = (float) $longitude;
 	}
 
 	public function getLongitude()
 	{
-		return $this->longitude;
+		return $this->geolocation->longitude;
 	}
 
 	public function buildJavascriptOutput($js_map_variable, $js_array_name, $js_array_index)

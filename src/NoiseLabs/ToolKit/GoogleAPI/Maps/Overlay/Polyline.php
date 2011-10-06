@@ -161,11 +161,11 @@ class Polyline extends BaseOverlay
 
   		$output .=
   		"\t// ".$js_class." ".$js_array_index."\n".
-  		"\tvar ".$js_array_name."[".$js_array_index."] = new google.maps.".$js_class."({\n".
+		"\t".$js_array_name."[".$js_array_index."] = new google.maps.".$js_class."({\n".
   		"\t\tpath: [";
   		foreach (array_keys($this->markers) as $k) {
   			$output .=
-  			"\n\t\t\tnew google.maps.LatLng(".$this->markers[$k]->getLatitude()."., ".$this->markers[$k]->getLongitude().".)";
+			"\n\t\t\tnew google.maps.LatLng(".$this->markers[$k]->getLatitude().", ".$this->markers[$k]->getLongitude().")";
   			if ($k+1 < count($this->markers)) {
   				$output .= ",";
   			}
@@ -177,9 +177,10 @@ class Polyline extends BaseOverlay
   		"\t\t],\n".
     	"\t\tstrokeColor: \"".$this->options->get('strokeColor')."\",\n".
     	"\t\tstrokeOpacity: ".$this->options->get('strokeOpacity').",\n".
-    	"\t\tstrokeWeight: ".$this->options->get('strokeWeight')."\n".
-  		"\t)};\n".
-  		"\t".$js_array_name."[".$js_array_index."].setMap(".$js_map_variable.");\n";
+		"\t\tstrokeWeight: ".$this->options->get('strokeWeight')."\n".
+		"\t});\n".
+		"\t".$js_array_name."[".$js_array_index."].setMap(".$js_map_variable.");\n".
+		"\n";
 
   		return $output;
 	}

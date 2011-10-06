@@ -24,7 +24,7 @@
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
  * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link http://www.noiselabs.org
- * @since 0.2.0-BETA2
+ * @since 0.2.0
  */
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay;
@@ -57,7 +57,7 @@ use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
  * above.
  *
  * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @since 0.2.0-BETA2
+ * @since 0.2.0
  */
 abstract class BaseOverlay
 {

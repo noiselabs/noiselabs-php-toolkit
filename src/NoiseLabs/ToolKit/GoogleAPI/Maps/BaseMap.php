@@ -55,14 +55,14 @@ abstract class BaseMap implements MapInterface
 	/**
 	 * Array holding all overlays added to this map instance.
 	 *
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public $overlays = array();
 
 	/**
 	 * Supported overlay types.
 	 *
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	protected $_overlay_types = array('marker', 'polyline');
 
@@ -167,7 +167,7 @@ abstract class BaseMap implements MapInterface
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function addOverlay($overlay)
 	{
@@ -177,7 +177,7 @@ abstract class BaseMap implements MapInterface
 	/**
 	 * @param $type
 	 *
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function getOverlays($type = null)
 	{
@@ -187,7 +187,7 @@ abstract class BaseMap implements MapInterface
 	/**
 	 * @param unknown_type $type
 	 *
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function hasOverlays($type = null)
 	{
@@ -195,7 +195,7 @@ abstract class BaseMap implements MapInterface
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function getOverlayTypes()
 	{
@@ -256,7 +256,7 @@ abstract class BaseMap implements MapInterface
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function hasFocus()
 	{
@@ -267,7 +267,7 @@ abstract class BaseMap implements MapInterface
 	 * @param $data Marker instance or array index
 	 * @param $zoom Zoom level to apply
 	 *
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function setFocus($data, $zoom = 16)
 	{
@@ -285,7 +285,7 @@ abstract class BaseMap implements MapInterface
 	}
 
 	/**
-	 * @since 0.2.0-BETA2
+	 * @since 0.2.0
 	 */
 	public function clearFocus()
 	{
