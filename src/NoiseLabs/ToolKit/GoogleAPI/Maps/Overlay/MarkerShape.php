@@ -59,14 +59,28 @@ class MarkerShape extends BaseOverlay
 	 *
 	 * @var array
 	 */
-	public $type;
+	public $coord = array();
+
 
 	/**
 	 * Describes the shape's type and can be circle, poly or rect.
 	 *
 	 * @var string
+	 *
+	 * @see http://code.google.com/intl/pt-PT/apis/maps/documentation/javascript/overlays.html#ComplexIcons
 	 */
-	public $coord;
+	public $type = 'poly';
+
+	public function buildJavascriptOutput($map_object, $array_prefix,
+	$array_sufix, $array_index)
+	{
+		$array_name = $array_prefix.$array_sufix;
+
+		return $array_name."[".$array_index."] = {\n".
+		"coord: [".implode(', ', $this->coord)."],\n".
+		"type: '".$this->type."'\n".
+		"};\n";
+	}
 }
 
 ?>

@@ -30,6 +30,8 @@
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay;
 
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\MarkerImage;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\MarkerShape;
 
 /**
  * Markers may define an icon to show in place of the default icon. Defining an
@@ -62,8 +64,8 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
 class Icon extends BaseOverlay
 {
 	public $image;
-	protected $shadow;
-	protected $shape;
+	public $shadow;
+	public $shape;
 
 	protected function getDefaultOptions()
 	{
@@ -72,23 +74,65 @@ class Icon extends BaseOverlay
 
 	/**
 	 *
-	 * @param unknown_type $image
+	 * @param string|MarkerImage $image
+	 * @param MarkerImage $shadow
+	 * @param MarkerShape $shape
 	 *
 	 * @since 0.2.0
 	 */
-	public static function create($image)
+	public static function create($image, MarkerImage $shadow = null,
+	MarkerShape $shape = null)
 	{
 		$icon = new static();
 
 		$icon->image = $image;
+		$icon->shadow = $shadow;
+		$icon->shape = $shape;
 
 		return $icon;
 	}
 
+	/**
+	 * @since 0.2.0
+	 */
+	public function hasShadow()
+	{
+		return isset($this->shadow);
+	}
+
+	/**
+	 * @since 0.2.0
+	 */
+	public function hasShape()
+	{
+		return isset($this->shape);
+	}
+
+
 	public function buildJavascriptOutput($map_object, $array_prefix,
 	$array_sufix, $array_index)
 	{
-		return '';
+		$output = '';
+		$icon_array = $array_prefix.'Icon'.$array_sufix;
+		$shadow_array = $array_prefix.'Shadow'.$array_sufix;
+		$shape_array = $array_prefix.'Shape'.$array_sufix;
+
+		if ($this->image instanceof MarkerImage) {
+			$output .= $this->image->buildJavascriptOutput($map_object, $array_prefix.'Icon', $array_sufix, $array_index);
+		}
+		else {
+			$output .= $icon_array."[".$array_index."] = '".$this->image."';\n";
+		}
+
+		if (isset($this->shadow)) {
+			$output .= $this->shadow->buildJavascriptOutput($map_object, $array_prefix.'Shadow', $array_sufix, $array_index);
+		}
+
+		if (isset($this->shape)) {
+			$output .= $this->shape->buildJavascriptOutput($map_object, $array_prefix.'Shape', $array_sufix, $array_index);
+		}
+
+		return $output;
 	}
 }
 

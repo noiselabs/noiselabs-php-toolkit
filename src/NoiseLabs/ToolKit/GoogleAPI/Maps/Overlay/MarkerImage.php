@@ -40,7 +40,33 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
  */
 class MarkerImage extends BaseOverlay
 {
+	public $url;
+	public $size = array(0, 0);
+	public $origin = array(0, 0);
+	public $anchor = array(0, 0);
 
+	/**
+	 *
+	 * @param unknown_type $map_object
+	 * @param unknown_type $array_prefix
+	 * @param unknown_type $array_sufix
+	 * @param unknown_type $array_index
+	 *
+	 * @since 0.2.0
+	 *
+	 * @see http://code.google.com/intl/pt-PT/apis/maps/documentation/javascript/overlays.html#ComplexIcons
+	 */
+	public function buildJavascriptOutput($map_object, $array_prefix,
+	$array_sufix, $array_index)
+	{
+		$array_name = $array_prefix.$array_sufix;
+
+		return $array_name."[".$array_index."] = new google.maps.MarkerImage('".$this->url."',\n".
+			"new google.maps.Size(".$this->size[0].", ".$this->size[1]."),\n".
+			"new google.maps.Point(".$this->origin[0].", ".$this->origin[1]."),\n".
+			"new google.maps.Point(".$this->anchor[0].", ".$this->anchor[1].")\n".
+			");\n";
+	}
 }
 
 ?>

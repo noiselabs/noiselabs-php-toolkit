@@ -38,7 +38,7 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollection;
 class MarkerCollection extends OverlayCollection
 {
 	public $prefix = 'markers';
-	public $dependents = array('InfoWindow');
+	public $dependents = array('InfoWindow', 'Icon', 'Shape', 'Shadow');
 
 	public function declareJavascriptVariables()
 	{

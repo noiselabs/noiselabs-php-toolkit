@@ -49,6 +49,23 @@ class Marker extends BaseOverlay
 	protected $icon;
 	protected $infowindow;
 
+	/**
+	 * Available options:
+	 *
+	 * 'animation':
+	 * You may animate markers so that they exhibit dynamic movement in a
+	 * variety of different circumstances. The way a marker is animated is
+	 * specified within the marker's animation property, of type
+	 * google.maps.Animation. The following Animation values are currently
+	 * supported:
+	 *  - DROP indicates that the marker should drop from the top of the map to
+	 * its final location when first placed on the map. Animation will cease
+	 * once the marker comes to rest and animation will revert to null. This
+	 * type of animation is usually specified during creation of the Marker.
+	 *  - BOUNCE indicates that the marker should "bounce" in place. A bouncing
+	 * marker will continue bouncing until its animation property is explicitly
+	 * set to null.
+	 */
 	protected function getDefaultOptions()
 	{
 		return array(
@@ -170,22 +187,42 @@ class Marker extends BaseOverlay
 	{
 		$output = '';
 		$js_class = ucfirst(self::OVERLAY_TYPE);
-		$marker_array = $array_prefix.$array_sufix;
-		$infowindow_array = $array_prefix.'InfoWindow'.$array_sufix;
+		$array = array(
+						'marker'		=> $array_prefix.$array_sufix,
+						'infowindow'	=> $array_prefix.'InfoWindow'.$array_sufix,
+						'icon'			=> $array_prefix.'Icon'.$array_sufix,
+						'shadow'		=> $array_prefix.'Shadow'.$array_sufix,
+						'shape'			=> $array_prefix.'Shape'.$array_sufix
+		);
 
-		$output .=
-		"\t// ".$js_class." ".$array_index."\n".
-		"\t".$marker_array."[".$array_index."] = new google.maps.".$js_class."({\n".
-		"		position: new google.maps.LatLng(".$this->getLatitude().", ".$this->getLongitude()."),\n".
-		"		map: ".$map_object;
+		$output .= "\t// ".$js_class." ".$array_index."\n";
 
 		if ($this->hasIcon()) {
-			$this->icon->buildJavascriptOutput($map_object, null, null, $array_index);
+			$output .= "\t".$this->icon->buildJavascriptOutput($map_object, $array_prefix, $array_sufix, $array_index);
 		}
+
+		$output .= "\t".$array['marker']."[".$array_index."] = new google.maps.".$js_class."({\n".
+		"		position: new google.maps.LatLng(".$this->getLatitude().", ".$this->getLongitude()."),\n";
+
+		if ($this->options->get('animation') != false) {
+			$output .= "\t\tanimation: google.maps.Animation.".strtoupper($this->options->get('animation')).",\n";
+		}
+
+		if ($this->hasIcon()) {
+			$output .= "\t\ticon: ".$array['icon']."[".$array_index."],\n";
+			if ($this->icon->hasShadow()) {
+				$output .= "\t\tshadow: '".$array['shadow']."[".$array_index."],\n";
+			}
+			if ($this->icon->hasShape()) {
+				$output .= "\t\tshape: '".$array['shape']."[".$array_index."],\n";
+			}
+		}
+
 		if ($this->options->has('title')) {
-			$output .= ",\n\t\ttitle: '".$this->options->get('title')."'";
+			$output .= "\t\ttitle: '".$this->options->get('title')."',\n";
 		}
-		$output .= "\n\t});\n";
+
+		$output .= "\t\tmap: ".$map_object."\n\t});\n";
 
 		// Info windows
 		if ($this->hasInfoWindow())
@@ -194,12 +231,12 @@ class Marker extends BaseOverlay
 				$map_object, $array_prefix.'InfoWindow', $array_sufix, $array_index
 			);
 
-			$output .= "\tgoogle.maps.event.addListener(".$marker_array."[".$array_index."], '".$this->options->get('uiEvent')."', function() {\n".
-			"\t\t".$marker_array."[".$array_index."].open(".$map_object.", markersArray[$array_index]);\n".
+			$output .= "\tgoogle.maps.event.addListener(".$array['marker']."[".$array_index."], '".$this->options->get('uiEvent')."', function() {\n".
+			"\t\t".$array['marker']."[".$array_index."].open(".$map_object.", markersArray[$array_index]);\n".
 			"\t});\n";
 
 		}
-		$output .= "\tbounds.extend(".$marker_array."[".$array_index."].getPosition());\n";
+		$output .= "\tbounds.extend(".$array['marker']."[".$array_index."].getPosition());\n";
 
 		return $output;
 	}
