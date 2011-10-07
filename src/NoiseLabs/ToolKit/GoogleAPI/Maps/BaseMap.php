@@ -18,29 +18,27 @@
  *
  * Copyright (C) 2011 Vítor Brandão
  *
- * @category NoiseLabs
- * @package GoogleAPI
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
- * @link http://www.noiselabs.org
- * @since 0.1.0
+ * @category 	NoiseLabs
+ * @package 	GoogleAPI
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
+ * @link 		http://www.noiselabs.org
+ * @since 		0.1.0
  */
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
 use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\MapInterface;
-use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollectionFactory;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\OverlayInterface;
 
 /**
  * GoogleMaps base class (abstract).
  *
  * Inspired by a GoogleMaps implementation made by tirnanog06.
  * @see https://github.com/kriswallsmith/GoogleBundle
- *
- * TODO: Please implement an addOverlay method and a protected $overlays
- * variable.
  */
 abstract class BaseMap implements MapInterface
 {
@@ -53,24 +51,19 @@ abstract class BaseMap implements MapInterface
 	protected $id;
 
 	/**
-	 * Array holding all overlays added to this map instance.
+	 * Array holding all overlays added to this map instance. Each first order
+	 * array element is of type OverlayCollection.
 	 *
 	 * @since 0.2.0
 	 */
-	public $overlays = array();
+	protected $overlays = array();
 
 	/**
 	 * Supported overlay types.
 	 *
 	 * @since 0.2.0
 	 */
-	protected $_overlay_types = array('marker', 'polyline');
-
-	/**
-	 * A collection of map markers. Each element of the array should be an
-	 * object of type Marker.
-	 */
-	protected $markers = array();
+	protected $_overlay_types = array('InfoWindow', 'Marker', 'Polyline');
 
 	/**
 	 * A set of parameters to append to configure how the Maps JavaScript API is
@@ -95,6 +88,8 @@ abstract class BaseMap implements MapInterface
 	 */
 	public function __construct($id = 'map', array $options = array(), array $parameters = array())
 	{
+		var_dump(OverlayCollectionFactory::create('Marker')); die;
+
 		$this->id = $id;
 
 		// option defaults
@@ -156,45 +151,78 @@ abstract class BaseMap implements MapInterface
 		return $options;
 	}
 
+	/**
+	 * Sets the map ID.
+	 *
+	 * @param string $id
+	 */
 	public function setId($id)
 	{
 		$this->id = (string) $id;
 	}
 
+	/**
+	 * @return The map ID.
+	 */
 	public function getId()
 	{
 		return $this->id;
 	}
 
 	/**
+	 * A method to add overlays (Markers, Polylines, etc.) to this map object.
+	 *
+	 * For each overlay type an OverlayCollection object is created to hold
+	 * OverlayInterface objects.
+	 *
+	 * @param 	OverlayInterface $overlay
+	 * @throws	InvalidArgumentException if the overlay type is not supported.
+	 *
 	 * @since 0.2.0
 	 */
-	public function addOverlay($overlay)
+	public function addOverlay(OverlayInterface $overlay)
 	{
-		$this->overlays[strtolower($overlay::OVERLAY_TYPE)][] = $overlay;
+		$overlay_type = $overlay::OVERLAY_TYPE;
+
+		if (!isset($this->overlays[$overlay_type]))
+		{
+			if (!in_array($overlay_type, $this->_overlay_types))
+			{
+				throw new \InvalidArgumentException("Overlay type '".
+				$overlay_type."' is not supported. Supported types are: ".
+				implode(', ', $this->_overlay_types).".");
+			}
+
+			$collection = $overlay_type.'Collection';
+			$this->overlays[$overlay_type] = $collection::create();
+		}
+
+		$this->overlays[$overlay_type]->append($overlay);
 	}
 
 	/**
-	 * @param $type
+	 * @param string $type
 	 *
 	 * @since 0.2.0
 	 */
 	public function getOverlays($type = null)
 	{
-		return (isset($type)) ? $this->overlays[strtolower($type)] : $this->overlays;
+		return (isset($type)) ? $this->overlays[$type] : $this->overlays;
 	}
 
 	/**
-	 * @param unknown_type $type
+	 * @param string $type
 	 *
 	 * @since 0.2.0
 	 */
 	public function hasOverlays($type = null)
 	{
-		return isset($type) ? !empty($this->overlays[strtolower($type)]) : !empty($this->overlays);
+		return isset($type) ? !empty($this->overlays[$type]) : !empty($this->overlays);
 	}
 
 	/**
+	 * @return An array containing all overlay types added to the map.
+	 *
 	 * @since 0.2.0
 	 */
 	public function getOverlayTypes()
@@ -202,6 +230,12 @@ abstract class BaseMap implements MapInterface
 		return array_keys($this->overlays);
 	}
 
+	/**
+	 * @todo Please check if this method is still required after the
+	 * introduction of the OverlayCollection object.
+	 *
+	 * @since 0.2.0
+	 */
 	public function getOverlayClasses()
 	{
 		$classes = array();
@@ -211,14 +245,6 @@ abstract class BaseMap implements MapInterface
 		}
 
 		return $classes;
-	}
-
-	public function hasMarkers()
-	{
-		if (!empty($this->markers)) {
-			return true;
-		}
-		return false;
 	}
 
 	/**

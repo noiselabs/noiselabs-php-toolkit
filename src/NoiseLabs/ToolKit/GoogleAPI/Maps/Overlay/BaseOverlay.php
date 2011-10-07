@@ -59,7 +59,7 @@ use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
  * @author Vítor Brandão <noisebleed@noiselabs.org>
  * @since 0.2.0
  */
-abstract class BaseOverlay
+abstract class BaseOverlay implements OverlayInterface
 {
 	public $options;
 

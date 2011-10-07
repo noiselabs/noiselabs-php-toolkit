@@ -18,27 +18,22 @@
  *
  * Copyright (C) 2011 Vítor Brandão
  *
- * @category NoiseLabs
- * @package GoogleAPI
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
- * @link http://www.noiselabs.org
- * @since 0.1.0
+ * @category 	NoiseLabs
+ * @package 	GoogleAPI
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
+ * @link 		http://www.noiselabs.org
+ * @since 		0.2.0
  */
 
-namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
+namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection;
 
-use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker;
-use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\OverlayInterface;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollection;
 
-interface MapInterface
+class PolylineCollection extends OverlayCollection
 {
-	public function setId($id);
-	public function getId();
-	public function addOverlay(OverlayInterface $overlay);
-	public function hasOverlays($type = null);
-	public function render();
+
 }
 
 ?>
