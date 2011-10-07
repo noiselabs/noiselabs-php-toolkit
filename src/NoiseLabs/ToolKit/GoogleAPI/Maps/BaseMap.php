@@ -88,8 +88,6 @@ abstract class BaseMap implements MapInterface
 	 */
 	public function __construct($id = 'map', array $options = array(), array $parameters = array())
 	{
-		var_dump(OverlayCollectionFactory::create('Marker')); die;
-
 		$this->id = $id;
 
 		// option defaults
@@ -184,8 +182,11 @@ abstract class BaseMap implements MapInterface
 	{
 		$overlay_type = $overlay::OVERLAY_TYPE;
 
+		 // create a new *Collection object to hold overlay objects if it
+		 // doesn't exist yet.
 		if (!isset($this->overlays[$overlay_type]))
 		{
+			// only overlay types defined in $this->_overlay_types are allowed
 			if (!in_array($overlay_type, $this->_overlay_types))
 			{
 				throw new \InvalidArgumentException("Overlay type '".
@@ -193,8 +194,7 @@ abstract class BaseMap implements MapInterface
 				implode(', ', $this->_overlay_types).".");
 			}
 
-			$collection = $overlay_type.'Collection';
-			$this->overlays[$overlay_type] = $collection::create();
+			$this->overlays[$overlay_type] = OverlayCollectionFactory::create($overlay_type);
 		}
 
 		$this->overlays[$overlay_type]->append($overlay);

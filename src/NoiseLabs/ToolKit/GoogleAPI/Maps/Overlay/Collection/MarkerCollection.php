@@ -31,9 +31,25 @@ namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection;
 
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollection;
 
+/**
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @since 		0.2.0
+ */
 class MarkerCollection extends OverlayCollection
 {
+	public $prefix = 'markers';
+	public $dependents = array('InfoWindow');
 
+	public function declareJavascriptVariables()
+	{
+		$output = "\tvar ".$this->prefix.$this->sufix." = [];\n";
+
+		foreach ($this->dependents as $var) {
+			$output .= "\tvar ".$this->prefix.$var.$this->sufix." = [];\n";
+		}
+
+		return $output;
+	}
 }
 
 ?>

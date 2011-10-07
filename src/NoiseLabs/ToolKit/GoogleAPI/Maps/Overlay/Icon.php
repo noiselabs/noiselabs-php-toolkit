@@ -85,7 +85,8 @@ class Icon extends BaseOverlay
 		return $icon;
 	}
 
-	public function buildJavascriptOutput($js_map_variable, $js_array_name, $js_array_index)
+	public function buildJavascriptOutput($map_object, $array_prefix,
+	$array_sufix, $array_index)
 	{
 		return '';
 	}

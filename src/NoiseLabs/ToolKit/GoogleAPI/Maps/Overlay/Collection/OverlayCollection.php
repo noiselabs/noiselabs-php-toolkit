@@ -29,8 +29,22 @@
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection;
 
-class OverlayCollection extends \ArrayObject
+/**
+ * Base (abstract) class for ${overlay_type} collections.
+ *
+ * The *Collection family is used to provide some overview information about
+ * the kind of objects it holds. This is required because when echoing all
+ * the javascript stuff each overlay type is stored in a array.
+ *
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @since 		0.2.0
+ */
+abstract class OverlayCollection extends \ArrayObject
 {
+	public $prefix = '';
+	public $sufix = 'Array';
+
+	abstract public function declareJavascriptVariables();
 }
 
 ?>

@@ -18,13 +18,13 @@
  *
  * Copyright (C) 2011 Vítor Brandão
  *
- * @category NoiseLabs
- * @package GoogleAPI
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
- * @link http://www.noiselabs.org
- * @since 0.1.0
+ * @category 	NoiseLabs
+ * @package 	GoogleAPI
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
+ * @link 		http://www.noiselabs.org
+ * @since 		0.1.0
  */
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay;
@@ -118,55 +118,69 @@ class Marker extends BaseOverlay
 		$this->infowindow = $infowindow;
 	}
 
+	/**
+	 * @since 0.2.0
+	 */
 	public function getInfoWindow()
 	{
 		return $this->infowindow;
 	}
 
+	/**
+	 * Saves the latitude.
+	 *
+	 * @param mixed $latitude
+	 *
+	 * @since 0.1.0
+	 */
 	public function setLatitude($latitude)
 	{
 		$this->geolocation->latitude = (float) $latitude;
 	}
 
+	/**
+	 * @since 0.1.0
+	 */
 	public function getLatitude()
 	{
 		return $this->geolocation->latitude;
 	}
 
+	/**
+	 *
+	 * @param unknown_type $longitude
+	 *
+	 * @since 0.1.0
+	 */
 	public function setLongitude($longitude)
 	{
 		$this->geolocation->longitude = (float) $longitude;
 	}
 
+	/**
+	 * @since 0.1.0
+	 */
 	public function getLongitude()
 	{
 		return $this->geolocation->longitude;
 	}
 
-	public static function declareJavascriptVariables()
-	{
-		return
-		"\tvar ".lcfirst(static::OVERLAY_TYPE)."sArray = [];\n".
-		"\tvar ".lcfirst(static::OVERLAY_TYPE)."s".InfoWindow::OVERLAY_TYPE."Array = [];\n";
-	}
-
-	public function buildJavascriptOutput($js_map_variable, $js_array_name, $js_array_index)
+	public function buildJavascriptOutput($map_object, $array_prefix,
+	$array_sufix, $array_index)
 	{
 		$output = '';
 		$js_class = ucfirst(self::OVERLAY_TYPE);
-
-		if (!isset($js_array_name)) {
-			$js_array_name = lcfirst(static::OVERLAY_TYPE)."sArray";
-		}
+		$marker_array = $array_prefix.$array_sufix;
+		$infowindow_array = $array_prefix.'InfoWindow'.$array_sufix;
 
 		$output .=
-		"\t// ".$js_class." ".$js_array_index."\n".
-		"\t".$js_array_name."[".$js_array_index."] = new google.maps.".$js_class."({\n".
+		"\t// ".$js_class." ".$array_index."\n".
+		"\t".$marker_array."[".$array_index."] = new google.maps.".$js_class."({\n".
 		"		position: new google.maps.LatLng(".$this->getLatitude().", ".$this->getLongitude()."),\n".
-		"		map: ".$js_map_variable;
+		"		map: ".$map_object;
 
 		if ($this->hasIcon()) {
-			$this->icon->buildJavascriptOutput();
+			$this->icon->buildJavascriptOutput($map_object, null, null, $array_index);
 		}
 		if ($this->options->has('title')) {
 			$output .= ",\n\t\ttitle: '".$this->options->get('title')."'";
@@ -177,16 +191,15 @@ class Marker extends BaseOverlay
 		if ($this->hasInfoWindow())
 		{
 			$output .= $this->infowindow->buildJavascriptOutput(
-				$js_map_variable,
-				lcfirst(static::OVERLAY_TYPE)."s".InfoWindow::OVERLAY_TYPE."Array",
-				$js_array_index);
+				$map_object, $array_prefix.'InfoWindow', $array_sufix, $array_index
+			);
 
-			$output .= "\tgoogle.maps.event.addListener(".lcfirst(static::OVERLAY_TYPE)."sArray[$js_array_index], '".$this->options->get('uiEvent')."', function() {\n".
-			"\t\t".$js_array_name."[".$js_array_index."].open(".$js_map_variable.", markersArray[$js_array_index]);\n".
+			$output .= "\tgoogle.maps.event.addListener(".$marker_array."[".$array_index."], '".$this->options->get('uiEvent')."', function() {\n".
+			"\t\t".$marker_array."[".$array_index."].open(".$map_object.", markersArray[$array_index]);\n".
 			"\t});\n";
 
 		}
-		$output .= "\tbounds.extend(".$js_array_name."[".$js_array_index."].getPosition());\n";
+		$output .= "\tbounds.extend(".$marker_array."[".$array_index."].getPosition());\n";
 
 		return $output;
 	}

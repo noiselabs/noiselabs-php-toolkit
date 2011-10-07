@@ -154,14 +154,16 @@ class Polyline extends BaseOverlay
 		return $this->markers;
 	}
 
-	public function buildJavascriptOutput($js_map_variable, $js_array_name, $js_array_index)
+	public function buildJavascriptOutput($map_object, $array_prefix,
+	$array_sufix, $array_index)
 	{
 		$output = '';
 		$js_class = ucfirst(self::OVERLAY_TYPE);
+		$array_name = $array_prefix.$array_sufix;
 
   		$output .=
-  		"\t// ".$js_class." ".$js_array_index."\n".
-		"\t".$js_array_name."[".$js_array_index."] = new google.maps.".$js_class."({\n".
+		"\t// ".$js_class." ".$array_index."\n".
+		"\t".$array_name."[".$array_index."] = new google.maps.".$js_class."({\n".
   		"\t\tpath: [";
   		foreach (array_keys($this->markers) as $k) {
   			$output .=
@@ -179,7 +181,7 @@ class Polyline extends BaseOverlay
     	"\t\tstrokeOpacity: ".$this->options->get('strokeOpacity').",\n".
 		"\t\tstrokeWeight: ".$this->options->get('strokeWeight')."\n".
 		"\t});\n".
-		"\t".$js_array_name."[".$js_array_index."].setMap(".$js_map_variable.");\n".
+		"\t".$array_name."[".$array_index."].setMap(".$map_object.");\n".
 		"\n";
 
   		return $output;

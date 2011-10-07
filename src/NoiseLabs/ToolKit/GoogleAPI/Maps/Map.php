@@ -55,7 +55,7 @@ class Map extends BaseMap
 	}
 
 	/**
-	 * Include the Maps API JavaScript using a script tag.
+	 * Include the Maps JavaScript API using a script tag.
 	 *
 	 * This function should be called in between the html <head></head> tags.
 	 */
@@ -96,19 +96,22 @@ class Map extends BaseMap
 
 	/**
 	 * The method called to output the HTML and JavaScript code used to create
-	 * a GoogleMap. Must be called between <body> tags.
+	 * a GoogleMap. Should be called in between HTML <body></body> tags.
 	 */
 	public function render()
 	{
 		// Create a div element to hold the Map.
-		echo "<div id=\"".$this->getId()."\" style=\"width:".$this->options->get('width')."; height:".$this->options->get('height')."\"></div>\n";
+		echo "<div id=\"".$this->getId()."\" style=\"width:".
+		$this->options->get('width')."; height:".$this->options->get('height').
+		";\"></div>\n";
 
 		echo
 		"<script type=\"text/javascript\">\n".
 		"function show_googlemap_".$this->getId()."() {\n";
 
-		foreach ($this->getOverlayClasses() as $class) {
-			echo $class::declareJavascriptVariables();
+		// declare all required overlay variables
+		foreach (array_keys($this->overlays) as $collection) {
+			echo $this->overlays[$collection]->declareJavascriptVariables();
 		}
 
 		echo
@@ -128,9 +131,13 @@ class Map extends BaseMap
 		"	var map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
 		"\n";
 
-		foreach ($this->getOverlayTypes() as $overlay_type) {
-			foreach (array_keys($this->overlays[$overlay_type]) as $k) {
-				echo $this->overlays[$overlay_type][$k]->buildJavascriptOutput('map', $overlay_type.'sArray', $k);
+		foreach (array_keys($this->overlays) as $collection)
+		{
+			$iterator = $this->overlays[$collection]->getIterator();
+
+			while ($iterator->valid()) {
+				echo $iterator->current()->buildJavascriptOutput('map', $this->overlays[$collection]->prefix, $this->overlays[$collection]->sufix, $iterator->key());
+				$iterator->next();
 			}
 			echo "\n";
 		}

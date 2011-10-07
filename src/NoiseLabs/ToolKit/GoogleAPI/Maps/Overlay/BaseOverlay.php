@@ -70,13 +70,8 @@ abstract class BaseOverlay implements OverlayInterface
 
 	abstract protected function getDefaultOptions();
 
-	abstract public function buildJavascriptOutput($js_map_variable,
-	$js_array_name, $js_array_index);
-
-	public static function declareJavascriptVariables()
-	{
-		return "\tvar ".lcfirst(static::OVERLAY_TYPE)."sArray = [];\n";
-	}
+	abstract public function buildJavascriptOutput($map_object, $array_prefix,
+	$array_sufix, $array_index);
 }
 
 ?>

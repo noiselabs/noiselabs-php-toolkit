@@ -31,9 +31,18 @@ namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection;
 
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollection;
 
+/**
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @since 		0.2.0
+ */
 class PolylineCollection extends OverlayCollection
 {
+	public $prefix = 'polylines';
 
+	public function declareJavascriptVariables()
+	{
+		return "\tvar ".$this->prefix.$this->sufix." = [];\n";
+	}
 }
 
 ?>
