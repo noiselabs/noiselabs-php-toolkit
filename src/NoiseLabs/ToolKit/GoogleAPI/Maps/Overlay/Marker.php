@@ -182,6 +182,14 @@ class Marker extends BaseOverlay
 		return $this->geolocation->longitude;
 	}
 
+	/**
+	 * @since 0.2.0
+	 */
+	public function getGeolocation()
+	{
+		return $this->geolocation;
+	}
+
 	public function buildJavascriptOutput($map_object, $array_prefix,
 	$array_sufix, $array_index)
 	{
@@ -202,7 +210,7 @@ class Marker extends BaseOverlay
 		}
 
 		$output .= "\t".$array['marker']."[".$array_index."] = new google.maps.".$js_class."({\n".
-		"		position: new google.maps.LatLng(".$this->getLatitude().", ".$this->getLongitude()."),\n";
+		"\t\tposition: new google.maps.LatLng(".$this->getLatitude().", ".$this->getLongitude()."),\n";
 
 		if ($this->options->get('animation') != false) {
 			$output .= "\t\tanimation: google.maps.Animation.".strtoupper($this->options->get('animation')).",\n";
@@ -232,7 +240,7 @@ class Marker extends BaseOverlay
 			);
 
 			$output .= "\tgoogle.maps.event.addListener(".$array['marker']."[".$array_index."], '".$this->options->get('uiEvent')."', function() {\n".
-			"\t\t".$array['marker']."[".$array_index."].open(".$map_object.", markersArray[$array_index]);\n".
+			"\t\t".$array['infowindow']."[".$array_index."].open(".$map_object.", markersArray[$array_index]);\n".
 			"\t});\n";
 
 		}

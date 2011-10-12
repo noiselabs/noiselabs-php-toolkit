@@ -181,8 +181,7 @@ class Polyline extends BaseOverlay
     	"\t\tstrokeOpacity: ".$this->options->get('strokeOpacity').",\n".
 		"\t\tstrokeWeight: ".$this->options->get('strokeWeight')."\n".
 		"\t});\n".
-		"\t".$array_name."[".$array_index."].setMap(".$map_object.");\n".
-		"\n";
+		"\t".$array_name."[".$array_index."].setMap(".$map_object.");\n";
 
   		return $output;
 	}

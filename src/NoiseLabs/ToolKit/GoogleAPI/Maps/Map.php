@@ -101,7 +101,8 @@ class Map extends BaseMap
 	public function render()
 	{
 		// Create a div element to hold the Map.
-		echo "<div id=\"".$this->getId()."\" style=\"width:".
+		echo
+		"<div id=\"".$this->getId()."\" style=\"width:".
 		$this->options->get('width')."; height:".$this->options->get('height').
 		";\"></div>\n";
 
@@ -117,18 +118,13 @@ class Map extends BaseMap
 		echo
 		"\tvar bounds = new google.maps.LatLngBounds();\n";
 
-		echo "\n";
-
-		// Create the map object
-		$kc = $this->options->get('center');
-
 		echo
-		"	var mapOptions = {\n".
-		"		zoom: ".$this->options->get('zoom').",\n".
-		"		center: new google.maps.LatLng(0, 0),\n".
-		"		mapTypeId: google.maps.MapTypeId.".strtoupper($this->options->get('type'))."\n".
-		"	};\n".
-		"	var map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
+		"\tvar mapOptions = {\n".
+		"\t\tzoom: ".$this->options->get('zoom').",\n".
+		"\t\tcenter: new google.maps.LatLng(0, 0),\n".
+		"\t\tmapTypeId: google.maps.MapTypeId.".strtoupper($this->options->get('type'))."\n".
+		"\t};\n".
+		"\tvar map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
 		"\n";
 
 		foreach (array_keys($this->overlays) as $collection)
@@ -138,20 +134,24 @@ class Map extends BaseMap
 			while ($iterator->valid()) {
 				echo $iterator->current()->buildJavascriptOutput('map', $this->overlays[$collection]->prefix, $this->overlays[$collection]->sufix, $iterator->key());
 				$iterator->next();
+				echo "\n";
 			}
-			echo "\n";
 		}
 
-		if (!$this->hasFocus())
-		{
+		if ($this->hasFocus()) {
+			echo
+			"\tmap.setCenter(new google.maps.LatLng(".$this->options->get('focus')->latitude.", ".$this->options->get('focus')->longitude."));\n";
+		}
+		else {
 			// Auto-center and auto-zoom
 			echo
-			"	map.fitBounds(bounds);\n".
-			"	map.setCenter(bounds.getCenter());\n";
+			"\tmap.fitBounds(bounds);\n".
+			"\tmap.setCenter(bounds.getCenter());\n";
 		}
 
 		echo
 		"}\n".
+		"\n".
 		"window.onload = show_googlemap_".$this->getId().";\n".
 		"</script>\n";
 	}

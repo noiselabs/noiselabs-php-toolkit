@@ -252,28 +252,19 @@ abstract class BaseMap implements MapInterface
 	 */
 	public function hasFocus()
 	{
-		return $this->options->get('focus');
+		return (false !== $this->options->get('focus'));
 	}
 
 	/**
-	 * @param $data Marker instance or array index
+	 * @param $geolocation Geolocation object to retrieve GPS coordinate from.
 	 * @param $zoom Zoom level to apply
 	 *
 	 * @since 0.2.0
 	 */
-	public function setFocus($data, $zoom = 16)
+	public function setFocus(Geolocation $geolocation, $zoom = 16)
 	{
-		if (is_int($data)) {
-			$this->options->set('center', $data);
-		}
-		elseif ($data instanceof Marker) {
-			if (($index =  array_search($data, $this->markers)) != false) {
-				$this->options->set('center', $index);
-			}
-		}
-
 		$this->options->set('zoom', $zoom);
-		$this->options->set('focus', true);
+		$this->options->set('focus', $geolocation);
 	}
 
 	/**
