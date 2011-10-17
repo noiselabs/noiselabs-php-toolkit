@@ -86,7 +86,7 @@ class Map extends BaseMap
 
 		// include defined parameters like 'sensor' or 'language' (if available)
 		foreach ($parameters as $key => $value) {
-			$html .= $key.'='.$value.'&';
+			$html .= '&'.$key.'='.$value;
 		}
 		$html = rtrim($html, '&'); // remove the last ampersand ('orphan')
 		$html .= '"></script>';

@@ -145,6 +145,7 @@ abstract class BaseMap implements MapInterface
 		 * Focus map (center and zoom) on a given marker? Value is array index.
 		 */
 		$options['focus'] = false;
+		$options['sensor'] = 'false';
 
 		return $options;
 	}
