@@ -136,7 +136,8 @@ class Process implements ProcessInterface
 			throw new \InvalidArgumentException('arguments must be a string');
 		}
 
-		$this->command = reset(explode(' ', $this->command));
+		$cmd = explode(' ', $this->command);
+		$this->command = reset($cmd);
 
 		return $this->addArguments($args);
 	}
