@@ -6,3 +6,4 @@ src/NoiseLabs/ToolKit/ToolKitBundle.php
 .buildpath
 .project
 .settings/
+doc/docblox/*

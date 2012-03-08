@@ -24,64 +24,65 @@
  * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
  * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link http://www.noiselabs.org
- * @since 0.1.0
+ * @since 0.2.0
  */
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
-use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
+use NoiseLabs\ToolKit\Helper;
 
-class Marker
+/**
+ * The core class for each Overlay element containing GPS coordinates (latitude
+ * and longitude) to identify a specific position.
+ *
+ * @author Vítor Brandão <noisebleed@noiselabs.org>
+ * @since 0.2.0
+ */
+class Geolocation
 {
-	protected $latitude;
-    protected $longitude;
+	public $latitude;
+	public $longitude;
+	public $altitude;
+	public $speed;
+	public $timestamp;
 
-    /**
-	 * Marker options.
+	/**
+	 * @param array $properties
 	 *
-	 * Known keys:
-	 *  - icon: 	An icon to show in place of the default icon
-	 *  - title:
-	 *
-	 * @var \NoiseLabs\ToolKit\ParameterBag
+	 * @since 0.2.0
 	 */
-	public $options;
-
-	public function __construct()
+	public function __construct(array $properties = array())
 	{
-		$this->options = new ParameterBag();
+ 		foreach ($properties as $k => $v) {
+  			$this->$k = $v;
+  		}
 	}
 
-    public static function create($latitude, $longitude, array $options = array())
-    {
-		$marker = new static();
-		$marker->setLatitude($latitude);
-		$marker->setLongitude($longitude);
-		$marker->options->add($options);
-
-		return $marker;
-	}
-
-	public function setLatitude($latitude)
+	/**
+	 *
+	 * @param float $latitude
+	 * @param float $longitude
+	 * @param float $altitude
+	 * @param float $speed
+	 * @param string $timestamp
+	 */
+	public static function create($latitude, $longitude, $altitude = null,
+	$speed = null, $timestamp = null)
 	{
-		$this->latitude = (float) $latitude;
-	}
+		if (!isset($timestamp)) {
+			$timestamp = Helper::timestamp();
+		}
 
-	public function getLatitude()
-	{
-		return $this->latitude;
-	}
+		$geolocation = new static(array(
+						'latitude'	=> $latitude,
+						'longitude'	=> $longitude,
+						'altitude'	=> $altitude,
+						'speed'		=> $speed,
+						'timestamp'	=> $timestamp
+		));
 
-	public function setLongitude($longitude)
-	{
-		$this->longitude = (float) $longitude;
-	}
-
-	public function getLongitude()
-	{
-		return $this->longitude;
+		return $geolocation;
 	}
 }
 
 ?>
-

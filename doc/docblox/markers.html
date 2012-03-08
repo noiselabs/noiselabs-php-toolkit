@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
             $(document).ready(function() {
                 $(".filetree").treeview({
                     collapsed: true,
@@ -13,10 +13,17 @@
 
                 $(".tabs").tabs();
             });
-        </script></head><body><div xmlns="" id="content">
+        </script></head><body><script xmlns="" type="text/javascript">
+        $(document).ready(function() {
+            $("#marker-accordion").accordion({
+                collapsible: true,
+                autoHeight:  false
+            });
+        });
+    </script><div xmlns="" id="content">
 <h1>Markers (TODO / FIXME)</h1>
-<div id="accordion">
-<h3><a href="#">ConfigParser/ConfigParser.php<small>2</small></a></h3>
+<div id="marker-accordion">
+<h3><a href="#">NoiseLabs/ToolKit/GoogleAPI/Maps/Map.php<small>1</small></a></h3>
 <div><table>
 <tr>
 <th>Type</th>
@@ -25,7 +32,49 @@
 </tr>
 <tr>
 <td>todo</td>
-<td>304</td>
+<td>230</td>
+<td>Please check if this method is still required after the
+introduction of the OverlayCollection object.</td>
+</tr>
+</table></div>
+<h3><a href="#">NoiseLabs/ToolKit/GoogleAPI/Maps/BaseMap.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>230</td>
+<td>Please check if this method is still required after the
+introduction of the OverlayCollection object.</td>
+</tr>
+</table></div>
+<h3><a href="#">NoiseLabs/ToolKit/GoogleAPI/Maps/StaticMap.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>230</td>
+<td>Please check if this method is still required after the
+introduction of the OverlayCollection object.</td>
+</tr>
+</table></div>
+<h3><a href="#">NoiseLabs/ToolKit/ConfigParser/ConfigParser.php<small>3</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>310</td>
 <td>write default section first</td>
 </tr>
 <tr>
@@ -33,8 +82,14 @@
 <td>255</td>
 <td>Option and value must be strings; if not, TypeException is raised.</td>
 </tr>
+<tr>
+<td>todo</td>
+<td>37</td>
+<td>: Describe the interpolation mecanism.
+Defaults to FALSE.</td>
+</tr>
 </table></div>
-<h3><a href="#">ConfigParser/BaseConfigParser.php<small>1</small></a></h3>
+<h3><a href="#">NoiseLabs/ToolKit/ConfigParser/BaseConfigParser.php<small>1</small></a></h3>
 <div><table>
 <tr>
 <th>Type</th>
@@ -44,7 +99,22 @@
 <tr>
 <td>todo</td>
 <td>37</td>
-<td></td>
+<td>: Describe the interpolation mecanism.
+Defaults to FALSE.</td>
+</tr>
+</table></div>
+<h3><a href="#">NoiseLabs/ToolKit/ConfigParser/NoSectionsConfigParser.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>37</td>
+<td>: Describe the interpolation mecanism.
+Defaults to FALSE.</td>
 </tr>
 </table></div>
 </div>

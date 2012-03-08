@@ -18,20 +18,21 @@
  *
  * Copyright (C) 2011 Vítor Brandão
  *
- * @category NoiseLabs
- * @package GoogleAPI
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
- * @link http://www.noiselabs.org
- * @since 0.1.0
+ * @category 	NoiseLabs
+ * @package 	GoogleAPI
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
+ * @link 		http://www.noiselabs.org
+ * @since 		0.1.0
  */
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
 use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\MapInterface;
-use NoiseLabs\ToolKit\GoogleAPI\Maps\Marker;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollectionFactory;
+use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\OverlayInterface;
 
 /**
  * GoogleMaps base class (abstract).
@@ -50,10 +51,19 @@ abstract class BaseMap implements MapInterface
 	protected $id;
 
 	/**
-	 * A collection of map markers. Each element of the array should be an
-	 * object of type Marker.
+	 * Array holding all overlays added to this map instance. Each first order
+	 * array element is of type OverlayCollection.
+	 *
+	 * @since 0.2.0
 	 */
-	protected $markers = array();
+	protected $overlays = array();
+
+	/**
+	 * Supported overlay types.
+	 *
+	 * @since 0.2.0
+	 */
+	protected $_overlay_types = array('InfoWindow', 'Marker', 'Polyline');
 
 	/**
 	 * A set of parameters to append to configure how the Maps JavaScript API is
@@ -111,6 +121,7 @@ abstract class BaseMap implements MapInterface
 		 * resolution.
 		 */
 		$options['zoom'] = 12;
+		$options['default_zoom'] = 12;
 
 		/**
 		 * Map type. The following types are supported:
@@ -130,55 +141,140 @@ abstract class BaseMap implements MapInterface
 
 		$options['center'] = 0; // center map on desidered Marker (array index)
 
+		/**
+		 * Focus map (center and zoom) on a given marker? Value is array index.
+		 */
+		$options['focus'] = false;
+		$options['sensor'] = 'false';
+
 		return $options;
 	}
 
+	/**
+	 * Sets the map ID.
+	 *
+	 * @param string $id
+	 */
 	public function setId($id)
 	{
 		$this->id = (string) $id;
 	}
 
+	/**
+	 * @return The map ID.
+	 */
 	public function getId()
 	{
 		return $this->id;
 	}
 
-	public function hasMarkers()
+	/**
+	 * A method to add overlays (Markers, Polylines, etc.) to this map object.
+	 *
+	 * For each overlay type an OverlayCollection object is created to hold
+	 * OverlayInterface objects.
+	 *
+	 * @param 	OverlayInterface $overlay
+	 * @throws	InvalidArgumentException if the overlay type is not supported.
+	 *
+	 * @since 0.2.0
+	 */
+	public function addOverlay(OverlayInterface $overlay)
 	{
-		if (!empty($this->markers)) {
-			return true;
+		$overlay_type = $overlay::OVERLAY_TYPE;
+
+		 // create a new *Collection object to hold overlay objects if it
+		 // doesn't exist yet.
+		if (!isset($this->overlays[$overlay_type]))
+		{
+			// only overlay types defined in $this->_overlay_types are allowed
+			if (!in_array($overlay_type, $this->_overlay_types))
+			{
+				throw new \InvalidArgumentException("Overlay type '".
+				$overlay_type."' is not supported. Supported types are: ".
+				implode(', ', $this->_overlay_types).".");
+			}
+
+			$this->overlays[$overlay_type] = OverlayCollectionFactory::create($overlay_type);
 		}
-		return false;
+
+		$this->overlays[$overlay_type]->append($overlay);
 	}
 
-	public function hasMarker(Marker $marker)
+	/**
+	 * @param string $type
+	 *
+	 * @since 0.2.0
+	 */
+	public function getOverlays($type = null)
 	{
-		return in_array($marker, $this->markers, true);
+		return (isset($type)) ? $this->overlays[$type] : $this->overlays;
 	}
 
-	public function addMarker(Marker $marker)
+	/**
+	 * @param string $type
+	 *
+	 * @since 0.2.0
+	 */
+	public function hasOverlays($type = null)
 	{
-		$this->markers[] = $marker;
+		return isset($type) ? !empty($this->overlays[$type]) : !empty($this->overlays);
 	}
 
-	public function removeMarker(Marker $marker)
+	/**
+	 * @return An array containing all overlay types added to the map.
+	 *
+	 * @since 0.2.0
+	 */
+	public function getOverlayTypes()
 	{
-		if (!$this->hasMarker($marker)) {
-			return null;
+		return array_keys($this->overlays);
+	}
+
+	/**
+	 * @todo Please check if this method is still required after the
+	 * introduction of the OverlayCollection object.
+	 *
+	 * @since 0.2.0
+	 */
+	public function getOverlayClasses()
+	{
+		$classes = array();
+
+		foreach (array_keys($this->overlays) as $type) {
+			$classes[] = get_class(current($this->overlays[$type]));
 		}
 
-		unset($this->markers[array_search($marker, $this->markers, true)]);
-		return $marker;
+		return $classes;
 	}
 
-	public function setMarkers(array $markers)
+	/**
+	 * @since 0.2.0
+	 */
+	public function hasFocus()
 	{
-		$this->markers = $markers;
+		return (false !== $this->options->get('focus'));
 	}
 
-	public function getMarkers()
+	/**
+	 * @param $geolocation Geolocation object to retrieve GPS coordinate from.
+	 * @param $zoom Zoom level to apply
+	 *
+	 * @since 0.2.0
+	 */
+	public function setFocus(Geolocation $geolocation, $zoom = 16)
 	{
-		return $this->markers;
+		$this->options->set('zoom', $zoom);
+		$this->options->set('focus', $geolocation);
+	}
+
+	/**
+	 * @since 0.2.0
+	 */
+	public function clearFocus()
+	{
+		$this->options->set('zoom', $this->options->get('default_zoom'));
+		$this->options->set('focus', false);
 	}
 
 	public static function create()

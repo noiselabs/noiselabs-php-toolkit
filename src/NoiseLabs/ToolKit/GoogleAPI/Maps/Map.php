@@ -18,13 +18,13 @@
  *
  * Copyright (C) 2011 Vítor Brandão
  *
- * @category NoiseLabs
- * @package GoogleAPI
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
- * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
- * @link http://www.noiselabs.org
- * @since 0.1.0
+ * @category 	NoiseLabs
+ * @package 	GoogleAPI
+ * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
+ * @link 		http://www.noiselabs.org
+ * @since 		0.1.0
  */
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
@@ -41,6 +41,12 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\BaseMap;
 class Map extends BaseMap
 {
 	/**
+	 * The GoogleMaps Javascript API version supported in this PHP library.
+	 * @var string
+	 */
+	const GOOGLE_MAPS_JAVASCRIPT_API = 'v3';
+
+	/**
 	 * For backwards compatibility.
 	 */
 	public function printGoogleJS()
@@ -49,7 +55,7 @@ class Map extends BaseMap
 	}
 
 	/**
-	 * Include the Maps API JavaScript using a script tag.
+	 * Include the Maps JavaScript API using a script tag.
 	 *
 	 * This function should be called in between the html <head></head> tags.
 	 */
@@ -80,7 +86,7 @@ class Map extends BaseMap
 
 		// include defined parameters like 'sensor' or 'language' (if available)
 		foreach ($parameters as $key => $value) {
-			$html .= $key.'='.$value.'&';
+			$html .= '&'.$key.'='.$value;
 		}
 		$html = rtrim($html, '&'); // remove the last ampersand ('orphan')
 		$html .= '"></script>';
@@ -88,73 +94,65 @@ class Map extends BaseMap
 		echo $html;
 	}
 
+	/**
+	 * The method called to output the HTML and JavaScript code used to create
+	 * a GoogleMap. Should be called in between HTML <body></body> tags.
+	 */
 	public function render()
 	{
-		//var_dump($this->getMarkers());die;
-
 		// Create a div element to hold the Map.
-		echo "<div id=\"".$this->getId()."\" style=\"width:".$this->options->get('width')."; height:".$this->options->get('height')."\"></div>\n";
-
-		// GoogleMaps won't work without at least one location.
-		if (!$this->hasMarkers()) {
-			return;
-		}
-		else {
-			$markers = $this->getMarkers();
-		}
+		echo
+		"<div id=\"".$this->getId()."\" style=\"width:".
+		$this->options->get('width')."; height:".$this->options->get('height').
+		";\"></div>\n";
 
 		echo
 		"<script type=\"text/javascript\">\n".
-		"function showmap() {\n".
-		"	var markersArray = [];\n".
-		"	var bounds = new google.maps.LatLngBounds();\n".
-		"	var infowindowsArray = [];\n".
-		"\n";
+		"function show_googlemap_".$this->getId()."() {\n";
 
-		// Create the map object
-		$kc = $this->options->get('center');
-		echo
-		"	var mapOptions = {\n".
-		"		zoom: ".$this->options->get('zoom').",\n".
-		"		center: new google.maps.LatLng(".$markers[$kc]->getLatitude().", ".$markers[$kc]->getLongitude()."),\n".
-		"		mapTypeId: google.maps.MapTypeId.".strtoupper($this->options->get('type'))."\n".
-		"	};\n".
-		"	var map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
-		"\n";
-
-		// Insert markers
-		foreach (array_keys($markers) as $k) {
-			echo
-			"	// Marker $k\n".
-			"	markersArray[$k] = new google.maps.Marker({\n".
-			"		position: new google.maps.LatLng(".$markers[$k]->getLatitude().", ".$markers[$k]->getLongitude()."),\n".
-			"		map: map";
-			if ($markers[$k]->options->has('icon')) {
-				echo ",\n		icon: '".$markers[$k]->options->get('icon')."'";
-			}
-			if ($markers[$k]->options->has('title')) {
-				echo ",\n		title: '".$markers[$k]->options->get('title')."'";
-			}
-			echo
-			"\n	});\n";
-			// Info windows
-			if ($markers[$k]->options->has('infowindow')) {
-				echo
-				"	infowindowsArray[$k] = new google.maps.InfoWindow({\n".
-				"		content: '".$markers[$k]->options->get('infowindow')."'\n".
-				"	});\n".
-				"	google.maps.event.addListener(markersArray[$k], 'click', function() {\n".
-				"		infowindowsArray[$k].open(map, markersArray[$k]);\n".
-				"	});\n";
-			}
-			echo "	bounds.extend(markersArray[$k].getPosition());\n";
+		// declare all required overlay variables
+		foreach (array_keys($this->overlays) as $collection) {
+			echo $this->overlays[$collection]->declareJavascriptVariables();
 		}
-		// Auto-center and auto-zoom
+
 		echo
-		"	map.fitBounds(bounds);\n".
-		"	map.setCenter(bounds.getCenter());\n".
+		"\tvar bounds = new google.maps.LatLngBounds();\n";
+
+		echo
+		"\tvar mapOptions = {\n".
+		"\t\tzoom: ".$this->options->get('zoom').",\n".
+		"\t\tcenter: new google.maps.LatLng(0, 0),\n".
+		"\t\tmapTypeId: google.maps.MapTypeId.".strtoupper($this->options->get('type'))."\n".
+		"\t};\n".
+		"\tvar map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
+		"\n";
+
+		foreach (array_keys($this->overlays) as $collection)
+		{
+			$iterator = $this->overlays[$collection]->getIterator();
+
+			while ($iterator->valid()) {
+				echo $iterator->current()->buildJavascriptOutput('map', $this->overlays[$collection]->prefix, $this->overlays[$collection]->sufix, $iterator->key());
+				$iterator->next();
+				echo "\n";
+			}
+		}
+
+		if ($this->hasFocus()) {
+			echo
+			"\tmap.setCenter(new google.maps.LatLng(".$this->options->get('focus')->latitude.", ".$this->options->get('focus')->longitude."));\n";
+		}
+		else {
+			// Auto-center and auto-zoom
+			echo
+			"\tmap.fitBounds(bounds);\n".
+			"\tmap.setCenter(bounds.getCenter());\n";
+		}
+
+		echo
 		"}\n".
-		"window.onload = showmap;\n".
+		"\n".
+		"window.onload = show_googlemap_".$this->getId().";\n".
 		"</script>\n";
 	}
 }

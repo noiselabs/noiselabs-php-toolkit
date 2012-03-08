@@ -1,0 +1,22 @@
+{
+	"name": "noiselabs/php-toolkit",
+	"type": "library",
+	"description": "This project holds a collection of useful PHP classes grouped in components to be used in any PHP5.3+ project.",
+	"keywords": ["noiselabs", "toolkit", "config-parser", "google-maps", "process"],
+	"homepage": "https://github.com/noiselabs/noiselabs-php-toolkit",
+	"version": "0.2.0-BETA2",
+	"license": "LGPLv3",
+	"authors": [
+		{
+			"name": "Vítor Brandão",
+			"email": "noisebleed@noiselabs.org",
+			"homepage": "http://blog.noiselabs.org"
+		}
+	],
+	"require": {
+		"php": ">=5.3.2"
+	},
+	"autoload": {
+		"psr-0": { "NoiseLabs\\ToolKit": "src" }
+	}
+}

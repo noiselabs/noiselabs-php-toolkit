@@ -160,8 +160,6 @@ class ConfigParser extends BaseConfigParser implements ConfigParserInterface
 								$this->_sections[static::DEFAULT_SECTION]
 								);
 			unset($this->_sections[static::DEFAULT_SECTION]);
-
-			var_dump($this->_defaults);
 		}
 	}
 
@@ -309,7 +307,7 @@ class ConfigParser extends BaseConfigParser implements ConfigParserInterface
 
 		// TODO: write default section first
 		if (!empty($this->_defaults)) {
-			$output .= sprintf("[%s]\n", static::DEFAULT_SECTION);
+			$output .= sprintf("[%s]%s", static::DEFAULT_SECTION, $this->settings->get('linebreak'));
 			foreach ($this->_defaults as $key => $value) {
 				$output .= $this->_buildOptionValueLine($key, $value);
 			}
@@ -321,7 +319,7 @@ class ConfigParser extends BaseConfigParser implements ConfigParserInterface
 				continue;
 			}
 			// write header tag
-			$output .= sprintf("[%s]\n", $section);
+			$output .= sprintf("[%s]%s", $section, $this->settings->get('linebreak'));
 			// and then all options in this section
 			foreach ($this->_sections[$section] as $key => $value) {
 				$output .= $this->_buildOptionValueLine($key, $value);
