@@ -47,6 +47,9 @@ class Process implements ProcessInterface
      *  'sudo':
      *      If TRUE, prepend every command with 'sudo'.
      *
+     *  'sudo_opts':
+     *      sudo options
+     *
      *  'cwd':
      *      The initial working dir for the command. This must be an absolute
      *      directory path, or NULL if you want to use the default value (the
@@ -65,6 +68,7 @@ class Process implements ProcessInterface
      */
     protected $_defaults = array(
         'sudo'      => false,
+        'sudo_opts' => '-n', // non-interactive
         'cwd'       => null,
         'env'       => null,
         'dry-run'   => false
@@ -189,7 +193,7 @@ class Process implements ProcessInterface
 
         // use sudo?
         $command = (true === $this->settings->get('sudo', $this->_defaults['sudo'])) ?
-            'sudo '.$this->command : $this->command;
+            'sudo '.$this->settings->get('sudo_opts', $this->_defaults['sudo_opts']).' '.$this->command : $this->command;
 
         // current working directory
         $cwd = $this->settings->get('cwd', $this->_defaults['cwd']);
