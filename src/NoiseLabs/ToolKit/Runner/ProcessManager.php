@@ -34,77 +34,77 @@ use NoiseLabs\ToolKit\Runner\ProcessManagerInterface;
 
 class ProcessManager implements ProcessManagerInterface
 {
-	protected $processes = array();
-	public $settings;
+    protected $processes = array();
+    public $settings;
 
-	public function __construct(array $settings = array())
-	{
-		$this->settings = new ParameterBag($settings);
-	}
+    public function __construct(array $settings = array())
+    {
+        $this->settings = new ParameterBag($settings);
+    }
 
-	public function has($id)
-	{
-		return isset($this->processes[$id]);
-	}
+    public function has($id)
+    {
+        return isset($this->processes[$id]);
+    }
 
-	public function add($id, ProcessInterface $process)
-	{
-		if ($this->has($id)) {
-			throw new \InvalidArgumentException(sprintf('A process with ID "%s" already exists.', $id));
-		}
+    public function add($id, ProcessInterface $process)
+    {
+        if ($this->has($id)) {
+            throw new \InvalidArgumentException(sprintf('A process with ID "%s" already exists.', $id));
+        }
 
-		return $this->set($id, $process);
-	}
+        return $this->set($id, $process);
+    }
 
-	/**
-	 * Add a new Process to the container.
-	 * A previous process with the same ID will be overridden.
-	 *
-	 * @param string $id Process ID
-	 * @param NoiseLabs\ToolKit\Runner\ProcessInterface The Process object to
-	 * add
-	 *
-	 * @return self (ProcessManager)
-	 */
-	public function set($id, ProcessInterface $process)
-	{
-		if (!is_string($id)) {
-			throw new \InvalidArgumentException('$id must be a string');
-		}
+    /**
+     * Add a new Process to the container.
+     * A previous process with the same ID will be overridden.
+     *
+     * @param string $id Process ID
+     * @param NoiseLabs\ToolKit\Runner\ProcessInterface The Process object to
+     * add
+     *
+     * @return self (ProcessManager)
+     */
+    public function set($id, ProcessInterface $process)
+    {
+        if (!is_string($id)) {
+            throw new \InvalidArgumentException('$id must be a string');
+        }
 
-		$this->processes[$id] = $process;
-		// Copy our own set of settings over Process current settings
-		$this->processes[$id]->settings->add($this->settings->all());
+        $this->processes[$id] = $process;
+        // Copy our own set of settings over Process current settings
+        $this->processes[$id]->settings->add($this->settings->all());
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Gets a Process registered in this object.
-	 *
-	 * @param $id Process ID
-	 *
-	 * @throws InvalidArgumentException if no process is registered with $id
-	 */
-	public function get($id)
-	{
-		if ($this->has($id)) {
-			return $this->processes[$id];
-		}
-		else {
-			throw new \InvalidArgumentException(sprintf('Process ID "%s" does not exist.', $id));
-		}
-	}
+    /**
+     * Gets a Process registered in this object.
+     *
+     * @param $id Process ID
+     *
+     * @throws InvalidArgumentException if no process is registered with $id
+     */
+    public function get($id)
+    {
+        if ($this->has($id)) {
+            return $this->processes[$id];
+        }
+        else {
+            throw new \InvalidArgumentException(sprintf('Process ID "%s" does not exist.', $id));
+        }
+    }
 
-	public function remove($id)
-	{
-		if ($this->has($id)) {
-			unset($this->processes[$id]);
-		}
-		else {
-			throw new \InvalidArgumentException(sprintf('Process ID "%s" does not exist.', $id));
-		}
-	}
+    public function remove($id)
+    {
+        if ($this->has($id)) {
+            unset($this->processes[$id]);
+        }
+        else {
+            throw new \InvalidArgumentException(sprintf('Process ID "%s" does not exist.', $id));
+        }
+    }
 
     /**
      * Returns true if the section exists (implements the \ArrayAccess
@@ -129,7 +129,7 @@ class ProcessManager implements ProcessManagerInterface
      */
     public function offsetGet($offset)
     {
-		return $this->has($offset) ? $this->get($offset) : null;
+        return $this->has($offset) ? $this->get($offset) : null;
     }
 
     /**
@@ -141,40 +141,40 @@ class ProcessManager implements ProcessManagerInterface
      */
     public function offsetSet($offset, $value)
     {
-		$this->set($offset, $value);
+        $this->set($offset, $value);
     }
 
-	/**
-	 * Removes the Process with the given ID (implements the
-	 * \ArrayAccess interface).
-	 *
-	 * @param string $name  The name of the Process to be removed
-	 */
-	public function offsetUnset($name)
-	{
-		$this->has($name) && $this->remove($name);
-	}
+    /**
+     * Removes the Process with the given ID (implements the
+     * \ArrayAccess interface).
+     *
+     * @param string $name  The name of the Process to be removed
+     */
+    public function offsetUnset($name)
+    {
+        $this->has($name) && $this->remove($name);
+    }
 
-	/**
-	 * Returns the number of registered processes (implements the \Countable
-	 * interface).
-	 *
-	 * @return integer The number of sections
-	 */
-	public function count()
-	{
-		return count($this->processes);
-	}
+    /**
+     * Returns the number of registered processes (implements the \Countable
+     * interface).
+     *
+     * @return integer The number of sections
+     */
+    public function count()
+    {
+        return count($this->processes);
+    }
 
-	/**
-	 * Returns the iterator for this group.
-	 *
-	 * @return \ArrayIterator
-	 */
-	public function getIterator()
-	{
-		return new \ArrayIterator($this->processes);
-	}
+    /**
+     * Returns the iterator for this group.
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->processes);
+    }
 }
 
 ?>

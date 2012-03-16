@@ -34,11 +34,11 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\OverlayInterface;
 
 interface MapInterface
 {
-	public function setId($id);
-	public function getId();
-	public function addOverlay(OverlayInterface $overlay);
-	public function hasOverlays($type = null);
-	public function render();
+    public function setId($id);
+    public function getId();
+    public function addOverlay(OverlayInterface $overlay);
+    public function hasOverlays($type = null);
+    public function render();
 }
 
 ?>

@@ -40,49 +40,49 @@ use NoiseLabs\ToolKit\Helper;
  */
 class Geolocation
 {
-	public $latitude;
-	public $longitude;
-	public $altitude;
-	public $speed;
-	public $timestamp;
+    public $latitude;
+    public $longitude;
+    public $altitude;
+    public $speed;
+    public $timestamp;
 
-	/**
-	 * @param array $properties
-	 *
-	 * @since 0.2.0
-	 */
-	public function __construct(array $properties = array())
-	{
- 		foreach ($properties as $k => $v) {
-  			$this->$k = $v;
-  		}
-	}
+    /**
+     * @param array $properties
+     *
+     * @since 0.2.0
+     */
+    public function __construct(array $properties = array())
+    {
+         foreach ($properties as $k => $v) {
+              $this->$k = $v;
+          }
+    }
 
-	/**
-	 *
-	 * @param float $latitude
-	 * @param float $longitude
-	 * @param float $altitude
-	 * @param float $speed
-	 * @param string $timestamp
-	 */
-	public static function create($latitude, $longitude, $altitude = null,
-	$speed = null, $timestamp = null)
-	{
-		if (!isset($timestamp)) {
-			$timestamp = Helper::timestamp();
-		}
+    /**
+     *
+     * @param float $latitude
+     * @param float $longitude
+     * @param float $altitude
+     * @param float $speed
+     * @param string $timestamp
+     */
+    public static function create($latitude, $longitude, $altitude = null,
+    $speed = null, $timestamp = null)
+    {
+        if (!isset($timestamp)) {
+            $timestamp = Helper::timestamp();
+        }
 
-		$geolocation = new static(array(
-						'latitude'	=> $latitude,
-						'longitude'	=> $longitude,
-						'altitude'	=> $altitude,
-						'speed'		=> $speed,
-						'timestamp'	=> $timestamp
-		));
+        $geolocation = new static(array(
+                        'latitude'	=> $latitude,
+                        'longitude'	=> $longitude,
+                        'altitude'	=> $altitude,
+                        'speed'		=> $speed,
+                        'timestamp'	=> $timestamp
+        ));
 
-		return $geolocation;
-	}
+        return $geolocation;
+    }
 }
 
 ?>

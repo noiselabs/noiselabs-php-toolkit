@@ -38,12 +38,12 @@ namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection;
  */
 class OverlayCollectionFactory
 {
-	public static function create($overlay_type)
-	{
-		$class = __NAMESPACE__.'\\'.$overlay_type.'Collection';
+    public static function create($overlay_type)
+    {
+        $class = __NAMESPACE__.'\\'.$overlay_type.'Collection';
 
-		return new $class(array());
-	}
+        return new $class(array());
+    }
 }
 
 ?>

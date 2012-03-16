@@ -37,12 +37,12 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollection;
  */
 class PolylineCollection extends OverlayCollection
 {
-	public $prefix = 'polylines';
+    public $prefix = 'polylines';
 
-	public function declareJavascriptVariables()
-	{
-		return "\tvar ".$this->prefix.$this->sufix." = [];\n";
-	}
+    public function declareJavascriptVariables()
+    {
+        return "\tvar ".$this->prefix.$this->sufix." = [];\n";
+    }
 }
 
 ?>

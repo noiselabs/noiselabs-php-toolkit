@@ -33,103 +33,103 @@ use NoiseLabs\ToolKit\Runner\Process;
 
 class ProcessTest extends \PHPUnit_Framework_TestCase
 {
-	public function setUp()
-	{
-		$this->app = __DIR__.'/Fixtures/app.php';
-	}
+    public function setUp()
+    {
+        $this->app = __DIR__.'/Fixtures/app.php';
+    }
 
-	public function testSettings()
-	{
-		$settings = array(
-						'cwd' 			=> '/tmp',
-						'new-setting' 	=> 'new-value'
-						);
+    public function testSettings()
+    {
+        $settings = array(
+                        'cwd' 			=> '/tmp',
+                        'new-setting' 	=> 'new-value'
+                        );
 
-		$proc = new Process('free', $settings);
+        $proc = new Process('free', $settings);
 
-		$this->assertEquals('/tmp', $proc->settings->get('cwd'));
-		$this->assertEquals('new-value', $proc->settings->get('new-setting'));
+        $this->assertEquals('/tmp', $proc->settings->get('cwd'));
+        $this->assertEquals('new-value', $proc->settings->get('new-setting'));
 
-		$wd = '/var/tmp';
-		$proc->settings->set('cwd', $wd);
-		$this->assertEquals($wd, $proc->settings->get('cwd'));
-	}
+        $wd = '/var/tmp';
+        $proc->settings->set('cwd', $wd);
+        $this->assertEquals($wd, $proc->settings->get('cwd'));
+    }
 
-	public function testBeforeRun()
-	{
-		$proc = new Process('free');
+    public function testBeforeRun()
+    {
+        $proc = new Process('free');
 
-		$this->assertEquals(null, $proc->getReturnCode());
-		$this->assertEquals(null, $proc->getOutput());
-		$this->assertEquals(null, $proc->getErrorMessage());
-		$this->assertEquals('free', $proc->getCommand());
-	}
+        $this->assertEquals(null, $proc->getReturnCode());
+        $this->assertEquals(null, $proc->getOutput());
+        $this->assertEquals(null, $proc->getErrorMessage());
+        $this->assertEquals('free', $proc->getCommand());
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\Process::run
      */
-	public function testRun()
-	{
-		$proc = $this->runApp();
+    public function testRun()
+    {
+        $proc = $this->runApp();
 
-		$this->assertEquals('testing string', $proc->getOutput());
-		$this->assertEquals(254, $proc->getReturnCode());
-		$this->assertEquals('these are errors', $proc->getErrorMessage());
-	}
+        $this->assertEquals('testing string', $proc->getOutput());
+        $this->assertEquals(254, $proc->getReturnCode());
+        $this->assertEquals('these are errors', $proc->getErrorMessage());
+    }
 
-	protected function runApp()
-	{
-		$proc = new Process('php '.$this->app);
-		$proc->run();
+    protected function runApp()
+    {
+        $proc = new Process('php '.$this->app);
+        $proc->run();
 
-		return $proc;
-	}
+        return $proc;
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\Process::setCommand
      */
-	public function testSetCommand()
-	{
-		$proc = new Process('free');
-		$this->assertEquals('free', $proc->getCommand());
+    public function testSetCommand()
+    {
+        $proc = new Process('free');
+        $this->assertEquals('free', $proc->getCommand());
 
-		$proc->setCommand('uptime');
-		$this->assertEquals('uptime', $proc->getCommand());
-	}
+        $proc->setCommand('uptime');
+        $this->assertEquals('uptime', $proc->getCommand());
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\Process::addArguments
      */
-	public function testAddArguments()
-	{
-		$proc = new Process('free');
-		$this->assertEquals('free', $proc->getCommand());
+    public function testAddArguments()
+    {
+        $proc = new Process('free');
+        $this->assertEquals('free', $proc->getCommand());
 
-		$proc->addArguments('-m -l');
-		$this->assertEquals('free -m -l', $proc->getCommand());
+        $proc->addArguments('-m -l');
+        $this->assertEquals('free -m -l', $proc->getCommand());
 
-		$this->assertEquals($proc, $proc->addArguments('--help'));
-	}
+        $this->assertEquals($proc, $proc->addArguments('--help'));
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\Process::replaceArguments
      */
-	public function testReplaceArguments()
-	{
-		$proc = new Process('/usr/bin/free -m -l');
-		$this->assertEquals('/usr/bin/free -m -l', $proc->getCommand());
+    public function testReplaceArguments()
+    {
+        $proc = new Process('/usr/bin/free -m -l');
+        $this->assertEquals('/usr/bin/free -m -l', $proc->getCommand());
 
-		$proc->replaceArguments('--help');
-		$this->assertEquals('/usr/bin/free --help', $proc->getCommand());
-	}
+        $proc->replaceArguments('--help');
+        $this->assertEquals('/usr/bin/free --help', $proc->getCommand());
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\Process::setArguments
      */
-	public function testSetArguments()
-	{
-		return $this->testReplaceArguments();
-	}
+    public function testSetArguments()
+    {
+        return $this->testReplaceArguments();
+    }
 }
 
 ?>

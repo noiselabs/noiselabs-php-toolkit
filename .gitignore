@@ -7,3 +7,4 @@ src/NoiseLabs/ToolKit/ToolKitBundle.php
 .project
 .settings/
 doc/docblox/*
+vendor/

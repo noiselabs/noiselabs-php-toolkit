@@ -41,10 +41,10 @@ namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection;
  */
 abstract class OverlayCollection extends \ArrayObject
 {
-	public $prefix = '';
-	public $sufix = 'Array';
+    public $prefix = '';
+    public $sufix = 'Array';
 
-	abstract public function declareJavascriptVariables();
+    abstract public function declareJavascriptVariables();
 }
 
 ?>

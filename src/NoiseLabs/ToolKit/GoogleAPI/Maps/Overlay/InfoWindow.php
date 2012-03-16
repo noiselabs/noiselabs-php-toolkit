@@ -43,80 +43,80 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
  */
 class InfoWindow extends BaseOverlay
 {
-	const OVERLAY_TYPE = 'InfoWindow';
+    const OVERLAY_TYPE = 'InfoWindow';
 
-	/**
-	 * Content to display in the InfoWindow. This can be an HTML element, a
-	 * plain-text string, or a string containing HTML. The InfoWindow will be
-	 * sized according to the content. To set an explicit size for the content,
-	 * set content to be a HTML element with that size.
-	 *
-	 * @var string
-	 */
-	public $content;
+    /**
+     * Content to display in the InfoWindow. This can be an HTML element, a
+     * plain-text string, or a string containing HTML. The InfoWindow will be
+     * sized according to the content. To set an explicit size for the content,
+     * set content to be a HTML element with that size.
+     *
+     * @var string
+     */
+    public $content;
 
-	/**
-	 * Available options:
-	 *
-	 * disableAutoPan: Disable auto-pan on open. By default, the info window
-	 * will pan the map so that it is fully visible when it opens.
-	 *
-	 * maxWidth: Maximum width of the infowindow, regardless of content's width.
-	 * This value is only considered if it is set before a call to open. To
-	 * change the maximum width when changing content, call close, setOptions,
-	 * and then open.
-	 *
-	 * pixelOffset: The offset, in pixels, of the tip of the info window
-	 * from the point on the map at whose geographical coordinates the info
-	 * window is anchored. If an InfoWindow is opened with an anchor,
-	 * the pixelOffset will be calculated from the top-center of the anchor's
-	 * bounds.
-	 *
-	 * position: The LatLng at which to display this InfoWindow. If the
-	 * InfoWindow is opened with an anchor, the anchor's position will be used
-	 * instead.
-	 *
-	 * zIndex: All InfoWindows are displayed on the map in order of their
-	 * zIndex, with higher values displaying in front of InfoWindows with lower
-	 * values. By default, InfoWinodws are displayed according to their
-	 * latitude, with InfoWindows of lower latitudes appearing in front of
-	 * InfoWindows at higher latitudes. InfoWindows are always displayed in
-	 * front of markers.
-	 *
-	 * uiEvent: User event used to trigger the opening of the info window.
-	 * Defaults to 'click'. Other event types may be used like:
-	 * 'dbclick', 'mouseup', 'mousedown', 'mouseover' or 'mousedown'.
-	 */
-	protected function getDefaultOptions()
-	{
-		return array(
-				'disableAutoPan'	=> false,
-				'pixelOffset'		=> 0,
-				'zIndex'			=> 0,
-				'uiEvent'			=> 'click'
-		);
-	}
+    /**
+     * Available options:
+     *
+     * disableAutoPan: Disable auto-pan on open. By default, the info window
+     * will pan the map so that it is fully visible when it opens.
+     *
+     * maxWidth: Maximum width of the infowindow, regardless of content's width.
+     * This value is only considered if it is set before a call to open. To
+     * change the maximum width when changing content, call close, setOptions,
+     * and then open.
+     *
+     * pixelOffset: The offset, in pixels, of the tip of the info window
+     * from the point on the map at whose geographical coordinates the info
+     * window is anchored. If an InfoWindow is opened with an anchor,
+     * the pixelOffset will be calculated from the top-center of the anchor's
+     * bounds.
+     *
+     * position: The LatLng at which to display this InfoWindow. If the
+     * InfoWindow is opened with an anchor, the anchor's position will be used
+     * instead.
+     *
+     * zIndex: All InfoWindows are displayed on the map in order of their
+     * zIndex, with higher values displaying in front of InfoWindows with lower
+     * values. By default, InfoWinodws are displayed according to their
+     * latitude, with InfoWindows of lower latitudes appearing in front of
+     * InfoWindows at higher latitudes. InfoWindows are always displayed in
+     * front of markers.
+     *
+     * uiEvent: User event used to trigger the opening of the info window.
+     * Defaults to 'click'. Other event types may be used like:
+     * 'dbclick', 'mouseup', 'mousedown', 'mouseover' or 'mousedown'.
+     */
+    protected function getDefaultOptions()
+    {
+        return array(
+                'disableAutoPan'	=> false,
+                'pixelOffset'		=> 0,
+                'zIndex'			=> 0,
+                'uiEvent'			=> 'click'
+        );
+    }
 
-	public function buildJavascriptOutput($map_object, $array_prefix,
-	$array_sufix, $array_index)
-	{
-		$js_class = static::OVERLAY_TYPE;
-		$array_name = $array_prefix.$array_sufix;
+    public function buildJavascriptOutput($map_object, $array_prefix,
+    $array_sufix, $array_index)
+    {
+        $js_class = static::OVERLAY_TYPE;
+        $array_name = $array_prefix.$array_sufix;
 
-		return
-		"\t".$array_name."[$array_index] = new google.maps.".$js_class."({\n".
-		"\t\tcontent: '".$this->content."'\n".
-		"\t});\n";
-	}
+        return
+        "\t".$array_name."[$array_index] = new google.maps.".$js_class."({\n".
+        "\t\tcontent: '".$this->content."'\n".
+        "\t});\n";
+    }
 
 
 
-	public static function create($content)
-	{
-		$infowindow = new static();
+    public static function create($content)
+    {
+        $infowindow = new static();
 
-		$infowindow->content = $content;
+        $infowindow->content = $content;
 
-		return $infowindow;
-	}
+        return $infowindow;
+    }
 }

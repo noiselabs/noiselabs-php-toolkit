@@ -34,105 +34,105 @@ use NoiseLabs\ToolKit\Runner\ProcessManager;
 
 class ProcessManagerTest extends \PHPUnit_Framework_TestCase
 {
-	protected function setUp()
-	{
-		$this->pm = new ProcessManager();
-	}
+    protected function setUp()
+    {
+        $this->pm = new ProcessManager();
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\ProcessManager::has
      */
-	public function testHas()
-	{
-		$this->pm->add('free', new Process('free'));
+    public function testHas()
+    {
+        $this->pm->add('free', new Process('free'));
 
-		$this->assertTrue($this->pm->has('free'));
-		$this->assertFalse($this->pm->has('uptime'));
-	}
+        $this->assertTrue($this->pm->has('free'));
+        $this->assertFalse($this->pm->has('uptime'));
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\ProcessManager::add
      */
-	public function testAdd()
-	{
-		$free = new Process('free');
-		$uptime = new Process('uptime');
+    public function testAdd()
+    {
+        $free = new Process('free');
+        $uptime = new Process('uptime');
 
-		$this->pm->
-			add('free', $free)->
-			add('uptime', $uptime);
+        $this->pm->
+            add('free', $free)->
+            add('uptime', $uptime);
 
-		$this->assertEquals($free, $this->pm->get('free'));
-		$this->assertEquals($uptime, $this->pm->get('uptime'));
-	}
+        $this->assertEquals($free, $this->pm->get('free'));
+        $this->assertEquals($uptime, $this->pm->get('uptime'));
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\ProcessManager::set
      */
-	public function testSet()
-	{
-		$free = new Process('free');
+    public function testSet()
+    {
+        $free = new Process('free');
 
-		$self = $this->pm->set('free', $free);
+        $self = $this->pm->set('free', $free);
 
-		$this->assertEquals($free, $this->pm->get('free'));
-		$this->assertEquals($this->pm, $self);
-	}
+        $this->assertEquals($free, $this->pm->get('free'));
+        $this->assertEquals($this->pm, $self);
+    }
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testSetWithNonStringId()
-	{
-		$this->pm->set(array(), new Process('uptime'));
-	}
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetWithNonStringId()
+    {
+        $this->pm->set(array(), new Process('uptime'));
+    }
 
-	/**
+    /**
      * @covers NoiseLabs\ToolKit\Runner\ProcessManager::remove
      */
-	public function testRemove()
-	{
-		$this->pm->set('uptime', new Process('uptime'));
+    public function testRemove()
+    {
+        $this->pm->set('uptime', new Process('uptime'));
 
-		$this->assertTrue($this->pm->has('uptime'));
+        $this->assertTrue($this->pm->has('uptime'));
 
-		$this->pm->remove('uptime');
+        $this->pm->remove('uptime');
 
-		$this->assertFalse($this->pm->has('uptime'));
-	}
+        $this->assertFalse($this->pm->has('uptime'));
+    }
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testRemoveWithNonExistingId()
-	{
-		$this->pm->remove('non-existing-id');
-	}
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testRemoveWithNonExistingId()
+    {
+        $this->pm->remove('non-existing-id');
+    }
 
-	public function testCount()
-	{
-		$this->assertEquals(0, count($this->pm));
+    public function testCount()
+    {
+        $this->assertEquals(0, count($this->pm));
 
-		$this->pm->
-			add('free', new Process('free'))->
-			add('uptime', new Process('uptime'));
+        $this->pm->
+            add('free', new Process('free'))->
+            add('uptime', new Process('uptime'));
 
-		$this->assertEquals(2, count($this->pm));
-	}
+        $this->assertEquals(2, count($this->pm));
+    }
 
-	public function testSettings()
-	{
-		$this->pm->settings->set('cwd','manager');
+    public function testSettings()
+    {
+        $this->pm->settings->set('cwd','manager');
 
-		$free = new Process('free');
-		$free->settings->set('cwd', 'process');
-		$this->assertEquals('process', $free->settings->get('cwd'));
+        $free = new Process('free');
+        $free->settings->set('cwd', 'process');
+        $this->assertEquals('process', $free->settings->get('cwd'));
 
-		// check $free has now 'manager' as the 'cwd' setting instead of
-		// 'process'
-		$this->pm->add('free', $free);
-		$this->assertEquals('manager', $this->pm->get('free')->settings->get('cwd'));
-	}
+        // check $free has now 'manager' as the 'cwd' setting instead of
+        // 'process'
+        $this->pm->add('free', $free);
+        $this->assertEquals('manager', $this->pm->get('free')->settings->get('cwd'));
+    }
 }
 
 ?>

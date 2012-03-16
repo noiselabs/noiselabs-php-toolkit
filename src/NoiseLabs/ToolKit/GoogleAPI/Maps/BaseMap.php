@@ -42,247 +42,247 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\OverlayInterface;
  */
 abstract class BaseMap implements MapInterface
 {
-	/**
-	 * An unique ID to identify this map, useful when manipulating an array of
-	 * maps. This is also used as the ID for the <div> element.
-	 *
-	 * @var string
-	 */
-	protected $id;
+    /**
+     * An unique ID to identify this map, useful when manipulating an array of
+     * maps. This is also used as the ID for the <div> element.
+     *
+     * @var string
+     */
+    protected $id;
 
-	/**
-	 * Array holding all overlays added to this map instance. Each first order
-	 * array element is of type OverlayCollection.
-	 *
-	 * @since 0.2.0
-	 */
-	protected $overlays = array();
+    /**
+     * Array holding all overlays added to this map instance. Each first order
+     * array element is of type OverlayCollection.
+     *
+     * @since 0.2.0
+     */
+    protected $overlays = array();
 
-	/**
-	 * Supported overlay types.
-	 *
-	 * @since 0.2.0
-	 */
-	protected $_overlay_types = array('InfoWindow', 'Marker', 'Polyline');
+    /**
+     * Supported overlay types.
+     *
+     * @since 0.2.0
+     */
+    protected $_overlay_types = array('InfoWindow', 'Marker', 'Polyline');
 
-	/**
-	 * A set of parameters to append to configure how the Maps JavaScript API is
-	 * loaded.
-	 *
-	 * @var \NoiseLabs\ToolKit\ParameterBag
-	 */
-	public $parameters;
+    /**
+     * A set of parameters to append to configure how the Maps JavaScript API is
+     * loaded.
+     *
+     * @var \NoiseLabs\ToolKit\ParameterBag
+     */
+    public $parameters;
 
-	/**
-	 * GoogleMaps configuration. This covers settings like zoom level to the
-	 * usage of HTTPS.
-	 *
-	 * @var \NoiseLabs\ToolKit\ParameterBag
-	 */
-	public $options;
+    /**
+     * GoogleMaps configuration. This covers settings like zoom level to the
+     * usage of HTTPS.
+     *
+     * @var \NoiseLabs\ToolKit\ParameterBag
+     */
+    public $options;
 
-	public $https = false;
+    public $https = false;
 
-	/**
-	 *
-	 */
-	public function __construct($id = 'map', array $options = array(), array $parameters = array())
-	{
-		$this->id = $id;
+    /**
+     *
+     */
+    public function __construct($id = 'map', array $options = array(), array $parameters = array())
+    {
+        $this->id = $id;
 
-		// option defaults
-		$this->options = new ParameterBag($this->getOptionsDefaults());
-		$this->options->add($options);
+        // option defaults
+        $this->options = new ParameterBag($this->getOptionsDefaults());
+        $this->options->add($options);
 
-		// parameter defaults
-		$this->parameters = new ParameterBag(array(
-			'sensor'	=> 'false'
-			));
-		$this->parameters->add($parameters);
-	}
+        // parameter defaults
+        $this->parameters = new ParameterBag(array(
+            'sensor'	=> 'false'
+            ));
+        $this->parameters->add($parameters);
+    }
 
-	protected function getOptionsDefaults()
-	{
-		$options = array();
+    protected function getOptionsDefaults()
+    {
+        $options = array();
 
-		/**
-		 * Zoom level. Ranges from 0 (less zoom) to 18 (higher zoom).
-		 *
-		 * Offering a map of the entire Earth as a single image would either
-		 * require an immense map, or a small map with very low resolution.
-		 * As a result, map images within Google Maps and the Maps API are
-		 * broken up into map "tiles" and "zoom levels." At low zoom levels, a
-		 * small set of map tiles covers a wide area; at higher zoom levels,
-		 * the tiles are of higher resolution and cover a smaller area.
-		 *
-		 * You specify the resolution at which to display a map by setting the
-		 * Map's zoom property, where zoom 0 corresponds to a map of the Earth
-		 * fully zoomed out, and higher zoom levels zoom in at a higher
-		 * resolution.
-		 */
-		$options['zoom'] = 12;
-		$options['default_zoom'] = 12;
+        /**
+         * Zoom level. Ranges from 0 (less zoom) to 18 (higher zoom).
+         *
+         * Offering a map of the entire Earth as a single image would either
+         * require an immense map, or a small map with very low resolution.
+         * As a result, map images within Google Maps and the Maps API are
+         * broken up into map "tiles" and "zoom levels." At low zoom levels, a
+         * small set of map tiles covers a wide area; at higher zoom levels,
+         * the tiles are of higher resolution and cover a smaller area.
+         *
+         * You specify the resolution at which to display a map by setting the
+         * Map's zoom property, where zoom 0 corresponds to a map of the Earth
+         * fully zoomed out, and higher zoom levels zoom in at a higher
+         * resolution.
+         */
+        $options['zoom'] = 12;
+        $options['default_zoom'] = 12;
 
-		/**
-		 * Map type. The following types are supported:
-		 * - 'ROADMAP' 		Displays the normal, default 2D tiles of Google Maps.
-		 * - 'SATELLITE'	Displays photographic tiles.
-		 * - 'HYBRID' 		Displays a mix of photographic tiles and a tile layer
-		 *					for prominent features (roads, city names).
-		 * - 'TERRAIN' 		Displays physical relief tiles for displaying elevation
-		 *					and water features (mountains, rivers, etc.).
-		 */
-		$options['type'] = 'ROADMAP';
+        /**
+         * Map type. The following types are supported:
+         * - 'ROADMAP' 		Displays the normal, default 2D tiles of Google Maps.
+         * - 'SATELLITE'	Displays photographic tiles.
+         * - 'HYBRID' 		Displays a mix of photographic tiles and a tile layer
+         *					for prominent features (roads, city names).
+         * - 'TERRAIN' 		Displays physical relief tiles for displaying elevation
+         *					and water features (mountains, rivers, etc.).
+         */
+        $options['type'] = 'ROADMAP';
 
-		$options['width'] = '400px';
-		$options['height'] = '400px';
+        $options['width'] = '400px';
+        $options['height'] = '400px';
 
-		$options['https'] = false;	// use https?
+        $options['https'] = false;	// use https?
 
-		$options['center'] = 0; // center map on desidered Marker (array index)
+        $options['center'] = 0; // center map on desidered Marker (array index)
 
-		/**
-		 * Focus map (center and zoom) on a given marker? Value is array index.
-		 */
-		$options['focus'] = false;
-		$options['sensor'] = 'false';
+        /**
+         * Focus map (center and zoom) on a given marker? Value is array index.
+         */
+        $options['focus'] = false;
+        $options['sensor'] = 'false';
 
-		return $options;
-	}
+        return $options;
+    }
 
-	/**
-	 * Sets the map ID.
-	 *
-	 * @param string $id
-	 */
-	public function setId($id)
-	{
-		$this->id = (string) $id;
-	}
+    /**
+     * Sets the map ID.
+     *
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = (string) $id;
+    }
 
-	/**
-	 * @return The map ID.
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * @return The map ID.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * A method to add overlays (Markers, Polylines, etc.) to this map object.
-	 *
-	 * For each overlay type an OverlayCollection object is created to hold
-	 * OverlayInterface objects.
-	 *
-	 * @param 	OverlayInterface $overlay
-	 * @throws	InvalidArgumentException if the overlay type is not supported.
-	 *
-	 * @since 0.2.0
-	 */
-	public function addOverlay(OverlayInterface $overlay)
-	{
-		$overlay_type = $overlay::OVERLAY_TYPE;
+    /**
+     * A method to add overlays (Markers, Polylines, etc.) to this map object.
+     *
+     * For each overlay type an OverlayCollection object is created to hold
+     * OverlayInterface objects.
+     *
+     * @param 	OverlayInterface $overlay
+     * @throws	InvalidArgumentException if the overlay type is not supported.
+     *
+     * @since 0.2.0
+     */
+    public function addOverlay(OverlayInterface $overlay)
+    {
+        $overlay_type = $overlay::OVERLAY_TYPE;
 
-		 // create a new *Collection object to hold overlay objects if it
-		 // doesn't exist yet.
-		if (!isset($this->overlays[$overlay_type]))
-		{
-			// only overlay types defined in $this->_overlay_types are allowed
-			if (!in_array($overlay_type, $this->_overlay_types))
-			{
-				throw new \InvalidArgumentException("Overlay type '".
-				$overlay_type."' is not supported. Supported types are: ".
-				implode(', ', $this->_overlay_types).".");
-			}
+         // create a new *Collection object to hold overlay objects if it
+         // doesn't exist yet.
+        if (!isset($this->overlays[$overlay_type]))
+        {
+            // only overlay types defined in $this->_overlay_types are allowed
+            if (!in_array($overlay_type, $this->_overlay_types))
+            {
+                throw new \InvalidArgumentException("Overlay type '".
+                $overlay_type."' is not supported. Supported types are: ".
+                implode(', ', $this->_overlay_types).".");
+            }
 
-			$this->overlays[$overlay_type] = OverlayCollectionFactory::create($overlay_type);
-		}
+            $this->overlays[$overlay_type] = OverlayCollectionFactory::create($overlay_type);
+        }
 
-		$this->overlays[$overlay_type]->append($overlay);
-	}
+        $this->overlays[$overlay_type]->append($overlay);
+    }
 
-	/**
-	 * @param string $type
-	 *
-	 * @since 0.2.0
-	 */
-	public function getOverlays($type = null)
-	{
-		return (isset($type)) ? $this->overlays[$type] : $this->overlays;
-	}
+    /**
+     * @param string $type
+     *
+     * @since 0.2.0
+     */
+    public function getOverlays($type = null)
+    {
+        return (isset($type)) ? $this->overlays[$type] : $this->overlays;
+    }
 
-	/**
-	 * @param string $type
-	 *
-	 * @since 0.2.0
-	 */
-	public function hasOverlays($type = null)
-	{
-		return isset($type) ? !empty($this->overlays[$type]) : !empty($this->overlays);
-	}
+    /**
+     * @param string $type
+     *
+     * @since 0.2.0
+     */
+    public function hasOverlays($type = null)
+    {
+        return isset($type) ? !empty($this->overlays[$type]) : !empty($this->overlays);
+    }
 
-	/**
-	 * @return An array containing all overlay types added to the map.
-	 *
-	 * @since 0.2.0
-	 */
-	public function getOverlayTypes()
-	{
-		return array_keys($this->overlays);
-	}
+    /**
+     * @return An array containing all overlay types added to the map.
+     *
+     * @since 0.2.0
+     */
+    public function getOverlayTypes()
+    {
+        return array_keys($this->overlays);
+    }
 
-	/**
-	 * @todo Please check if this method is still required after the
-	 * introduction of the OverlayCollection object.
-	 *
-	 * @since 0.2.0
-	 */
-	public function getOverlayClasses()
-	{
-		$classes = array();
+    /**
+     * @todo Please check if this method is still required after the
+     * introduction of the OverlayCollection object.
+     *
+     * @since 0.2.0
+     */
+    public function getOverlayClasses()
+    {
+        $classes = array();
 
-		foreach (array_keys($this->overlays) as $type) {
-			$classes[] = get_class(current($this->overlays[$type]));
-		}
+        foreach (array_keys($this->overlays) as $type) {
+            $classes[] = get_class(current($this->overlays[$type]));
+        }
 
-		return $classes;
-	}
+        return $classes;
+    }
 
-	/**
-	 * @since 0.2.0
-	 */
-	public function hasFocus()
-	{
-		return (false !== $this->options->get('focus'));
-	}
+    /**
+     * @since 0.2.0
+     */
+    public function hasFocus()
+    {
+        return (false !== $this->options->get('focus'));
+    }
 
-	/**
-	 * @param $geolocation Geolocation object to retrieve GPS coordinate from.
-	 * @param $zoom Zoom level to apply
-	 *
-	 * @since 0.2.0
-	 */
-	public function setFocus(Geolocation $geolocation, $zoom = 16)
-	{
-		$this->options->set('zoom', $zoom);
-		$this->options->set('focus', $geolocation);
-	}
+    /**
+     * @param $geolocation Geolocation object to retrieve GPS coordinate from.
+     * @param $zoom Zoom level to apply
+     *
+     * @since 0.2.0
+     */
+    public function setFocus(Geolocation $geolocation, $zoom = 16)
+    {
+        $this->options->set('zoom', $zoom);
+        $this->options->set('focus', $geolocation);
+    }
 
-	/**
-	 * @since 0.2.0
-	 */
-	public function clearFocus()
-	{
-		$this->options->set('zoom', $this->options->get('default_zoom'));
-		$this->options->set('focus', false);
-	}
+    /**
+     * @since 0.2.0
+     */
+    public function clearFocus()
+    {
+        $this->options->set('zoom', $this->options->get('default_zoom'));
+        $this->options->set('focus', false);
+    }
 
-	public static function create()
-	{
-		$map = new static();
+    public static function create()
+    {
+        $map = new static();
 
-		return $map;
-	}
+        return $map;
+    }
 }
 
 ?>

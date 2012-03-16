@@ -30,19 +30,19 @@ namespace NoiseLabs\ToolKit\Runner;
 
 interface ProcessInterface
 {
-	public function getCommand();
+    public function getCommand();
 
-	public function setCommand($command);
+    public function setCommand($command);
 
-	public function run();
+    public function run();
 
-	public function getOutput();
+    public function getOutput();
 
-	public function getErrorMessage();
+    public function getErrorMessage();
 
-	public function getReturnCode();
+    public function getReturnCode();
 
-	public function log($message, $level);
+    public function log($message, $level);
 }
 
 ?>

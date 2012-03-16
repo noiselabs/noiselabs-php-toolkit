@@ -2,7 +2,7 @@
 <?php
 /**
  * @category NoiseLabs
- * @package  NoiseLabs-PHP-ToolKit
+ * @package  ToolKit
  *
  * Coding Standards (a.k.a. CS)
  *
@@ -28,7 +28,7 @@ $finder
     ->name('*.xml')
     ->name('*.xml.dist')
     ->name('*.yml')
-    ->in(array(__DIR__.'/src', __DIR__.'/tests'))
+    ->in(array($rootDir.'/src', $rootDir.'/tests'))
     ->notName(basename(__FILE__))
     ->exclude('.git')
     ->exclude('vendor')

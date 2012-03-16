@@ -23,11 +23,11 @@ Cloning/downloading from [GitHub](https://github.com/noiselabs/noiselabs-php-too
 
 You may clone via git:
 
-	$ git clone git://github.com/noiselabs/noiselabs-php-toolkit.git
+    $ git clone git://github.com/noiselabs/noiselabs-php-toolkit.git
 
 or download a tarball either in Gzip or Zip format:
 
-	https://github.com/noisebleed/noiselabs-php-toolkit/archives/master
+    https://github.com/noisebleed/noiselabs-php-toolkit/archives/master
 
 Documentation
 ==============
@@ -45,44 +45,44 @@ Runner makes use of PHP namespaces and as such the usage of a autoloader libray 
 
 To have Symfony's ClassLoader autoloading our classes create a `autoload.php` file  and included it at the top of your scripts.
 
-	<?php
-	// autoload.php
+    <?php
+    // autoload.php
 
-	require_once '/path/to/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+    require_once '/path/to/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
-	use Symfony\Component\ClassLoader\UniversalClassLoader;
+    use Symfony\Component\ClassLoader\UniversalClassLoader;
 
-	$loader = new UniversalClassLoader();
-	$loader->registerNamespaces(array(
-		'NoiseLabs' => '/path/to/noiselabs-php-toolkit/src',
-	));
-	$loader->register();
+    $loader = new UniversalClassLoader();
+    $loader->registerNamespaces(array(
+        'NoiseLabs' => '/path/to/noiselabs-php-toolkit/src',
+    ));
+    $loader->register();
 
-	?>
+    ?>
 
 ### Basic usage
 
 To quickstart let's run `ls` from a web script:
 
-	<?php
+    <?php
 
-	namespace Your\Namespace;
+    namespace Your\Namespace;
 
-	use NoiseLabs\ToolKit\Runner\Process;
+    use NoiseLabs\ToolKit\Runner\Process;
 
-	$proc = new Process('ls -l');
+    $proc = new Process('ls -l');
 
-	$proc->run();
+    $proc->run();
 
-	if (0 === $this->getReturnCode()) {
-		echo $proc->getOutput();
-		// prints: apc.php app.php check.php favicon.ico robots.txt
-	}
-	else {
-		echo 'Execution failed with error: '.$proc->getErrorMessage();
-	}
+    if (0 === $this->getReturnCode()) {
+        echo $proc->getOutput();
+        // prints: apc.php app.php check.php favicon.ico robots.txt
+    }
+    else {
+        echo 'Execution failed with error: '.$proc->getErrorMessage();
+    }
 
-	?>
+    ?>
 
 ### Configuring Runner behaviour
 
@@ -96,13 +96,13 @@ The Process class is configurable through the `$settings` public variable. This 
 
 **Usage**:
 
-	$proc = new Process('ls -l');
+    $proc = new Process('ls -l');
 
-	// change the current working directory
-	$proc->settings->set('cwd', '/usr/share/php');
+    // change the current working directory
+    $proc->settings->set('cwd', '/usr/share/php');
 
-	// now execute with these new settings
-	$proc->run();
+    // now execute with these new settings
+    $proc->run();
 
 ### Using a custom logger
 
@@ -110,53 +110,53 @@ By default Process will use `error_log()` to record it's messages. To override t
 
 [Monolog](https://github.com/Seldaek/monolog) is a great logging library for PHP 5.3 and will be used as our custom logger in the following example.
 
-	<?php
+    <?php
 
-	namespace Your\Namespace;
+    namespace Your\Namespace;
 
-	use NoiseLabs\ToolKit\Runner\Process;
-	use Monolog\Logger;
-	use Monolog\Handler\StreamHandler;
+    use NoiseLabs\ToolKit\Runner\Process;
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
 
-	class MyProcess extends Process
-	{
-		protected $logger;
+    class MyProcess extends Process
+    {
+        protected $logger;
 
-		public function __construct($command, array $settings = array())
-		{
-			parent::__construct($command, $settings);
+        public function __construct($command, array $settings = array())
+        {
+            parent::__construct($command, $settings);
 
-			// create a log channel
-			$this->logger = new Logger('Runner');
-			$this->logger->pushHandler(new StreamHandler('path/to/your.log', Logger::WARNING));
-		}
+            // create a log channel
+            $this->logger = new Logger('Runner');
+            $this->logger->pushHandler(new StreamHandler('path/to/your.log', Logger::WARNING));
+        }
 
-		public function log($message, $level = null)
-		{
-			// add records to the log
-			$this->logger->info($message);
-		}
-	}
+        public function log($message, $level = null)
+        {
+            // add records to the log
+            $this->logger->info($message);
+        }
+    }
 
-	?>
+    ?>
 
 ### ProcessManager
 
 The ProcessManager class is a container for Process objects that allows a _set-once-set-all_ procedure and easy reutilization of commands.
 
-	$procman = new ProcessManager();
+    $procman = new ProcessManager();
 
-	// apply settings for every process registered in this object
-	$procman->settings->set('sudo', true);
+    // apply settings for every process registered in this object
+    $procman->settings->set('sudo', true);
 
-	// now, add some commands...
-	$procman->
-		add('users', new Process('users'))->
-		add('uptime', new Process('uptime'))->
-		add('free', new Process('free -m'));
+    // now, add some commands...
+    $procman->
+        add('users', new Process('users'))->
+        add('uptime', new Process('uptime'))->
+        add('free', new Process('free -m'));
 
-	// ...and run 'free'
-	$procman->get('free')->run();
+    // ...and run 'free'
+    $procman->get('free')->run();
 
 Development
 ===========

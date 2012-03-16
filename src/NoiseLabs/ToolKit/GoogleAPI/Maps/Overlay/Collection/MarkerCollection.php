@@ -37,19 +37,19 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection\OverlayCollection;
  */
 class MarkerCollection extends OverlayCollection
 {
-	public $prefix = 'markers';
-	public $dependents = array('InfoWindow', 'Icon', 'Shape', 'Shadow');
+    public $prefix = 'markers';
+    public $dependents = array('InfoWindow', 'Icon', 'Shape', 'Shadow');
 
-	public function declareJavascriptVariables()
-	{
-		$output = "\tvar ".$this->prefix.$this->sufix." = [];\n";
+    public function declareJavascriptVariables()
+    {
+        $output = "\tvar ".$this->prefix.$this->sufix." = [];\n";
 
-		foreach ($this->dependents as $var) {
-			$output .= "\tvar ".$this->prefix.$var.$this->sufix." = [];\n";
-		}
+        foreach ($this->dependents as $var) {
+            $output .= "\tvar ".$this->prefix.$var.$this->sufix." = [];\n";
+        }
 
-		return $output;
-	}
+        return $output;
+    }
 }
 
 ?>

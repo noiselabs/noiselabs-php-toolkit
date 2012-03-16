@@ -61,17 +61,17 @@ use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
  */
 abstract class BaseOverlay implements OverlayInterface
 {
-	public $options;
+    public $options;
 
-	public function __construct()
-	{
-		$this->options = new ParameterBag($this->getDefaultOptions());
-	}
+    public function __construct()
+    {
+        $this->options = new ParameterBag($this->getDefaultOptions());
+    }
 
-	abstract protected function getDefaultOptions();
+    abstract protected function getDefaultOptions();
 
-	abstract public function buildJavascriptOutput($map_object, $array_prefix,
-	$array_sufix, $array_index);
+    abstract public function buildJavascriptOutput($map_object, $array_prefix,
+    $array_sufix, $array_index);
 }
 
 ?>

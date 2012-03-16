@@ -32,15 +32,15 @@ use NoiseLabs\ToolKit\Runner\ProcessInterface;
 
 interface ProcessManagerInterface extends \ArrayAccess, \IteratorAggregate, \Countable
 {
-	public function has($id);
+    public function has($id);
 
-	public function add($id, ProcessInterface $process);
+    public function add($id, ProcessInterface $process);
 
-	public function set($id, ProcessInterface $process);
+    public function set($id, ProcessInterface $process);
 
-	public function get($id);
+    public function get($id);
 
-	public function remove($id);
+    public function remove($id);
 }
 
 ?>

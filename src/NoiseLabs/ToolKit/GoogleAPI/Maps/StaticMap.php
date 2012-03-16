@@ -33,10 +33,10 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\BaseMap;
 
 class StaticMap extends BaseMap
 {
-	public function render()
-	{
-		//
-	}
+    public function render()
+    {
+        //
+    }
 }
 
 ?>
