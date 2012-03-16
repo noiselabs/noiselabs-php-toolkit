@@ -1,10 +1,10 @@
 <?php
 /**
- * @category NoiseLabs
- * @package ToolKit
- * @version 0.1.0
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @category  NoiseLabs
+ * @package   ToolKit
+ * @since     0.1.0
+ * @author    Vítor Brandão <noisebleed@noiselabs.org>
+ * @copyright (C) 2011-2012 Vítor Brandão <noisebleed@noiselabs.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,5 +15,3 @@ if (file_exists($file = __DIR__.'/../autoload.php')) {
 } elseif (file_exists($file = __DIR__.'/../autoload.php.dist')) {
     require_once $file;
 }
-
-?>
