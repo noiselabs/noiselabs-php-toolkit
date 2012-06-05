@@ -172,8 +172,7 @@ class Polyline extends BaseOverlay
             "\n\t\t\tnew google.maps.LatLng(".$this->markers[$k]->getLatitude().", ".$this->markers[$k]->getLongitude().")";
               if ($k+1 < count($this->markers)) {
                   $output .= ",";
-              }
-              else {
+              } else {
                   $output .= "\n";
               }
           }
@@ -189,4 +188,3 @@ class Polyline extends BaseOverlay
     }
 }
 
-?>

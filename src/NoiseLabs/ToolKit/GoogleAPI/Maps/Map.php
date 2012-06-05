@@ -78,8 +78,7 @@ class Map extends BaseMap
          */
         if (true === $this->options->get('https', false)) {
             $html .= 'https://maps-api-ssl.google.com/maps/api/js?v=3';
-        }
-        else {
+        } else {
             $html .= 'http://maps.google.com/maps/api/js';
             if (!empty($parameters)) { $html .= '?'; }
         }
@@ -127,8 +126,7 @@ class Map extends BaseMap
         "\tvar map = new google.maps.Map(document.getElementById(\"".$this->getId()."\"), mapOptions);\n".
         "\n";
 
-        foreach (array_keys($this->overlays) as $collection)
-        {
+        foreach (array_keys($this->overlays) as $collection) {
             $iterator = $this->overlays[$collection]->getIterator();
 
             while ($iterator->valid()) {
@@ -141,8 +139,7 @@ class Map extends BaseMap
         if ($this->hasFocus()) {
             echo
             "\tmap.setCenter(new google.maps.LatLng(".$this->options->get('focus')->latitude.", ".$this->options->get('focus')->longitude."));\n";
-        }
-        else {
+        } else {
             // Auto-center and auto-zoom
             echo
             "\tmap.fitBounds(bounds);\n".
@@ -157,4 +154,3 @@ class Map extends BaseMap
     }
 }
 
-?>

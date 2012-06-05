@@ -43,4 +43,3 @@ interface ProcessManagerInterface extends \ArrayAccess, \IteratorAggregate, \Cou
     public function remove($id);
 }
 
-?>

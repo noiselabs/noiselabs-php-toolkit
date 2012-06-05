@@ -109,8 +109,6 @@ class InfoWindow extends BaseOverlay
         "\t});\n";
     }
 
-
-
     public static function create($content)
     {
         $infowindow = new static();

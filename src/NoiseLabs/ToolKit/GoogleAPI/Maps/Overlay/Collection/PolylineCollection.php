@@ -45,4 +45,3 @@ class PolylineCollection extends OverlayCollection
     }
 }
 
-?>

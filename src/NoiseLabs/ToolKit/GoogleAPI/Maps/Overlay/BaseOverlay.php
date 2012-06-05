@@ -74,4 +74,3 @@ abstract class BaseOverlay implements OverlayInterface
     $array_sufix, $array_index);
 }
 
-?>

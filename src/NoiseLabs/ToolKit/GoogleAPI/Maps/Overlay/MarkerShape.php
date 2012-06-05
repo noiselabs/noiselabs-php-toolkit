@@ -83,4 +83,3 @@ class MarkerShape extends BaseOverlay
     }
 }
 
-?>

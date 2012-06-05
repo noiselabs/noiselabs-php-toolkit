@@ -47,4 +47,3 @@ abstract class OverlayCollection extends \ArrayObject
     abstract public function declareJavascriptVariables();
 }
 
-?>

@@ -29,7 +29,6 @@
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay;
 
-use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Geolocation;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\BaseOverlay;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\InfoWindow;
@@ -233,8 +232,7 @@ class Marker extends BaseOverlay
         $output .= "\t\tmap: ".$map_object."\n\t});\n";
 
         // Info windows
-        if ($this->hasInfoWindow())
-        {
+        if ($this->hasInfoWindow()) {
             $output .= $this->infowindow->buildJavascriptOutput(
                 $map_object, $array_prefix.'InfoWindow', $array_sufix, $array_index
             );
@@ -250,4 +248,3 @@ class Marker extends BaseOverlay
     }
 }
 
-?>

@@ -29,7 +29,6 @@
 
 namespace NoiseLabs\ToolKit\GoogleAPI\Maps;
 
-use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Marker;
 use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\OverlayInterface;
 
 interface MapInterface
@@ -41,4 +40,3 @@ interface MapInterface
     public function render();
 }
 
-?>

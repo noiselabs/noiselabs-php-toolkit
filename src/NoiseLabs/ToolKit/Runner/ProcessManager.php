@@ -90,8 +90,7 @@ class ProcessManager implements ProcessManagerInterface
     {
         if ($this->has($id)) {
             return $this->processes[$id];
-        }
-        else {
+        } else {
             throw new \InvalidArgumentException(sprintf('Process ID "%s" does not exist.', $id));
         }
     }
@@ -100,8 +99,7 @@ class ProcessManager implements ProcessManagerInterface
     {
         if ($this->has($id)) {
             unset($this->processes[$id]);
-        }
-        else {
+        } else {
             throw new \InvalidArgumentException(sprintf('Process ID "%s" does not exist.', $id));
         }
     }
@@ -137,7 +135,7 @@ class ProcessManager implements ProcessManagerInterface
      * \ArrayAccess interface).
      *
      * @param string $offset Process ID
-     * @param array $values  Process to register
+     * @param array  $values Process to register
      */
     public function offsetSet($offset, $value)
     {
@@ -148,7 +146,7 @@ class ProcessManager implements ProcessManagerInterface
      * Removes the Process with the given ID (implements the
      * \ArrayAccess interface).
      *
-     * @param string $name  The name of the Process to be removed
+     * @param string $name The name of the Process to be removed
      */
     public function offsetUnset($name)
     {
@@ -177,4 +175,3 @@ class ProcessManager implements ProcessManagerInterface
     }
 }
 
-?>

@@ -75,8 +75,8 @@ class Icon extends BaseOverlay
     /**
      *
      * @param string|MarkerImage $image
-     * @param MarkerImage $shadow
-     * @param MarkerShape $shape
+     * @param MarkerImage        $shadow
+     * @param MarkerShape        $shape
      *
      * @since 0.2.0
      */
@@ -119,8 +119,7 @@ class Icon extends BaseOverlay
 
         if ($this->image instanceof MarkerImage) {
             $output .= $this->image->buildJavascriptOutput($map_object, $array_prefix.'Icon', $array_sufix, $array_index);
-        }
-        else {
+        } else {
             $output .= $icon_array."[".$array_index."] = '".$this->image."';\n";
         }
 
@@ -136,4 +135,3 @@ class Icon extends BaseOverlay
     }
 }
 
-?>

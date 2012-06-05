@@ -45,4 +45,3 @@ interface ProcessInterface
     public function log($message, $level);
 }
 
-?>

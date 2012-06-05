@@ -174,8 +174,8 @@ abstract class BaseMap implements MapInterface
      * For each overlay type an OverlayCollection object is created to hold
      * OverlayInterface objects.
      *
-     * @param 	OverlayInterface $overlay
-     * @throws	InvalidArgumentException if the overlay type is not supported.
+     * @param  OverlayInterface         $overlay
+     * @throws InvalidArgumentException if the overlay type is not supported.
      *
      * @since 0.2.0
      */
@@ -185,11 +185,9 @@ abstract class BaseMap implements MapInterface
 
          // create a new *Collection object to hold overlay objects if it
          // doesn't exist yet.
-        if (!isset($this->overlays[$overlay_type]))
-        {
+        if (!isset($this->overlays[$overlay_type])) {
             // only overlay types defined in $this->_overlay_types are allowed
-            if (!in_array($overlay_type, $this->_overlay_types))
-            {
+            if (!in_array($overlay_type, $this->_overlay_types)) {
                 throw new \InvalidArgumentException("Overlay type '".
                 $overlay_type."' is not supported. Supported types are: ".
                 implode(', ', $this->_overlay_types).".");
@@ -285,4 +283,3 @@ abstract class BaseMap implements MapInterface
     }
 }
 
-?>

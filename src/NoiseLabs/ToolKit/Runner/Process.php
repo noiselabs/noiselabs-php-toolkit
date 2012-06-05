@@ -234,8 +234,7 @@ class Process implements ProcessInterface
             $msg .= ")";
 
             $this->log($msg);
-        }
-        else {
+        } else {
             $this->log(static::PACKAGE.": failed to open resource using proc_open");
         }
 

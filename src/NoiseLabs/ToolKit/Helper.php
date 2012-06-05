@@ -56,7 +56,7 @@ class Helper
      * @since 0.1.0
      *
      * @param string $dangerous_filename The source filename to be "sanitized"
-     * @param string $platform The target OS
+     * @param string $platform           The target OS
      *
      * @return Boolean string A safe version of the input filename
      */
@@ -65,8 +65,7 @@ class Helper
         if (in_array(strtolower($platform), array('unix', 'linux'))) {
                 // our list of "dangerous characters", add/remove characters if necessary
                 $dangerous_characters = array(" ", '"', "'", "&", "/", "\\", "?", "#");
-        }
-        else {
+        } else {
                 // no OS matched? return the original filename then...
                 return $dangerous_filename;
         }
@@ -81,7 +80,7 @@ class Helper
      *
      * @since 0.1.0
      *
-     * @param array $objects The collection of objects holding the target property
+     * @param array  $objects  The collection of objects holding the target property
      * @param string $property Property name to collect data from
      *
      * @return array
@@ -105,7 +104,7 @@ class Helper
      *
      * @since 0.1.0
      *
-     * @param array $objects The collection of objects holding the target method
+     * @param array  $objects  The collection of objects holding the target method
      * @param string $property Method name to ask for data
      *
      * @return array
@@ -148,8 +147,7 @@ class Helper
 
         if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             return $default_language;
-        }
-        else {
+        } else {
             $http_accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         }
 
@@ -171,17 +169,13 @@ class Helper
         $bestlang = $available_languages[0];
         $bestqval = 0;
 
-        foreach ($hits as $arr)
-        {
+        foreach ($hits as $arr) {
             // read data from the array of this hit
             $langprefix = strtolower ($arr[1]);
-            if (!empty($arr[3]))
-            {
+            if (!empty($arr[3])) {
                 $langrange = strtolower ($arr[3]);
                 $language = $langprefix . "-" . $langrange;
-            }
-            else
-            {
+            } else {
                 $language = $langprefix;
             }
 
@@ -190,8 +184,7 @@ class Helper
             if (!empty($arr[5])) $qvalue = floatval($arr[5]);
 
             // find q-maximal language
-            if (in_array($language,$available_languages) && ($qvalue > $bestqval))
-            {
+            if (in_array($language,$available_languages) && ($qvalue > $bestqval)) {
                 $bestlang = $language;
                 $bestqval = $qvalue;
             }
@@ -207,4 +200,3 @@ class Helper
     }
 }
 
-?>

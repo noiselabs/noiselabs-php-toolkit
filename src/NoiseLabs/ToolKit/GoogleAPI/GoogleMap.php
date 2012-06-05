@@ -141,12 +141,12 @@ class GoogleMap
      * need for two different show methods from version 1.0).
      *
      * @param	$address:string
-     * @return  Boolean True:False (True if address has long/lat, false if it
+     * @return Boolean True:False (True if address has long/lat, false if it
      *			doesn't)
      */
     public function addAddress($address,$htmlMessage=null)
     {
-        if (!is_string($address)){
+        if (!is_string($address)) {
             die("All Addresses must be passed as a string");
         }
         $apiURL = "http://maps.google.com/maps/geo?&output=xml&key=ABQIAAAAJUqzkGTwxHyfr_AFlet6FRSqiy-aFjcz-2DijvkBG8XEujeXPxSyYk3YLvgZJq0HyHrB2gCTJJRVAg&q=";
@@ -159,8 +159,7 @@ class GoogleMap
             $this->invalidPoints[$pointer]['long']= $results['Point']['coordinates'][1];
             $this->invalidPoints[$pointer]['passedAddress'] = $address;
             $this->invalidPoints[$pointer]['htmlMessage'] = $htmlMessage;
-          }
-          else {
+          } else {
             $pointer = count($this->validPoints);
             $this->validPoints[$pointer]['lat']= $results['Point']['coordinates'];
             $this->validPoints[$pointer]['long']= $results['Point']['coordinates'];
@@ -176,7 +175,7 @@ class GoogleMap
      *
      * @param	$displayType:string
      * @param	$css_id:string
-     * @return	nothing
+     * @return nothing
      */
     public function showValidPoints($displayType,$css_id)
     {
@@ -203,14 +202,14 @@ class GoogleMap
      *
      * @param	$displayType:string
      * @param	$css_id:string
-     * @return	nothing
+     * @return nothing
      */
     public function showInvalidPoints($displayType,$css_id)
     {
         $total = count($this->invalidPoints);
         if ($displayType == "table") {
             echo "<table id=\"".$css_id."\">\n<tr>\n\t<td>Address</td>\n</tr>\n";
-            for ($t=0; $t<$total; $t++){
+            for ($t=0; $t<$total; $t++) {
                 echo"<tr>\n\t<td>".$this->invalidPoints[$t]['passedAddress']."</td>\n</tr>\n";
             }
         echo "</table>\n";
@@ -228,7 +227,7 @@ class GoogleMap
      * Sets the width of the map to be displayed.
      *
      * @param	$width:int
-     * @return	nothing
+     * @return nothing
      */
     public function setWidth($width)
     {
@@ -239,7 +238,7 @@ class GoogleMap
      * Sets the height of the map to be displayed
      *
      * @param	$height:int
-     * @return	nothing
+     * @return nothing
      */
     public function setHeight($height)
     {
@@ -250,7 +249,7 @@ class GoogleMap
      * Stores the API Key acquired from Google.
      *
      * @param	$key:string
-     * @return	nothing
+     * @return nothing
      */
     public function setAPIkey($key)
     {
@@ -261,7 +260,7 @@ class GoogleMap
      * Adds the necessary Javascript for the Google Map to function should be
      * called in between the html <head></head> tags.
      *
-     * @return	othing
+     * @return othing
      */
     public function printGoogleJS()
     {
@@ -275,14 +274,14 @@ class GoogleMap
     {
         echo "\n<div id=\"map\" style=\"width: ".$this->mapWidth."px; height: ".$this->mapHeight."px\">\n</div>\n";
         echo "    <script type=\"text/javascript\">\n
-        function showmap(){
+        function showmap()
+        {
                 //<![CDATA[\n
             if (GBrowserIsCompatible()) {\n
             var map = new GMap(document.getElementById(\"map\"));\n";
             if (empty($this->centerMap)) {
                 echo "map.centerAndZoom(new GPoint(".$this->validPoints[0]['long'].",".$this->validPoints[0]['lat']."), ".$this->zoomLevel.");\n";
-            }
-            else {
+            } else {
                 echo $this->centerMap;
             }
             echo "}\n
@@ -310,8 +309,7 @@ class GoogleMap
             GEvent.addListener(marker".$g.", \"click\", function() {\n";
             if ($this->validPoints[$g]['htmlMessage']!=null) {
                 echo "marker".$g.".openInfoWindowHtml(\"".$this->validPoints[$g]['htmlMessage']."\");\n";
-            }
-            else {
+            } else {
                 echo "marker".$g.".openInfoWindowHtml(\"".$this->validPoints[$g]['passedAddress']."\");\n";
             }
             echo "});\n";
@@ -359,7 +357,7 @@ class GoogleMap
     public function endElement($parser, $name)
     {
        $key=array_pop($this->keys);
-       if($this->node_flag==1){
+       if ($this->node_flag==1) {
          $this->arrays[$this->depth][$key]=$this->arrays[$this->depth+1];
          unset($this->arrays[$this->depth+1]);
         }
@@ -370,4 +368,3 @@ class GoogleMap
     /*** END CODE FROM Roger Veciana's CLASS (assoc_array2xml) ****************/
 }
 
-?>

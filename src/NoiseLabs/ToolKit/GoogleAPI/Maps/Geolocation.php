@@ -60,10 +60,10 @@ class Geolocation
 
     /**
      *
-     * @param float $latitude
-     * @param float $longitude
-     * @param float $altitude
-     * @param float $speed
+     * @param float  $latitude
+     * @param float  $longitude
+     * @param float  $altitude
+     * @param float  $speed
      * @param string $timestamp
      */
     public static function create($latitude, $longitude, $altitude = null,
@@ -85,4 +85,3 @@ class Geolocation
     }
 }
 
-?>
