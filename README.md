@@ -26,15 +26,25 @@ The NoiseLabs PHP ToolKit is licensed under the LGPLv3 License. See the LICENSE 
 Installation
 ------------
 
-Cloning/downloading from [GitHub](https://github.com/noiselabs/noiselabs-php-toolkit) is, so far, the only available method to get this library.
+NoiseLabs-PHP-ToolKit is composer-friendly.
 
-You may clone via git:
+### 1. Add the noiselabs/php-toolkit package in your composer.json
 
-	$ git clone git://github.com/noiselabs/noiselabs-php-toolkit.git
+```js
+{
+    "require": {
+        "noiselabs/php-toolkit": "dev-master"
+    }
+}
+```
 
-or download a tarball either in Gzip or Zip format:
+Now tell composer to download this package by running the command:
 
-	https://github.com/noisebleed/noiselabs-php-toolkit/archives/master
+``` bash
+$ php composer.phar update noiselabs/php-toolkit
+```
+
+Composer will install the bundle to your project's `vendor/noiselabs` directory.
 
 Documentation
 -------------
