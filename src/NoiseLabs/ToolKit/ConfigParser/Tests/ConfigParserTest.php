@@ -16,17 +16,16 @@
  * License along with NoiseLabs-PHP-ToolKit; if not, see
  * <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * Copyright (C) 2011-2013 Vítor Brandão <noisebleed@noiselabs.org>
  *
  *
- * @category NoiseLabs
- * @package ConfigParser
- * @version 0.1.1
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @category    NoiseLabs
+ * @package     ConfigParser
+ * @author      Vítor Brandão <noisebleed@noiselabs.org>
+ * @copyright   (C) 2011-2013 Vítor Brandão <noisebleed@noiselabs.org>
  */
 
-namespace NoiseLabs\Tests\ToolKit\ConfigParser;
+namespace NoiseLabs\ToolKit\ConfigParser\Tests;
 
 use NoiseLabs\ToolKit\ConfigParser\ConfigParser;
 
@@ -43,11 +42,7 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->cfg = new ConfigParser();
-
-        $this->filenames = array(
-                    __DIR__.'/Fixtures/source.cfg'
-                    );
-
+        $this->filenames = array(__DIR__.'/Fixtures/source.cfg');
         $this->out_filename = tempnam(sys_get_temp_dir(), str_replace('\\', '_',__CLASS__).'_');
     }
 
@@ -57,7 +52,7 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException NoiseLabs\ToolKit\ConfigParser\Exception\DuplicateSectionException
+     * @expectedException \NoiseLabs\ToolKit\ConfigParser\Exception\DuplicateSectionException
      */
     public function testAddDuplicateSection()
     {
@@ -120,5 +115,3 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->cfg->hasOption('', 'User'));
     }
 }
-
-?>
