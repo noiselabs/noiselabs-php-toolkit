@@ -20,8 +20,8 @@
  *
  * @category 	NoiseLabs
  * @package 	GoogleAPI
- * @author 		Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @author 		Vítor Brandão <vitor@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <vitor@noiselabs.org>
  * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link 		http://www.noiselabs.org
  * @since 		0.2.0
@@ -36,7 +36,7 @@ namespace NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\Collection;
  * the kind of objects it holds. This is required because when echoing all
  * the javascript stuff each overlay type is stored in a array.
  *
- * @author 		Vítor Brandão <noisebleed@noiselabs.org>
+ * @author 		Vítor Brandão <vitor@noiselabs.org>
  * @since 		0.2.0
  */
 abstract class OverlayCollection extends \ArrayObject

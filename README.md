@@ -58,7 +58,7 @@ Development
 
 ### Authors
 
-* Vítor Brandão [ <noisebleed@noiselabs.org> / [@noiselabs](http://twitter.com/noiselabs) / [blog](http://blog.noiselabs.org) ]
+* Vítor Brandão [ <vitor@noiselabs.org> / [@noiselabs](http://twitter.com/noiselabs) / [blog](http://blog.noiselabs.org) ]
 
 ### Submitting bugs and feature requests
 

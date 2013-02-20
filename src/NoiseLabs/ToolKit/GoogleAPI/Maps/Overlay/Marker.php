@@ -20,8 +20,8 @@
  *
  * @category 	NoiseLabs
  * @package 	GoogleAPI
- * @author 		Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @author 		Vítor Brandão <vitor@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <vitor@noiselabs.org>
  * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link 		http://www.noiselabs.org
  * @since 		0.1.0
@@ -38,7 +38,7 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\InfoWindow;
  * though you can set a custom icon within the marker's constructor or by
  * calling setIcon() on the marker.
  *
- * @author Vítor Brandão <noisebleed@noiselabs.org>
+ * @author Vítor Brandão <vitor@noiselabs.org>
  * @since 0.1.0
  */
 class Marker extends BaseOverlay

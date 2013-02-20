@@ -20,8 +20,8 @@
  *
  * @category NoiseLabs
  * @package GoogleAPI
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @author Vítor Brandão <vitor@noiselabs.org>
+ * @copyright (C) 2011 Vítor Brandão <vitor@noiselabs.org>
  * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link http://www.noiselabs.org
  * @since 0.2.0
@@ -35,7 +35,7 @@ use NoiseLabs\ToolKit\Helper;
  * The core class for each Overlay element containing GPS coordinates (latitude
  * and longitude) to identify a specific position.
  *
- * @author Vítor Brandão <noisebleed@noiselabs.org>
+ * @author Vítor Brandão <vitor@noiselabs.org>
  * @since 0.2.0
  */
 class Geolocation

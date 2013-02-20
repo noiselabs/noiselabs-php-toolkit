@@ -20,8 +20,8 @@
  *
  * @category NoiseLabs
  * @package GoogleAPI
- * @author Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright (C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @author Vítor Brandão <vitor@noiselabs.org>
+ * @copyright (C) 2011 Vítor Brandão <vitor@noiselabs.org>
  * @license http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link http://www.noiselabs.org
  * @since 0.2.0
@@ -56,7 +56,7 @@ use NoiseLabs\ToolKit\GoogleAPI\ParameterBag;
  * This class provides the base class (abstract) for each overlay type listed
  * above.
  *
- * @author Vítor Brandão <noisebleed@noiselabs.org>
+ * @author Vítor Brandão <vitor@noiselabs.org>
  * @since 0.2.0
  */
 abstract class BaseOverlay implements OverlayInterface

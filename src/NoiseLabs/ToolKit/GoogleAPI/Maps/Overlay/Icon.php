@@ -20,8 +20,8 @@
  *
  * @category 	NoiseLabs
  * @package 	GoogleAPI
- * @author 		Vítor Brandão <noisebleed@noiselabs.org>
- * @copyright 	(C) 2011 Vítor Brandão <noisebleed@noiselabs.org>
+ * @author 		Vítor Brandão <vitor@noiselabs.org>
+ * @copyright 	(C) 2011 Vítor Brandão <vitor@noiselabs.org>
  * @license 	http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL-3
  * @link 		http://www.noiselabs.org
  * @since 		0.2.0
@@ -58,7 +58,7 @@ use NoiseLabs\ToolKit\GoogleAPI\Maps\Overlay\MarkerShape;
  * API require the usage of a MarkerImage class but this PHP library uses the
  * same Icon class for both "simple" and "complex" icons.
  *
- * @author Vítor Brandão <noisebleed@noiselabs.org>
+ * @author Vítor Brandão <vitor@noiselabs.org>
  * @since 0.2.0
  */
 class Icon extends BaseOverlay
