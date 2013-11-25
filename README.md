@@ -63,3 +63,6 @@ Development
 ### Submitting bugs and feature requests
 
 Bugs and feature requests are tracked on [GitHub](https://github.com/noiselabs/noiselabs-php-toolkit/issues)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/noiselabs/noiselabs-php-toolkit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
